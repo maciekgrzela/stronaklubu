@@ -36,15 +36,16 @@ h1, h2, h3, h4, h5, h6 {
   max-width: 70px;
 }
 
-.lh-30 {
-  line-height: 30px;
+.nearest-match-list {
+  list-style-type: none;
 }
 
 
 .league-table > tbody > tr > td {
   font-weight: normal;
   text-transform: uppercase;
-  font-size: 14px;
+  font-size: 17px;
+  line-height: 0.5rem;
 }
 
 .league-table > tbody > tr > td:nth-child(1),
@@ -96,6 +97,35 @@ h1, h2, h3, h4, h5, h6 {
 .flex-auto {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto;
+}
+
+.h-fixed-420 {
+  height: 420px;
+}
+
+.article-carousel-caption {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, rgba(41,41,41,1) 50%, rgba(41,41,41, 0.5) 85%, rgba(0,0,0,0) 100%);
+}
+
+.carousel-control {
+  display: flex;
+  position: absolute;
+  top: unset;
+  bottom: unset;
+  width: 35px;
+  height: 35px;
+  background: #006643;
+  opacity: 1 !important;
+}
+
+.carousel-controls {
+  position: absolute;
+  bottom: 60px;
+  right: 60px;
 }
 
 .h-250 { min-height: 250px; }
