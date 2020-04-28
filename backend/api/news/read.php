@@ -10,11 +10,12 @@
     $database = new Database();
     $db = $database->connect();
 
-    // Instantiate player object
+    // Instantiate news object
     $news = new News($db);
 
     // News query
     $result = $news->read();
+
     // Get row count
     $num = $result->rowCount();
 
@@ -32,7 +33,10 @@
                 'content_path' => $content_path,
                 'news_img_path' => $news_img_path,
                 'tags' => $tags,
-                'client_ID' => $client_ID
+                'created_at' => $created_at,
+                'last_commented' => $last_commented,
+                'viewers' => $viewers,
+                'worker_ID' => $worker_ID
             );
 
 

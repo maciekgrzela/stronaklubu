@@ -26,7 +26,10 @@
         'content_path' => $news->content_path,
         'news_img_path' => $news->news_img_path,
         'tags' => $news->tags,
-        'client_ID' => $news->client_ID
+        'created_at' => $news->created_at,
+        'last_commented' => $news->last_commented,
+        'viewers' => $news->viewers,
+        'worker_ID' => $news->worker_ID
     );
 
     // Make JSON

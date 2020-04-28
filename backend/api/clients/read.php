@@ -35,8 +35,7 @@
                 'date_of_birth' => $date_of_birth,
                 'user_login' => $user_login,
                 'user_password' => $user_password,
-                'create_date' => $create_date,
-                'privileges' => $privileges
+                'create_date' => $create_date
             );
 
 

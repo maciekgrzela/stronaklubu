@@ -28,8 +28,7 @@
         'date_of_birth' => $client->date_of_birth,
         'user_login' => $client->user_login,
         'user_password' => $client->user_password,
-        'create_date' => $client->create_date,
-        'privileges' => $client->privileges
+        'create_date' => $client->create_date
     );
 
     // Make JSON

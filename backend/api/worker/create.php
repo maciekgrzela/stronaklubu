@@ -24,9 +24,14 @@
     $worker->last_name = $data->last_name;
     $worker->age = $data->age;
     $worker->nationality = $data->nationality;
-    $worker->worker_role = $data->worker_role;
+    $worker->mail = $data->mail;
+    $worker->is_journalist = $data->is_journalist;
+    $worker->is_executive = $data->is_executive;
+    $worker->is_staff = $data->is_staff;
+    $worker->worker_login = $data->worker_login;
+    $worker->worker_password = $data->worker_password;
+    $worker->worker_date_of_birth = $data->worker_date_of_birth;
     $worker->worker_img_path = $data->worker_img_path;
-   
 
     // Create worker
     if($worker->create()) {

@@ -26,8 +26,6 @@
     $client->date_of_birth = $data->date_of_birth;
     $client->user_login = $data->user_login;
     $client->user_password = $data->user_password;
-    $client->create_date = $data->create_date;
-    $client->privileges = $data->privileges;
    
 
     // Create client

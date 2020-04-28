@@ -26,7 +26,7 @@
     $news->content_path = $data->content_path;
     $news->news_img_path = $data->news_img_path;
     $news->tags = $data->tags;
-    $news->client_ID = $data->client_ID;
+    $news->worker_ID = $data->worker_ID;
  
 
     // Create news
