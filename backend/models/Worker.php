@@ -13,8 +13,15 @@
         public $last_name;
         public $age;
         public $nationality;
-        public $worker_role;
+        public $mail;
+        public $is_journalist;
+        public $is_executive;
+        public $is_staff;
+        public $worker_login;
+        public $worker_password;
         public $worker_img_path;
+        public $worker_date_of_birth;
+        public $create_date;
 
         // Constructor with DB
         public function __construct($db) {
@@ -29,8 +36,15 @@
                 last_name,
                 age,
                 nationality,
-                worker_role,
-                worker_img_path FROM ' . $this->table;
+                mail,
+                is_journalist,
+                is_executive,
+                is_staff,
+                worker_login,
+                worker_password,
+                worker_date_of_birth,
+                worker_img_path,
+                create_date FROM ' . $this->table;
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -50,8 +64,15 @@
                 last_name,
                 age,
                 nationality,
-                worker_role, 
-                worker_img_path FROM ' . $this->table . ' WHERE worker_ID = ?';
+                mail,
+                is_journalist,
+                is_executive,
+                is_staff,
+                worker_login,
+                worker_password,
+                worker_date_of_birth,
+                worker_img_path, 
+                create_date FROM ' . $this->table . ' WHERE worker_ID = ?';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -70,9 +91,15 @@
             $this->last_name = $row['last_name'];
             $this->age = $row['age'];
             $this->nationality = $row['nationality'];
-            $this->worker_role = $row['worker_role'];
+            $this->mail = $row['mail'];
+            $this->is_executive = $row['is_executive'];
+            $this->is_journalist = $row['is_journalist'];
+            $this->is_staff = $row['is_staff'];
+            $this->worker_login = $row['worker_login'];
+            $this->worker_password = $row['worker_password'];
             $this->worker_img_path = $row['worker_img_path'];
-
+            $this->worker_date_of_birth = $row['worker_date_of_birth'];
+            $this->create_date = $row['create_date'];
         }
 
         // Create Worker
@@ -83,7 +110,13 @@
                 last_name = :last_name,
                 age = :age,
                 nationality = :nationality,
-                worker_role = :worker_role,
+                mail = :mail,
+                is_journalist = :is_journalist,
+                is_executive = :is_executive,
+                is_staff = :is_staff,
+                worker_login = :worker_login,
+                worker_password = :worker_password,
+                worker_date_of_birth = :worker_date_of_birth,
                 worker_img_path = :worker_img_path';
 
             // Prepare statement
@@ -94,7 +127,13 @@
             $this->last_name = htmlspecialchars(strip_tags($this->last_name));
             $this->age = htmlspecialchars(strip_tags($this->age));
             $this->nationality = htmlspecialchars(strip_tags($this->nationality));
-            $this->worker_role = htmlspecialchars(strip_tags($this->worker_role));
+            $this->mail = htmlspecialchars(strip_tags($this->mail));
+            $this->is_staff = htmlspecialchars(strip_tags($this->is_staff));
+            $this->is_journalist = htmlspecialchars(strip_tags($this->is_journalist));
+            $this->is_executive = htmlspecialchars(strip_tags($this->is_executive));
+            $this->worker_login = htmlspecialchars(strip_tags($this->worker_login));
+            $this->worker_password = htmlspecialchars(strip_tags($this->worker_password));
+            $this->worker_date_of_birth = htmlspecialchars(strip_tags($this->worker_date_of_birth));
             $this->worker_img_path = htmlspecialchars(strip_tags($this->worker_img_path));
 
             // Bind data
@@ -102,7 +141,13 @@
             $stmt->bindParam(':last_name', $this->last_name);
             $stmt->bindParam(':age', $this->age);
             $stmt->bindParam(':nationality', $this->nationality);
-            $stmt->bindParam(':worker_role', $this->worker_role);
+            $stmt->bindParam(':mail', $this->mail);
+            $stmt->bindParam(':is_journalist', $this->is_journalist);
+            $stmt->bindParam(':is_executive', $this->is_executive);
+            $stmt->bindParam(':is_staff', $this->is_staff);
+            $stmt->bindParam(':worker_login', $this->worker_login);
+            $stmt->bindParam(':worker_password', $this->worker_password);
+            $stmt->bindParam(':worker_date_of_birth', $this->worker_date_of_birth);
             $stmt->bindParam(':worker_img_path', $this->worker_img_path);
 
             if($stmt->execute()) {
@@ -123,8 +168,14 @@
                 last_name = :last_name,
                 age = :age,
                 nationality = :nationality,
-                worker_role = :worker_role,
-                worker_img_path WHERE worker_ID = :worker_ID';
+                mail = :mail,
+                is_journalist = :is_journalist,
+                is_executive = :is_executive,
+                is_staff = :is_staff,
+                worker_login = :worker_login,
+                worker_password = :worker_password,
+                worker_date_of_birth = :worker_date_of_birth,
+                worker_img_path = :worker_img_path WHERE worker_ID = :worker_ID';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -134,7 +185,13 @@
             $this->last_name = htmlspecialchars(strip_tags($this->last_name));
             $this->age = htmlspecialchars(strip_tags($this->age));
             $this->nationality = htmlspecialchars(strip_tags($this->nationality));
-            $this->worker_role = htmlspecialchars(strip_tags($this->worker_role));
+            $this->mail = htmlspecialchars(strip_tags($this->mail));
+            $this->is_staff = htmlspecialchars(strip_tags($this->is_staff));
+            $this->is_journalist = htmlspecialchars(strip_tags($this->is_journalist));
+            $this->is_executive = htmlspecialchars(strip_tags($this->is_executive));
+            $this->worker_login = htmlspecialchars(strip_tags($this->worker_login));
+            $this->worker_password = htmlspecialchars(strip_tags($this->worker_password));
+            $this->worker_date_of_birth = htmlspecialchars(strip_tags($this->worker_date_of_birth));
             $this->worker_img_path = htmlspecialchars(strip_tags($this->worker_img_path));
 
             // Bind data
@@ -142,9 +199,14 @@
             $stmt->bindParam(':last_name', $this->last_name);
             $stmt->bindParam(':age', $this->age);
             $stmt->bindParam(':nationality', $this->nationality);
-            $stmt->bindParam(':worker_role', $this->worker_role);
+            $stmt->bindParam(':mail', $this->mail);
+            $stmt->bindParam(':is_journalist', $this->is_journalist);
+            $stmt->bindParam(':is_executive', $this->is_executive);
+            $stmt->bindParam(':is_staff', $this->is_staff);
+            $stmt->bindParam(':worker_login', $this->worker_login);
+            $stmt->bindParam(':worker_password', $this->worker_password);
+            $stmt->bindParam(':worker_date_of_birth', $this->worker_date_of_birth);
             $stmt->bindParam(':worker_img_path', $this->worker_img_path);
-            $stmt->bindParam(':worker_ID', $this->worker_ID);
 
 
             if($stmt->execute()) {

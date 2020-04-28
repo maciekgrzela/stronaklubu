@@ -32,9 +32,15 @@
                 'last_name' => $last_name,
                 'age' => $age,
                 'nationality' => $nationality,
-                'worker_role' => $worker_role,
-                'worker_img_path' => $worker_img_path
-                
+                'mail' => $mail,
+                'is_journalist' => $is_journalist,
+                'is_executive' => $is_executive,
+                'is_staff' => $is_staff,
+                'worker_login' => $worker_login,
+                'worker_password' => $worker_password,
+                'worker_date_of_birth' => $worker_date_of_birth,
+                'worker_img_path' => $worker_img_path,
+                'create_date' => $create_date
             );
 
 

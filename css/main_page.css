@@ -23,7 +23,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .article-slider {
-  background-image: url("../img/article1.jpg");
+  background-image: url("../img/articles/article1.jpg");
   background-repeat: no-repeat;
   background-size: cover;
 }
@@ -118,8 +118,18 @@ h1, h2, h3, h4, h5, h6 {
   bottom: unset;
   width: 35px;
   height: 35px;
-  background: #006643;
+  color: rgb(0, 102, 67);
+  background: rgb(255,255,255);
   opacity: 1 !important;
+}
+
+.carousel-control-next-icon {
+  background-image: url('../img/icons/right-arrow.svg');
+  color: rgb(0, 102, 67);
+}
+
+.carousel-control-prev-icon {
+  background-image: url('../img/icons/left-arrow.svg');
 }
 
 .carousel-controls {

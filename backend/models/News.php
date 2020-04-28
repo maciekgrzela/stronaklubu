@@ -13,7 +13,10 @@
         public $content_path;
         public $news_img_path;
         public $tags;
-        public $client_ID;
+        public $created_at;
+        public $worker_ID;
+        public $last_commented;
+        public $viewers;
 
         // Constructor with DB
         public function __construct($db) {
@@ -28,7 +31,10 @@
                 content_path,
                 news_img_path,
                 tags,
-                client_ID FROM ' . $this->table;
+                created_at,
+                last_commented,
+                viewers,
+                worker_ID FROM ' . $this->table . ' ORDER BY created_at';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -37,7 +43,6 @@
             $stmt->execute();
 
             return $stmt;
-
         }
 
         // Get single News
@@ -48,7 +53,10 @@
                 content_path,
                 news_img_path,
                 tags,
-                client_ID  FROM ' . $this->table . ' WHERE news_ID = ?';
+                created_at,
+                last_commented,
+                viewers,
+                worker_ID  FROM ' . $this->table . ' WHERE news_ID = ?';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -67,8 +75,48 @@
             $this->content_path = $row['content_path'];
             $this->news_img_path = $row['news_img_path'];
             $this->tags = $row['tags'];
-            $this->client_ID = $row['client_ID'];
+            $this->created_at = $row['created_at'];
+            $this->worker_ID = $row['worker_ID'];
+        }
 
+        public function read_last_commented() {
+            $query = 'SELECT 
+                    news_ID,
+                    title,
+                    content_path,
+                    news_img_path,
+                    tags,
+                    created_at,
+                    last_commented,
+                    viewers,
+                    worker_ID FROM ' . $this->table . ' ORDER BY last_commented DESC LIMIT 1';
+
+            $stmt = $this->conn->prepare($query);
+
+            // Execute query
+            $stmt->execute();
+
+            return $stmt;
+        }
+
+        public function read_most_popular() {
+            $query = 'SELECT 
+                    news_ID,
+                    title,
+                    content_path,
+                    news_img_path,
+                    tags,
+                    created_at,
+                    last_commented,
+                    viewers,
+                    worker_ID FROM ' . $this->table . ' ORDER BY viewers DESC LIMIT 1';
+
+            $stmt = $this->conn->prepare($query);
+
+            // Execute query
+            $stmt->execute();
+
+            return $stmt;
         }
 
         // Create News
@@ -79,7 +127,7 @@
                 content_path = :content_path,
                 news_img_path = :news_img_path,
                 tags = :tags,
-                client_ID = :client_ID';
+                worker_ID = :worker_ID';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -89,14 +137,14 @@
             $this->content_path = htmlspecialchars(strip_tags($this->content_path));
             $this->news_img_path = htmlspecialchars(strip_tags($this->news_img_path));
             $this->tags = htmlspecialchars(strip_tags($this->tags));
-            $this->client_ID = htmlspecialchars(strip_tags($this->client_ID));
+            $this->worker_ID = htmlspecialchars(strip_tags($this->worker_ID));
 
             // Bind data
             $stmt->bindParam(':title', $this->title);
             $stmt->bindParam(':content_path', $this->content_path);
             $stmt->bindParam(':news_img_path', $this->news_img_path);
             $stmt->bindParam(':tags', $this->tags);
-            $stmt->bindParam(':client_ID', $this->client_ID);
+            $stmt->bindParam(':worker_ID', $this->worker_ID);
 
             if($stmt->execute()) {
                 return true;
@@ -116,7 +164,7 @@
                 content_path = :content_path,
                 news_img_path = :news_img_path,
                 tags = :tags,
-                client_ID = :client_ID WHERE news_ID = :news_ID';
+                worker_ID = :worker_ID WHERE news_ID = :news_ID';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -126,14 +174,14 @@
             $this->content_path = htmlspecialchars(strip_tags($this->content_path));
             $this->news_img_path = htmlspecialchars(strip_tags($this->news_img_path));
             $this->tags = htmlspecialchars(strip_tags($this->tags));
-            $this->client_ID = htmlspecialchars(strip_tags($this->client_ID));
+            $this->worker_ID = htmlspecialchars(strip_tags($this->worker_ID));
 
             // Bind data
             $stmt->bindParam(':title', $this->title);
             $stmt->bindParam(':content_path', $this->content_path);
             $stmt->bindParam(':news_img_path', $this->news_img_path);
             $stmt->bindParam(':tags', $this->tags);
-            $stmt->bindParam(':client_ID', $this->client_ID);
+            $stmt->bindParam(':worker_ID', $this->worker_ID);
             $stmt->bindParam(':news_ID', $this->news_ID);
 
 
