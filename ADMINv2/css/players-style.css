@@ -1,0 +1,41 @@
+form button {
+	margin-left: 5px;
+}
+
+.playersTable {
+	padding: 40px;
+}
+
+.playersTable h3 {
+	padding-bottom: 5px;
+}
+
+.playerImgPreview {
+	padding: 40px;
+}
+
+.choosePlayer {
+	padding: 40px;
+}
+
+.choosePlayer select {
+	padding: 40px;
+}
+
+#playerImgPreview {
+	border: 2px solid black;
+	padding-top: 20px;
+
+	width: 440px;
+	height: 365px;
+}
+
+#content {
+/*	background-image: url('img/XD.png');
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+  	background-position: center; 
+  	background-size: 500px;*/
+
+}
+
