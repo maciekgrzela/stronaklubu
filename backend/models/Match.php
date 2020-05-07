@@ -9,7 +9,13 @@
         // match Properties
         public $match_ID;
         public $club_home_ID;
+        public $club_home_clubname;
+        public $club_home_city;
+        public $club_home_path_img_logo;
         public $club_away_ID;
+        public $club_away_clubname;
+        public $club_away_city;
+        public $club_away_path_img_logo;
         public $stadium;
         public $match_address;
         public $amount_of_spectators;
@@ -24,16 +30,24 @@
         // Get matchs
         public function read() {
             $query = 'SELECT
-                match_ID,
-                club_home_ID,
-                club_away_ID,
-                stadium,
-                match_address,
-                amount_of_spectators,
-                earnings,
-                date_of_match
+                m.match_ID,
+                c1.club_ID as club1_ID,
+                c1.clubname as club1_clubname,
+                c1.city as club1_city,
+                c1.path_img_logo as club1_path_img_logo,
+                c2.club_ID as club2_ID,
+                c2.clubname as club2_clubname,
+                c2.city as club2_city,
+                c2.path_img_logo as club2_path_img_logo,
+                m.stadium,
+                m.match_address,
+                m.amount_of_spectators,
+                m.earnings,
+                m.date_of_match
                 FROM
-                ' . $this->table;
+                ' . $this->table .' m
+                LEFT JOIN clubs c1 ON  c1.club_ID = m.club_home_ID
+                LEFT JOIN clubs c2 ON c2.club_ID = m.club_away_ID ORDER BY m.date_of_match';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);

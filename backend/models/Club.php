@@ -14,6 +14,9 @@
         public $stadium;
         public $club_address;
         public $path_img_logo;
+        public $league_position;
+        public $league_points;
+        public $league_matches;
 
         // Constructor with DB
         public function __construct($db) {
@@ -28,7 +31,10 @@
                 city,
                 stadium,
                 club_address,
-                path_img_logo FROM ' . $this->table;
+                path_img_logo,
+                league_position,
+                league_points,
+                league_matches FROM ' . $this->table .' ORDER BY league_position';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -48,7 +54,10 @@
                 city,
                 stadium,
                 club_address,
-                path_img_logo  FROM ' . $this->table . ' WHERE club_ID = ?';
+                path_img_logo,
+                league_position,
+                league_points,
+                league_matches  FROM ' . $this->table . ' WHERE club_ID = ?';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -68,7 +77,9 @@
             $this->stadium = $row['stadium'];
             $this->club_address = $row['club_address'];
             $this->path_img_logo = $row['path_img_logo'];
-
+            $this->league_position = $row['league_position'];
+            $this->league_points = $row['league_points'];
+            $this->league_matches = $row['league_matches'];
         }
 
         // Create Club

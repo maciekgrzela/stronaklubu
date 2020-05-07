@@ -31,25 +31,27 @@
     <div class="row flex-nowrap justify-content-between align-items-center">
       <div class="col-4 pt-1"></div>
       <div class="col-4 text-center">
-        <img class="img img-fluid logo" src="./img/logo.png" />
-        <a class="blog-header-logo text-dark text-uppercase" href="#">Śląsk Wrocław</a>
+        <ul class="d-flex align-items-end pl-0">
+          <li class="d-inline-flex"><a class="blog-header-logo text-dark text-uppercase mr-3" href="#">Strona</a></li>
+          <li class="d-inline-flex"><a href="index.html"><img class="img img-fluid logo" src="./img/logo.png" /></a></li>
+          <li class="d-inline-flex"><a class="blog-header-logo text-dark text-uppercase ml-3" href="#">klubu</a></li>
+        </ul>
       </div>
       <div class="col-4 d-flex justify-content-end align-items-center">
         <a class="text-muted" href="#" aria-label="Search">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
         </a>
-        <a class="btn btn-sm btn-outline-primary" href="#">Moje konto</a>
+        <a class="btn btn-sm btn-outline-primary" href="./admin/login.html">Moje konto</a>
       </div>
     </div>
   </header>
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="#">Klub</a>
       <a class="p-2 text-muted" href="#">Bilety i karnety</a>
       <a class="p-2 text-muted" href="#">Wydarzenia</a>
-      <a class="p-2 text-muted" href="#">Rozgrywki</a>
-      <a class="p-2 text-muted" href="#">Zespoły</a>
+      <a class="p-2 text-muted" href="#">Zespół</a>
+      <a class="p-2 text-muted" href="#">Historia</a>
       <a class="p-2 text-muted" href="#">Stadion</a>
       <a class="p-2 text-muted" href="#">Sponsorzy</a>
       <a class="p-2 text-muted" href="#">Relacje LIVE</a>
@@ -95,9 +97,7 @@
 <main role="main" class="container bg-white mb-4 pb-4">
   <div class="row">
     <div class="col-md-8 blog-main">
-      <h3 class="mt-4 pb-2 font-weight-light border-bottom">
-        Klubowe aktualności
-      </h3>
+      <h3 class="mt-4 pb-2 font-weight-light border-bottom">Klubowe aktualności</h3>
 
       <div class="club-articles"></div>
     </div>
@@ -114,163 +114,17 @@
             <th class="font-weight-light">Punkty</th>
           </tr>
           </thead>
-          <tbody class="font-secondary">
-          <tr class="first ">
-            <td>1.</td>
-            <td class="font-secondary bold txt-left">
-              Legia Warszawa					</td>
-            <td>26</td>
-            <td class="font-secondary bold">51</td>
-          </tr>
-          <tr class="">
-            <td>2.</td>
-            <td class="font-secondary bold txt-left">
-              Piast Gliwice					</td>
-            <td>26</td>
-            <td class="font-secondary bold">43</td>
-          </tr>
-          <tr class="">
-            <td>3.</td>
-            <td class="font-secondary bold txt-left">
-              Cracovia					</td>
-            <td>26</td>
-            <td class="font-secondary bold">42</td>
-          </tr>
-          <tr class="bor-2 bor-col-green">
-            <td class="font-weight-bold">4.</td>
-            <td class="font-secondary font-weight-bold txt-left">
-              Śląsk Wrocław					</td>
-            <td class="font-weight-bold">26</td>
-            <td class="font-secondary font-weight-bold">42</td>
-          </tr>
-          <tr class="">
-            <td>5.</td>
-            <td class="font-secondary bold txt-left">
-              Lech Poznań					</td>
-            <td>26</td>
-            <td class="font-secondary bold">42</td>
-          </tr>
-          <tr class="">
-            <td>6.</td>
-            <td class="font-secondary bold txt-left">
-              Pogoń Szczecin					</td>
-            <td>26</td>
-            <td class="font-secondary bold">41</td>
-          </tr>
-          <tr class="">
-            <td>7.</td>
-            <td class="font-secondary bold txt-left">
-              Lechia Gdańsk					</td>
-            <td>26</td>
-            <td class="font-secondary bold">38</td>
-          </tr>
-          <tr class="">
-            <td>8.</td>
-            <td class="font-secondary bold txt-left">
-              Jagiellonia Białystok</td>
-            <td>26</td>
-            <td class="font-secondary bold">37</td>
-          </tr>
-          <tr class="">
-            <td>9.</td>
-            <td class="font-secondary bold txt-left">
-              Raków Częstochowa</td>
-            <td>26</td>
-            <td class="font-secondary bold">36</td>
-          </tr>
-          <tr class="">
-            <td>10.</td>
-            <td class="font-secondary bold txt-left">
-              Wisła Płock					</td>
-            <td>26</td>
-            <td class="font-secondary bold">36</td>
-          </tr>
-          <tr class="">
-            <td>11.</td>
-            <td class="font-secondary bold txt-left">
-              Zagłębie Lubin					</td>
-            <td>26</td>
-            <td class="font-secondary bold">33</td>
-          </tr>
-          <tr class="">
-            <td>12.</td>
-            <td class="font-secondary bold txt-left">
-              Górnik Zabrze					</td>
-            <td>26</td>
-            <td class="font-secondary bold">33</td>
-          </tr>
-          <tr class="">
-            <td>13.</td>
-            <td class="font-secondary bold txt-left">
-              Wisła Kraków					</td>
-            <td>26</td>
-            <td class="font-secondary bold">31</td>
-          </tr>
-          <tr class="">
-            <td>14.</td>
-            <td class="font-secondary bold txt-left">
-              Korona Kielce					</td>
-            <td>26</td>
-            <td class="font-secondary bold">26</td>
-          </tr>
-          <tr class="">
-            <td>15.</td>
-            <td class="font-secondary bold txt-left">
-              Arka Gdynia					</td>
-            <td>26</td>
-            <td class="font-secondary bold">25</td>
-          </tr>
-          <tr class="">
-            <td>16.</td>
-            <td class="font-secondary bold txt-left">
-              ŁKS Łódź					</td>
-            <td>26</td>
-            <td class="font-secondary bold">20</td>
-          </tr>
+          <tbody class="font-secondary clubs-table">
           </tbody>
         </table>
       </div>
 
-      <div class="mt-4 p-4 rounded shadow bg-secondary text-white">
-        <h4 class="pb-3">Najbliższy mecz</h4>
-        <div class="container-fluid">
-          <div class="row">
-            <div class="col-3 px-0">
-              <img class="img-fluid mx-auto d-block" src="./img/teams/koronaKielce.png" />
-            </div>
-            <div class="col-9 px-0">
-              <ul class="nearest-match-list">
-                <li>Data: 25.04.2020</li>
-                <li>Przeciwnik: Korona Kielce</li>
-                <li>Miejsce: Kolporter Arena</li>
-              </ul>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="mt-4 p-4 bg-light shadow rounded">
-        <h4>Archiwum</h4>
-        <ol class="list-unstyled mb-0">
-          <li><a href="#">March 2014</a></li>
-          <li><a href="#">February 2014</a></li>
-          <li><a href="#">January 2014</a></li>
-          <li><a href="#">December 2013</a></li>
-          <li><a href="#">November 2013</a></li>
-          <li><a href="#">October 2013</a></li>
-          <li><a href="#">September 2013</a></li>
-          <li><a href="#">August 2013</a></li>
-          <li><a href="#">July 2013</a></li>
-          <li><a href="#">June 2013</a></li>
-          <li><a href="#">May 2013</a></li>
-          <li><a href="#">April 2013</a></li>
-        </ol>
+      <div class="mt-4 p-4 rounded shadow bg-secondary text-white nearest-match">
       </div>
 
       <div class="mt-4 p-4 bg-light shadow rounded">
         <h4>Media społecznościowe</h4>
-                  <div class="fb-page" data-href="https://www.facebook.com/slaskwroclawpl" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/slaskwroclawpl" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/slaskwroclawpl">WKS Śląsk Wrocław SA</a></blockquote></div>
+        <div class="fb-page" data-href="https://www.facebook.com/slaskwroclawpl" data-tabs="timeline" data-width="" data-height="" data-small-header="false" data-adapt-container-width="true" data-hide-cover="false" data-show-facepile="true"><blockquote cite="https://www.facebook.com/slaskwroclawpl" class="fb-xfbml-parse-ignore"><a href="https://www.facebook.com/slaskwroclawpl">WKS Śląsk Wrocław SA</a></blockquote></div>
       </div>
     </aside>
 
@@ -299,19 +153,17 @@
 
 <footer class="container-fluid py-5 bg-primary text-white">
   <div class="container">
-    <div class="row">
+    <div class="row flex align-items-center">
       <div class="col-4 col-md">
-        <img src="./img/logo.png" class="img-fluid mx-auto d-block" />
-        <small class="d-block mb-3 text-center">© 2020</small>
+        <img src="./img/logos/logo_white.png" class="img-fluid mx-auto d-block" />
       </div>
       <div class="col-4 col-md">
         <h5>Na skróty</h5>
         <ul class="list-unstyled text-small">
-          <li><a class="text-white" href="#">Klub</a></li>
           <li><a class="text-white" href="#">Bilety i karnety</a></li>
           <li><a class="text-white" href="#">Wydarzenia</a></li>
-          <li><a class="text-white" href="#">Rozgrywki</a></li>
-          <li><a class="text-white" href="#">Zespoły</a></li>
+          <li><a class="text-white" href="#">Zespół</a></li>
+          <li><a class="text-white" href="#">Historia</a></li>
           <li><a class="text-white" href="#">Stadion</a></li>
           <li><a class="text-white" href="#">Sponsorzy</a></li>
           <li><a class="text-white" href="#">Relacje LIVE</a></li>

@@ -16,7 +16,7 @@ $(document).ready(function(){
                             <div class="pl-2 pt-2">
                                 <h1 class="display-4 my-1 font-weight-light">${article.title}</h1>
                                 <p class="lead mb-3 font-weight-light text-justify">${article.content_path.substr(0, article.content_path.indexOf('{hl}')) }</p>
-                                <p class="lead mb-0"><a href="#" article-id="${article.news_ID}" class="text-white font-weight-bold">Czytaj dalej...</a></p>
+                                <p class="lead mb-0"><a href="article.php?article-id=${article.news_ID}" class="text-white font-weight-bold">Czytaj dalej...</a></p>
                             </div>
                         </div>
                     </div>`;
@@ -25,7 +25,7 @@ $(document).ready(function(){
                 let singleArticle =
                     `<div class="blog-post mt-4 pb-3">
                     <h2 class="blog-post-title">${article.title}</h2>
-                    <p class="blog-post-meta">${article.created_at} by <a href="#" class="text-secondary">${article.worker_ID}</a></p>
+                    <p class="blog-post-meta">${article.created_at} by <a href="#" class="text-secondary">${article.worker_first_name} ${article.worker_last_name}</a></p>
                     <img class="img img-fluid rounded shadow" src="img/articles/${article.news_img_path}.jpg" />
                     <strong class="d-block mt-3 mb-3 font-weight-normal">${article.content_path.substr(0, article.content_path.indexOf('{hl}')) }</strong>
                     <p class="font-weight-light">${article.content_path.substr(article.content_path.indexOf('{hl}') + 4, article.content_path.indexOf('{st}') - article.content_path.indexOf('{hl}') - 4) }...</p>
@@ -36,6 +36,51 @@ $(document).ready(function(){
             counter++;
         });
         $('.loading').fadeOut('slow');
+    });
+
+    $.ajax({
+        url         : "http://localhost/stronaklubu/backend/api/matches/read.php",
+        method      : "get",
+        dataType    : "json",
+    }).done((response) => {
+        let match = response[0];
+        let nearestMatch = `
+        <h4 class="pb-3">Najbliższy mecz</h4>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-3 px-0">
+                    <img class="img-fluid mx-auto d-block" src="./img/teams/${match.club1_ID === "1" ? match.club2_path_img_logo : match.club1_path_img_logo}.png" />
+                </div>
+                <div class="col-9 px-0">
+                    <ul class="nearest-match-list">
+                        <li>Data: ${match.date_of_match}</li>
+                        <li>Przeciwnik: ${match.club2_clubname}</li>
+                        <li>Miejsce: ${match.stadium}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>`;
+        $('.nearest-match').html(nearestMatch);
+    });
+
+    $.ajax({
+        url         : "http://localhost/stronaklubu/backend/api/clubs/read.php",
+        method      : "get",
+        dataType    : "json",
+    }).done((response) => {
+        let pos = 1;
+        response.map((club) => {
+            console.log(club);
+            let clubTableRow =
+                `<tr>
+                    <td class="${club.club_ID === "1" ? "font-weight-bold" : "" }">${club.league_position}.</td>
+                    <td class="font-secondary ${club.club_ID === "1" ? "font-weight-bold" : "bold" } txt-left">${club.clubname}</td>
+                    <td class="${club.club_ID === "1" ? "font-weight-bold" : "" }">${club.league_matches}</td>
+                    <td class="font-secondary ${club.club_ID === "1" ? "font-weight-bold" : "bold" }">${club.league_points}</td>
+                </tr>`;
+            $('.clubs-table').append(clubTableRow);
+            pos++;
+        });
     });
 
 

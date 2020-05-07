@@ -29,14 +29,19 @@
 
             $match_item = array(
                 'match_ID' => $match_ID,
-                'club_home_ID' => $club_home_ID,
-                'club_away_ID' => $club_away_ID,
+                'club1_ID' => $club1_ID,
+                'club1_clubname' => $club1_clubname,
+                'club1_city' => $club1_city,
+                'club1_path_img_logo' => $club1_path_img_logo,
+                'club2_ID' => $club2_ID,
+                'club2_clubname' => $club2_clubname,
+                'club2_city' => $club2_city,
+                'club2_path_img_logo' => $club2_path_img_logo,
                 'stadium' => $stadium,
                 'match_address' => $match_address,
                 'amount_of_spectators' => $amount_of_spectators,
                 'earnings' => $earnings,
                 'date_of_match' => $date_of_match
-
             );
 
 
