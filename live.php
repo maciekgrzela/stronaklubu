@@ -1,7 +1,4 @@
 <?php
-    if(!isset($_GET['article-id'])){
-        header("Location: index.php");
-    }
 ?>
 <!doctype html>
 <html class="no-js" lang="pl">
@@ -19,11 +16,11 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/main_page.css">
-    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/live.css">
     <meta name="theme-color" content="#fafafa">
 </head>
 
-<body data-article="<?php echo $_GET['article-id'] ?>">
+<body>
 <!--[if IE]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
@@ -68,38 +65,38 @@
 
 <main role="main" class="container bg-white mb-4 pb-4">
     <div class="row">
-        <div class="col-md-8 blog-main article-main">
+        <div class="col-md-12 blog-main events-main">
+            <h3 class="mt-4 pb-2 font-weight-light border-bottom d-flex"><a href="index.php"><ion-icon name="chevron-back-outline"></ion-icon></a> Relacje LIVE</h3>
+            <div class="live">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="nav flex-column nav-pills narratives" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                                <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Wybierz relację</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <div class="tab-content narratives-caption" id="v-pills-tabContent">
+                                <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+                                    <div class="jumbotron rounded shadow">
+                                        <div class="container">
+                                            <h1 class="display-4 d-flex py-0 my-2 px-0"><ion-icon name="football-outline" class="mr-2"></ion-icon> Wybierz relację</h1>
+                                            <p class="lead">Po lewej stronie przedstawione zostały ostatnie wydarzenia. Niektóre z nich dzieją się teraz. Wybierz jedno z nich w celu przeglądania wpisów z relacji</p>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat.</div>
+                                <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">Cillum ad ut irure tempor velit nostrud occaecat ullamco aliqua anim Lorem sint. Veniam sint duis incididunt do esse magna mollit excepteur laborum qui. Id id reprehenderit sit est eu aliqua occaecat quis et velit excepteur laborum mollit dolore eiusmod. Ipsum dolor in occaecat commodo et voluptate minim reprehenderit mollit pariatur. Deserunt non laborum enim et cillum eu deserunt excepteur ea incididunt minim occaecat.</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <aside class="col-md-4 blog-sidebar">
-            <div class="p-1 pt-0 mb-3 bg-primary text-light rounded shadow">
-                <h4 class="py-3 px-3">Tabela ligowa</h4>
-                <table class="table table-borderless league-table text-light">
-                    <thead class="text-uppercase">
-                    <tr>
-                        <th class="font-weight-light">Lp.</th>
-                        <th class="font-weight-light">Drużyna</th>
-                        <th class="font-weight-light">Mecz</th>
-                        <th class="font-weight-light">Punkty</th>
-                    </tr>
-                    </thead>
-                    <tbody class="font-secondary clubs-table">
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mt-4 p-4 rounded shadow bg-secondary text-white nearest-match">
-            </div>
-        </aside>
-        <div class="col-md-12">
-            <h3 class="mt-4 pb-2 font-weight-light border-bottom">Pozostałe artykuły</h3>
-            <div class="container-fluid">
-                <div class="row other-articles"></div>
-            </div>
-        </div>
-    </div><!-- /.row -->
-
-</main><!-- /.container -->
+</main>
 
 <footer class="container-fluid py-5 bg-primary text-white">
     <div class="container">
@@ -146,7 +143,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/plugins.js"></script>
-<script src="js/article.js"></script>
+<script src="js/live.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v6.0&appId=1884357361881732&autoLogAppEvents=1"></script>

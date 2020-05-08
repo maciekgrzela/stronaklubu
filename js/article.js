@@ -12,8 +12,8 @@ $(document).ready(function(){
             if(article.news_ID === $('body').attr('data-article')){
                 let singleArticle =
                     `<div class="blog-post mt-4 pb-3">
-                    <h3 class="mt-4 pb-2 font-weight-light border-bottom">${article.title}</h3>
-                    <p class="blog-post-meta">${article.created_at} by <a href="#" class="text-secondary">${article.worker_first_name} ${article.worker_last_name}</a></p>
+                    <h3 class="mt-4 pb-2 font-weight-light border-bottom d-flex"><a href="index.php"><ion-icon name="chevron-back-outline"></ion-icon></a> ${article.title}</h3>
+                    <p class="blog-post-meta ml-2">${article.created_at} by <a href="#" class="text-secondary">${article.worker_first_name} ${article.worker_last_name}</a></p>
                     <img class="img img-fluid rounded shadow" src="img/articles/${article.news_img_path}.jpg" />
                     <strong class="d-block mt-3 mb-3 font-weight-normal">${article.content_path.substr(0, article.content_path.indexOf('{hl}')) }</strong>
                     <p class="font-weight-light">${article.content_path.substr(article.content_path.indexOf('{hl}') + 4) }...</p>
@@ -24,7 +24,7 @@ $(document).ready(function(){
                 let singleArticle =
                     `<div class="col-md-3 mt-3 other-article">
                         <a class="d-block" href="article.php?article-id=${article.news_ID}">
-                        <p class="bg-primary shadow p-2 rounded absolute-center d-none text-white">${article.title}</p>
+                        <p class="bg-primary shadow p-1 rounded absolute-center d-none text-white">${article.title.substr(0, 30)}...</p>
                         <img class="img img-fluid rounded shadow" src="img/articles/${article.news_img_path}.jpg" />
                         </a>
                      </div>`;

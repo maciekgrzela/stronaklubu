@@ -33,7 +33,7 @@
       <div class="col-4 text-center">
         <ul class="d-flex align-items-end pl-0">
           <li class="d-inline-flex"><a class="blog-header-logo text-dark text-uppercase mr-3" href="#">Strona</a></li>
-          <li class="d-inline-flex"><a href="index.html"><img class="img img-fluid logo" src="./img/logo.png" /></a></li>
+          <li class="d-inline-flex"><a href="index.php"><img class="img img-fluid logo" src="./img/logo.png" /></a></li>
           <li class="d-inline-flex"><a class="blog-header-logo text-dark text-uppercase ml-3" href="#">klubu</a></li>
         </ul>
       </div>
@@ -48,13 +48,13 @@
 
   <div class="nav-scroller py-1 mb-2">
     <nav class="nav d-flex justify-content-between">
-      <a class="p-2 text-muted" href="#">Bilety i karnety</a>
-      <a class="p-2 text-muted" href="#">Wydarzenia</a>
-      <a class="p-2 text-muted" href="#">Zespół</a>
-      <a class="p-2 text-muted" href="#">Historia</a>
-      <a class="p-2 text-muted" href="#">Stadion</a>
-      <a class="p-2 text-muted" href="#">Sponsorzy</a>
-      <a class="p-2 text-muted" href="#">Relacje LIVE</a>
+      <a class="p-2 text-muted menu-link" href="tickets.php">Bilety i karnety</a>
+      <a class="p-2 text-muted menu-link" href="events.php">Wydarzenia</a>
+      <a class="p-2 text-muted menu-link" href="team.php">Zespół</a>
+      <a class="p-2 text-muted menu-link" href="history.php">Historia</a>
+      <a class="p-2 text-muted menu-link" href="stadium.php">Stadion</a>
+      <a class="p-2 text-muted menu-link" href="sponsors.php">Sponsorzy</a>
+      <a class="p-2 text-muted menu-link" href="live.php">Relacje LIVE</a>
     </nav>
   </div>
 
@@ -172,7 +172,7 @@
       <div class="col-4 col-md">
         <h5>O stronie</h5>
         <ul class="list-unstyled text-small text-justify">
-          <li>Niniejsza strona stanowi witrynę poglądową wykonaną na potrzeby przedmiotu Projektowanie Systemów Internetowych i Mobilnych. Wszystkie zawarte na niej treści (tj. zdjęcia artykułów, dane prawcowników, treści artykułów) zostały pobrane z oficjalnej strony klubu.</li>
+          <li>Niniejsza strona stanowi witrynę poglądową wykonaną na potrzeby przedmiotu Projektowanie Systemów Internetowych i Mobilnych. Wszystkie zawarte na niej treści (tj. zdjęcia artykułów, dane prawcowników, treści artykułów, zdjęcia sponsorów) zostały pobrane z oficjalnej strony klubu.</li>
         </ul>
       </div>
       <div class="col-4 col-md">

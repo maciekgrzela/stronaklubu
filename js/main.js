@@ -29,7 +29,7 @@ $(document).ready(function(){
                     <img class="img img-fluid rounded shadow" src="img/articles/${article.news_img_path}.jpg" />
                     <strong class="d-block mt-3 mb-3 font-weight-normal">${article.content_path.substr(0, article.content_path.indexOf('{hl}')) }</strong>
                     <p class="font-weight-light">${article.content_path.substr(article.content_path.indexOf('{hl}') + 4, article.content_path.indexOf('{st}') - article.content_path.indexOf('{hl}') - 4) }...</p>
-                    <button article-id="${article.news_ID}" class="btn btn-outline-secondary float-right">Przejdź do artykułu</button>
+                    <a href="article.php?article-id=${article.news_ID}" class="btn btn-outline-secondary float-right">Przejdź do artykułu</a>
                 </div>`;
                 $('.club-articles').append(singleArticle);
             }
@@ -100,7 +100,7 @@ $(document).ready(function(){
                     <h3 class="mb-0 font-weight-light">${response.title}</h3>
                     <div class="mb-1 text-muted">${response.created_at}</div>
                     <p class="card-text mb-auto font-weight-light">${response.content_path.substr(0, response.content_path.indexOf('{hl}')) }...</p>
-                    <a href="#" article-id="${response.news_ID}" class="stretched-link">Czytaj dalej</a>
+                    <a href="article.php?article-id=${response.news_ID}" class="stretched-link">Czytaj dalej</a>
                 </div>
             </div>`;
         $('.most-popular-article').append(mostPopularArticle);
@@ -122,7 +122,7 @@ $(document).ready(function(){
             <h3 class="mb-0 font-weight-light">${response.title}</h3>
             <div class="mb-1 text-muted">${response.created_at}</div>
             <p class="card-text mb-auto font-weight-light">${response.content_path.substr(0, response.content_path.indexOf('{hl}')) }...</p>
-            <a href="#" article-id="${response.news_ID}" class="stretched-link text-secondary">Czytaj dalej</a>
+            <a href="article.php?article-id=${response.news_ID}" class="stretched-link text-secondary">Czytaj dalej</a>
           </div>
         </div>`;
         $('.last-commented-article').append(lastCommentedArticle);

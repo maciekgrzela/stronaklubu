@@ -1,10 +1,12 @@
 .absolute-center {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    top: 0;
+}
+
+.other-article {
+    filter: grayscale(1);
 }
 
 .activeTitle {
-    filter: brightness(0.5);
+    filter: grayscale(0);
 }

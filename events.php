@@ -1,7 +1,4 @@
 <?php
-    if(!isset($_GET['article-id'])){
-        header("Location: index.php");
-    }
 ?>
 <!doctype html>
 <html class="no-js" lang="pl">
@@ -19,11 +16,12 @@
     <link rel="stylesheet" href="css/normalize.css">
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/main_page.css">
-    <link rel="stylesheet" href="css/article.css">
+    <link rel="stylesheet" href="css/events.css">
+    <link rel="stylesheet" href="css/equinox.css">
     <meta name="theme-color" content="#fafafa">
 </head>
 
-<body data-article="<?php echo $_GET['article-id'] ?>">
+<body>
 <!--[if IE]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
@@ -68,38 +66,16 @@
 
 <main role="main" class="container bg-white mb-4 pb-4">
     <div class="row">
-        <div class="col-md-8 blog-main article-main">
+        <div class="col-md-12 blog-main events-main">
+            <h3 class="mt-4 pb-2 font-weight-light border-bottom d-flex"><a href="index.php"><ion-icon name="chevron-back-outline"></ion-icon></a> Wydarzenia klubowe</h3>
+            <div class="matches-calendar"></div>
         </div>
+        <div class="col-md-12 event-details">
 
-        <aside class="col-md-4 blog-sidebar">
-            <div class="p-1 pt-0 mb-3 bg-primary text-light rounded shadow">
-                <h4 class="py-3 px-3">Tabela ligowa</h4>
-                <table class="table table-borderless league-table text-light">
-                    <thead class="text-uppercase">
-                    <tr>
-                        <th class="font-weight-light">Lp.</th>
-                        <th class="font-weight-light">Drużyna</th>
-                        <th class="font-weight-light">Mecz</th>
-                        <th class="font-weight-light">Punkty</th>
-                    </tr>
-                    </thead>
-                    <tbody class="font-secondary clubs-table">
-                    </tbody>
-                </table>
-            </div>
-
-            <div class="mt-4 p-4 rounded shadow bg-secondary text-white nearest-match">
-            </div>
-        </aside>
-        <div class="col-md-12">
-            <h3 class="mt-4 pb-2 font-weight-light border-bottom">Pozostałe artykuły</h3>
-            <div class="container-fluid">
-                <div class="row other-articles"></div>
-            </div>
         </div>
-    </div><!-- /.row -->
+    </div>
 
-</main><!-- /.container -->
+</main>
 
 <footer class="container-fluid py-5 bg-primary text-white">
     <div class="container">
@@ -145,8 +121,10 @@
 <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.4.1.min.js"><\/script>')</script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment-with-locales.min.js"></script>
+<script src="js/equinox.js"></script>
 <script src="js/plugins.js"></script>
-<script src="js/article.js"></script>
+<script src="js/events.js"></script>
 <script src="js/owl.carousel.min.js"></script>
 <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
 <script async defer crossorigin="anonymous" src="https://connect.facebook.net/pl_PL/sdk.js#xfbml=1&version=v6.0&appId=1884357361881732&autoLogAppEvents=1"></script>
