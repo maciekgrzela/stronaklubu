@@ -1,0 +1,64 @@
+.courtIntro {
+
+    margin-top: 2rem;
+    text-align: center;
+
+}
+
+.green {
+
+    color:#398756;
+}
+
+.red {
+
+    color:#A10500;
+}
+
+.center {
+    text-align: center;
+}
+
+.centerTitle {
+
+    color:#A10500;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+.stadions {
+    height: 15rem;
+}
+
+.locationTitle {
+
+    margin-top: 2rem;
+    text-align: left;
+    margin-bottom: 1rem;
+}
+
+.location {
+    text-align: left;
+    margin-bottom: 2rem;
+}
+
+.map-container-5{
+    overflow:hidden;
+    padding-bottom:56.25%;
+    position:relative;
+    height:0;
+}
+
+.map-container-5 iframe{
+    left:0;
+    top:0;
+    height:100%;
+    width:100%;
+    position:absolute;
+}
+
+.stadionName {
+
+    margin-top: 1rem;
+    color:#398756;
+}
