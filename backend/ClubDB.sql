@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Czas generowania: 28 Kwi 2020, 14:39
--- Wersja serwera: 10.1.38-MariaDB
--- Wersja PHP: 5.6.40
+-- Host: localhost
+-- Czas generowania: 12 Maj 2020, 04:34
+-- Wersja serwera: 10.4.6-MariaDB
+-- Wersja PHP: 7.1.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `clubdb`
+-- Baza danych: `ClubDB`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `achievements`
+--
+
+CREATE TABLE `achievements` (
+  `achievement_ID` int(11) NOT NULL,
+  `achievement_year` year(4) NOT NULL,
+  `achievement_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `achievements`
+--
+
+INSERT INTO `achievements` (`achievement_ID`, `achievement_year`, `achievement_name`) VALUES
+(1, 1977, 'Mistrz Polski - pierwsze');
 
 -- --------------------------------------------------------
 
@@ -36,7 +55,7 @@ CREATE TABLE `clients` (
   `date_of_birth` date NOT NULL,
   `user_login` varchar(150) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `user_password` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `create_date` datetime DEFAULT CURRENT_TIMESTAMP
+  `create_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -60,16 +79,33 @@ CREATE TABLE `clubs` (
   `city` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `stadium` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `club_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `path_img_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL
+  `path_img_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `league_position` int(11) DEFAULT NULL,
+  `league_points` int(11) NOT NULL DEFAULT 0,
+  `league_matches` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `clubs`
 --
 
-INSERT INTO `clubs` (`club_ID`, `clubname`, `city`, `stadium`, `club_address`, `path_img_logo`) VALUES
-(1, 'Slask Wroclaw', 'Wroclaw', 'Stadion Wroclaw', 'aleja slaska', 'asdasdasd'),
-(2, 'Lechia', 'Gdansk', 'PGE Arena', 'adasd', 'adasd');
+INSERT INTO `clubs` (`club_ID`, `clubname`, `city`, `stadium`, `club_address`, `path_img_logo`, `league_position`, `league_points`, `league_matches`) VALUES
+(1, 'Klub FC', 'Wroclaw', 'Stadion Wroclaw', 'aleja Śląska 1, 54-118 Wrocław', 'klubfc', 4, 42, 26),
+(2, 'Zespół Gdańsk', 'Gdansk', 'PGE Arena', 'adasd', 'lechiaGdansk', 7, 38, 26),
+(3, 'Zespół Warszawa', 'Warszawa', '', '', 'legiaWarszawa', 1, 51, 26),
+(4, 'Zespół Gliwice', 'Gliwice', '', '', 'piastGliwice', 2, 43, 26),
+(5, 'Zespół Kraków I', 'Kraków', '', '', 'cracoviaKrakow', 3, 42, 26),
+(6, 'Zespół Poznań', 'Poznań', '', '', 'lechPoznan', 5, 42, 26),
+(7, 'Zespół Szczecin', 'Szczecin', '', '', 'pogonSzczecin', 6, 41, 26),
+(8, 'Zespół Białystok', 'Białystok', '', '', 'jagielloniaBialystok', 8, 37, 26),
+(9, 'Zespół Częstochowa', 'Częstochowa', '', '', 'rakowCzestochowa', 9, 36, 26),
+(10, 'Zespół Płock', 'Płock', '', '', 'wislaPlock', 10, 36, 26),
+(11, 'Zespół Lubin', 'Lubin', '', '', 'zaglebieLubin', 11, 33, 26),
+(12, 'Zespół Zabrze', 'Zabrze', '', '', 'gornikZabrze', 12, 33, 26),
+(13, 'Zespół Kraków II', 'Kraków', '', '', 'wislaKrakow', 13, 31, 26),
+(14, 'Zespół Kielce', 'Kielce', '', '', 'koronaKielce', 14, 26, 26),
+(15, 'Zespół Gdynia', 'Gdynia', '', '', 'arkaGdynia', 15, 25, 26),
+(16, 'Zespół Łódź', 'Łódź', '', '', 'lksLodz', 16, 20, 26);
 
 -- --------------------------------------------------------
 
@@ -85,7 +121,7 @@ CREATE TABLE `matches` (
   `match_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `amount_of_spectators` int(11) DEFAULT NULL,
   `earnings` double DEFAULT NULL,
-  `date_of_match` date NOT NULL
+  `date_of_match` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -93,7 +129,69 @@ CREATE TABLE `matches` (
 --
 
 INSERT INTO `matches` (`match_ID`, `club_home_ID`, `club_away_ID`, `stadium`, `match_address`, `amount_of_spectators`, `earnings`, `date_of_match`) VALUES
-(1, 1, 2, 'adasd', 'asdasd', NULL, NULL, '2020-04-13');
+(1, 1, 2, 'Stadion Wrocław', 'aleja Śląska 1, 54-118 Wrocław', 10000, NULL, '2020-05-08 00:00:00'),
+(2, 1, 4, 'Stadion Poznań', 'Bułgarska 5/7, Poznań 60-320', 12000, NULL, '2020-05-12 16:16:38'),
+(3, 14, 1, 'Stadion Kielce', 'Księdza Piotra Ściegiennego 8, 25-033 Kielce', 7000, NULL, '2020-05-04 16:16:38');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `narratives`
+--
+
+CREATE TABLE `narratives` (
+  `narrative_ID` int(11) NOT NULL,
+  `match_ID` int(11) NOT NULL,
+  `title` varchar(300) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `narratives`
+--
+
+INSERT INTO `narratives` (`narrative_ID`, `match_ID`, `title`, `date`) VALUES
+(1, 1, 'Relacja z meczu 26 kolejki PKO Ekstraklasy', '2020-05-08 19:22:22'),
+(2, 2, 'Relacja z meczu 27 kolejki PKO Ekstraklasy', '2020-05-08 19:23:24'),
+(3, 3, 'Relacja z meczu 28 kolejki PKO Ekstraklasy', '2020-05-09 20:12:24'),
+(4, 3, 'XXXXXXX', '2020-05-04 16:16:38'),
+(5, 2, 'update3', '2020-05-12 16:16:38'),
+(7, 3, 'YYYYYY', '2020-05-12 16:16:38');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `narrative_items`
+--
+
+CREATE TABLE `narrative_items` (
+  `item_id` int(11) NOT NULL,
+  `narrative_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `img_path` varchar(100) COLLATE utf8_polish_ci NOT NULL DEFAULT 'thumbnail',
+  `text` varchar(500) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
+  `date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `narrative_items`
+--
+
+INSERT INTO `narrative_items` (`item_id`, `narrative_id`, `author_id`, `img_path`, `text`, `date`) VALUES
+(2, 1, 2, 'whistle', 'Witamy Państwa bardzo serdecznie na relacji z 26. kolejki meczu PKO Ekstraklasy. Jest 19:46. Zawodnicy już na płycie boiska. Właśnie sędzia dzisiejszego meczu rozpoczyna spotkanie.', '2020-05-08 19:47:36'),
+(3, 1, 2, 'free-kick', 'Pierwsza groźna akcja pod bramką gospodarzy. Na szczęście obrońca ratuje sytuację.', '2020-05-09 21:15:12'),
+(5, 1, 2, 'corner', 'Rzut rożny dla drużyny gospodarzy. Zawodnik drużyny gości w ostatnim momencie wybił piłkę na aut bramkowy', '2020-05-09 21:35:07'),
+(6, 1, 2, 'free-kick', 'Drużyna gości ratuje się z opresji. Piłka szybko wyprowadzona przez bramkarza. Zawodnicy gości zbliżają się pod pole karne gospodarzy', '2020-05-09 21:37:39'),
+(7, 1, 2, 'penalty', 'aaaaaaaxdDDD', '2020-05-09 21:38:18'),
+(8, 1, 2, 'corner', 'bbbbb', '2020-05-09 21:39:34'),
+(10, 1, 2, 'corner', 'eeeee', '2020-05-09 21:41:48'),
+(11, 1, 2, 'corner', 'hhhhhhhh', '2020-05-09 21:51:20'),
+(12, 1, 2, 'corner', 'uuuuuuu', '2020-05-09 21:53:58'),
+(13, 1, 2, 'corner', 'gggggg', '2020-05-09 21:55:19'),
+(14, 1, 2, 'corner', 'uiyhkjhda', '2020-05-09 21:57:12'),
+(15, 1, 2, 'penalty', 'Proszę Państwa. Karny dla gospodarzy!', '2020-05-09 21:59:41'),
+(16, 1, 2, 'red-card', 'Bramkarz gości dostaje czerwoną kartkę', '2020-05-09 22:02:20'),
+(17, 1, 2, 'penalty', 'kurde blaszka', '2020-05-09 21:35:07');
 
 -- --------------------------------------------------------
 
@@ -106,10 +204,10 @@ CREATE TABLE `news` (
   `title` varchar(200) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `content_path` longtext CHARACTER SET utf8 NOT NULL,
   `news_img_path` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `tags` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `last_commented` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `viewers` int(11) NOT NULL DEFAULT '0',
+  `last_commented` datetime NOT NULL DEFAULT current_timestamp(),
+  `viewers` int(11) NOT NULL DEFAULT 0,
   `worker_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -118,14 +216,24 @@ CREATE TABLE `news` (
 --
 
 INSERT INTO `news` (`news_ID`, `title`, `content_path`, `news_img_path`, `created_at`, `tags`, `last_commented`, `viewers`, `worker_ID`) VALUES
-(2, 'Piłkarze Śląska w jedynastkach kolejki!', 'Dino Stiglec i Michał Chrapek znaleźli się w najlepszych jedenastkach 23. kolejki PKO Ekstraklasy! Obaj zostali wyróżnieni za mecz z Górnikiem Zabrze.{hl}\r\nStiglec zdobył bramkę już w 3. minucie spotkania z Górnikiem Zabrze i pomógł drużynie odnieść niezwykle ważne zwycięstwo. Jego występ został doceniony i Chorwat znalazł się w jedenastce kolejki PKO Ekstraklasy, a także w drużynie kolejki wybieranej przez Canal+ i tygodnik \"Piłka Nożna\". Asystę przy bramce Dino{st} zaliczył Michał Chrapek, który również został doceniony przez tygodnik \"Piłka Nożna\".\r\n\r\nJedenastka 23. kolejki PKO Ekstraklasy: \r\n\r\nKuciak (Lechia Gdańsk) - Stiglec (Śląsk Wrocław), Wieteska (Legia Warszawa), Rymaniak (Piast Gliwice), Niepsuj (Wisła Kraków), Jóżwiak (Lech Poznań), Szczepański (Raków Częstochowa), Błaszczykowski (Wisła Kraków), Młyński (Arka Gdynia), Buksa (Wisła Kraków), Kante (Legia Warszawa)\r\n\r\nJedenastka tygodnika \"Piłka Nożna\":\r\n\r\nKuciak (Lechia Gdańsk) - Stiglec (Śląsk Wrocław), Rymaniak (Piast Gliwice), Czerwiński (Zagłębie Lubin) - Karbownik (Legia Warszawa), Tiba (Lech Poznań), Chrapek (Śląsk Wrocław), Błaszczykowski (Wisła Kraków) - Novikovas (Legia Warszawa), Młyński (Arka Gdynia), Kante (Legia Warszawa)', 'article5', '2020-04-27 18:03:14', 'Stiglec, Chrapek, Zabrze, PKO Ekstraklasa, Piłka Nożna, Canal+', '2020-04-28 12:18:53', 180, 2),
+(2, '-Piłkarze Śląska w jedynastkach kolejki!', 'Dino Stiglec i Michał Chrapek znaleźli się w najlepszych jedenastkach 23. kolejki PKO Ekstraklasy! Obaj zostali wyróżnieni za mecz z Górnikiem Zabrze.{hl}\nStiglec zdobył bramkę już w 3. minucie spotkania z Górnikiem Zabrze i pomógł drużynie odnieść niezwykle ważne zwycięstwo. Jego występ został doceniony i Chorwat znalazł się w jedenastce kolejki PKO Ekstraklasy, a także w drużynie kolejki wybieranej przez Canal+ i tygodnik &amp;quot;Piłka Nożna&amp;quot;. Asystę przy bramce Dino{st} zaliczył Michał Chrapek, który również został doceniony przez tygodnik &amp;quot;Piłka Nożna&amp;quot;.\n\nJedenastka 23. kolejki PKO Ekstraklasy: \n\nKuciak (Lechia Gdańsk) - Stiglec (Śląsk Wrocław), Wieteska (Legia Warszawa), Rymaniak (Piast Gliwice), Niepsuj (Wisła Kraków), Jóżwiak (Lech Poznań), Szczepański (Raków Częstochowa), Błaszczykowski (Wisła Kraków), Młyński (Arka Gdynia), Buksa (Wisła Kraków), Kante (Legia Warszawa)\n\nJedenastka tygodnika &amp;quot;Piłka Nożna&amp;quot;:\n\nKuciak (Lechia Gdańsk) - Stiglec (Śląsk Wrocław), Rymaniak (Piast Gliwice), Czerwiński (Zagłębie Lubin) - Karbownik (Legia Warszawa), Tiba (Lech Poznań), Chrapek (Śląsk Wrocław), Błaszczykowski (Wisła Kraków) - Novikovas (Legia Warszawa), Młyński (Arka Gdynia), Kante (Legia Warszawa)', 'article5', '2020-04-27 18:03:14', 'Stiglec, Chrapek, Zabrze, PKO Ekstraklasa, Piłka Nożna, Canal+', '2020-04-28 12:18:53', 180, 2),
 (3, 'Kadra Śląska na obóz na Cyprze', '27 zawodników zabierze na obóz w Ayia Napie trener Vitezslav Lavicka. Wrocławianie będą trenować na Cyprze od 19 do 29 stycznia.{hl}\r\nDrużyna wyruszy na obóz w sobotnią noc, a około godziny 6 wejdzie na pokład samolotu do cypryjskiej Larnak, skąd autokarem dojedzie do miejsca docelowego - Ayia Napy. Sztab WKS-u będzie miał do dyspozycji 27 zawodników.\r\n\r\nKadra Śląska na obóz na Cyprze (19-29 stycznia):\r\n\r\nBramkarze:\r\nMatus Putnocky, Dariusz Szczerbal, Bartosz Frasik, Daniel Kajzer{st}\r\n\r\nObrońcy:\r\nPiotr Celeban, Dino Stiglec, Israel Puerto, Wojciech Golla, Mariusz Pawelec, Kamil Dankowski, Konrad Poprawa\r\n\r\nPomocnicy:\r\nMichał Chrapek, Robert Pich, Przemysław Płacheta, Grzegorz Kotowicz, Marcin Szpakowski, Lubambo Musonda, Filip Marković, Jakub Łabojko, Diego Żivulić, Damian Gąska, Przemysław Bargiel, Krzysztof Mączyński, Bartosz Boruń\r\n\r\nNapastnicy:\r\nErik Exposito, Piotr Samiec-Talar, Sebastian Bergier', 'article6', '2020-04-27 18:03:14', 'Obóz treningowy, Cypr, Ayia Napa', '2020-04-28 12:18:53', 560, 2),
 (8, 'Mecz o wysoką stawkę', 'W 24. kolejce PKO Ekstraklasy Śląsk Wrocław uda się do Lubina, gdzie zmierzy się z miejscowym Zagłębiem. Wygrana w derbach może znacznie przybliżyć wrocławian do miejsca w górnej ósemce na koniec rundy zasadniczej.{hl}Początek rundy wiosennej wygląda obiecująco dla Śląska. Pięć punktów w trzech meczach to solidny start, jednak jeśli wrocławianie chcą być pewni miejsca w grupie mistrzowskiej na koniec rundy zasadniczej, to muszą wygrywać. Każde punkty są cenne, ale te zdobyte w derbowej rywalizacji, mają podwójne znaczenie.Zagłębie również bardzo potrzebuje punktów. Lubinianie nie rozpoczęli rundy wiosennej w najlepszym stylu. Dwie porażki i remis sprawiły, że zespół Martina Seveli z dorobkiem 29 punktów znajduje się dopiero na dwunastym miejscu w ligowej tabeli{st} tracąc w tej chwili do ósmej Wisły Płock cztery punkty. Czasu do końca rundy zostało coraz mniej i każde kolejne potknięcie może sprawić, że Zagłębie, zamiast grać z czołowymi zespołami, znajdzie się w dolnej ósemce. Wrocławianie nie wspominają najlepiej ostatnich wizyt na stadionie w Lubinie. Trzy ostatnie mecze zakończyły się porażką WKS-u i Śląsk nie zdobył w nich ani jednej bramki. Dodatkowo, Trójkolorowi nie wygrali w Lubinie od 6 listopada 2011 roku. Wówczas zwyciężyli aż 5:1, jednak od tamtego meczu ich bilans w Lubinie to trzy remisy i cztery porażki. Coraz lepiej wygląda sytuacja kadrowa Śląska. Po trzech meczach zawieszenia do składu wraca Filip Marković. - Filip walczy o miejsce w składzie. Jesienią brakowało mu trochę przygotowania fizycznego, ale przed tą rundą dobrze przepracował okres przygotowawczy. W trzech ostatnich meczach był zawieszony, teraz jest przygotowany i widać na treningach, że jest głodny gry. - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. Ubiegły tydzień w Lubinie stał pod znakiem transferów. Bartosz Slisz odszedł do Legii Warszawa, bijąc tym samym rekord, jeśli chodzi o transakcje wewnątrz ligi (1,5 mln euro). Zagłębie szybko znalazło jednak zastępstwo. - Analizowaliśmy przeciwnika. Slisz odszedł do Legii Warszawa, ale zastąpi go bardzo doświadczony pomocnik z Rosji - Baszkirow. Myślę, że Zagłębie nie będzie zmieniać swojego stylu gry. Mają bardzo niebezpieczne skrzydła, kreatywną dziesiątkę w postaci Filipa Starzyńskiego, więc wiemy, że czeka nas spore wyzwanie - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. Poprzednie spotkanie Śląska z Zagłębiem na długo zapadnie w pamięci kibiców. Po szalonym meczu padł remis 4:4. Bramkę na wagę punktu w doliczonym czasie gry zdobył wówczas Erik Exposito, który skompletował wtedy hat-tricka. Początek meczu Zagłębie - Śląsk o godzinie 17:30. Na naszej stronie internetowej przeprowadzimy relację live. ', 'article4', '2020-04-27 19:22:21', 'Zagłębie, Exposito, Lavička, Marković', '2020-04-28 12:18:53', 320, 3),
 (9, '27. kolejka odkodowana w Canal+', 'Nadawca telewizyjny meczów PKO BP Ekstraklasy, Canal+ Sport, zdecydował się odkodować wszystkie mecze 27. kolejki dla abonentów Platformy CANAL+.{hl} Decyzja związana jest z postanowieniem o rozgrywaniu meczów PKO Ekstraklasy bez udziału kibiców ze względu na z ryzyko rozprzestrzeniania się koronawirusa (Covid-19).\r\nO tym, że mecze Ekstraklasy do odwołania będą odbywać się bez udziału publiczności wiemy od wtorkowego przedpołudnia. TUTAJ informowaliśmy o zwrocie biletów zakupionych na piątkowe spotkanie Śląska Wrocław z Rakowem Częstochowa.{st}\r\n\r\nTym razem kibice nie będą mogli wspomóc swoich drużyn z trybun, jednak dzięki decyzji CANAL+, większa ich grupa obejrzy spotkanie swojego klubu w domu. Nadawca telewizyjne zdecydował o odkodowaniu całej 27. kolejki dla wszystkich abonentów Platformy CANAL+.\r\n\r\nPoniżej treść całego komunikatu telewizji Canal+ Sport:\r\n\r\n\"Wszystkie mecze 27. kolejki PKO BP Ekstraklasy odkodowane dla abonentów CANAL+! W hicie tej serii gier Lech Poznań podejmie Legię Warszawa.\r\n \r\nAbonenci i Kibice! Sytuacja jest wyjątkowa, wymaga więc od nas wyjątkowych działań. Z duchem sportu i z myślą o Was – kibicach, najbliższą kolejkę PKO BP Ekstraklasy odkodujemy dla wszystkich abonentów Platformy CANAL+. To znaczy, że nawet jeśli nie macie CANAL+ w swojej ofercie, to będziecie mogli przeżywać sportowe emocje razem ze swoimi drużynami - pomimo zamkniętych stadionów. Pracujemy równocześnie dla Was nad specjalnymi ofertami, które pozwolą śledzić rozgrywki PKO BP Ekstraklasy w kolejnych kolejkach. Zachęcamy również innych operatorów którzy mają w ofercie CANAL+ do podobnych działań. Ze sportowymi pozdrowieniami! CANAL+ dla kibiców!\".', 'article8', '2020-04-28 12:00:04', 'Canal+, Mecze, PKO Ekstraklasa', '2020-04-28 12:18:53', 811, 2),
 (10, 'Trenerzy Śląska Wrocław na stażu w Slavii Praga', 'Krystian Rubajczyk, Dawid Gomola, Paweł Mucha i Józef Klepak w dniach 25-28 lutego przebywali na stażu szkoleniowym w akademii Slavii Praga, obserwując pracę jednego z najlepszych czeskich klubów.{hl}\r\nSlavia Praga to pięciokrotny mistrz Czech, a także obecny lider Fortuna Ligi.  W klubie występowali między innymi Jii Pavlenka (obecnie Werder Brema), Tomas Soucek (West Ham United), a we wcześniejszych latach choćby Karel Poborsky i Vladimir Smicer.{st}\r\n\r\nZgodnie z długofalową strategią rozwoju działalności klubu przyjętą przez Śląsk Wrocław, kolejna grupa trenerów odbyła staż trenerski. - Jednym z najważniejszych elementów rozwoju klubu jest dalsze kształcenie i rozwój trenerów Akademii. Podjęliśmy szerokie działania w zakresie nawiązania współpracy i wyjazdów na staże zagraniczne z klubami, które specjalizują się w przygotowaniu młodzieży do grania na najwyższym poziomie. Staże takie odbyły się już w Benfice Lizbona, Dinamo Zagrzeb, MSK Żylina, a kolejnymi klubami są: Slavia Praga, FC Liverpool, RB Lipsk i Red Bull Salzburg. Jesteśmy na etapie unowocześniania naszego systemu szkolenia w Akademii i dostosowywania do najbardziej nowoczesnych tendencji europejskich i z tego powodu takie wyjazdy dają nam wiele ciekawych spostrzeżeń - mówi Krzysztof Paluszek, dyrektor do spraw rozwoju sportowego Śląska Wrocław.\r\n\r\nZaplecze Akademii Slavii, choć wizualnie skromne, to robi ogromne wrażenie i posiada wszystko, czego młodzi piłkarze potrzebują do odpowiedniego rozwoju. Każdy zespół należący do Akademii posiada swoją własną szatnię, a trenerzy mają przydzielone swoje pokoje. - Jest tam wszystko, co potrzebne do profesjonalnego treningu. Jest odpowiednia liczba boisk, każda drużyna ma swoją szatnie i wszystko jest zorganizowane w jednym miejscu - mówi Krystian Rubajczyk. ', 'article1', '2020-04-28 12:11:47', 'Slavia Praga, Rubajczyk, Gomola, Mucha, Klepak', '2020-04-28 12:18:53', 730, 2),
 (11, 'Żółta kartka dla Márka Tamása anulowana!', 'Komisja Ligi po zapoznaniu się z opinią Kolegium Sędziów PZPN uwzględniła protest klubu i anulowała żółtą kartkę, którą napomniany został Márk Tamás w meczu z Jagiellonią Białystok.{hl}\r\nW spotkaniu 26. kolejki PKO Ekstraklasy obrońca Śląska Wrocław ukarany został żółtą kartką po interwencji w polu karnym, gdzie zdaniem arbitra nieprzepisowo zatrzymywał Przemysława Mystkowskiego. Sędzia Piotr Lasyk, nie oglądając sytuacji na powtórce, podyktował „jedenastkę” dla gospodarzy, którą na gola zamienił Martin Pospíšil.{st}\r\n\r\nWrocławski klub odwołał się od kary napomnienia dla Tamása, wskazując, że Węgier w tej sytuacji nie popełnił przewinienia na zawodniku Jagiellonii. Komisja Ligi w środę uwzględniła protest Śląska, uznając karę żółtej kartki za niebyłą.', 'article7', '2020-04-28 12:14:42', 'Márk Tamás, Martin Pospíšil, Kartka ', '2020-04-28 12:18:53', 310, 2),
 (12, 'Marković strzelcem gola w derbach', 'Dla Serba spotkanie w Lubinie było pierwszym po prawie dwóch miesiącach. Poprzednio wystąpił 20 grudnia w Krakowie. Przeciwko Cracovii otrzymał czerwoną kartkę{hl}, a później karę trzech meczów zawieszenia. Po jej odcierpieniu Marković pojawił się na murawie w 66. minucie spotkania z Zagłębiem. - Cieszę się, że wróciłem. Bardzo czekałem na to, by móc zagrać i pomóc drużynie. Mam nadzieję, że teraz będę mógł to robić regularnie - mówił po meczu 28-latek.{st}\r\nMarković w 83. min brał udział w akcji bramkowej, po której WKS strzelił gola na 1:3. Początkowo trafienie zaliczono jako bramkę samobójczą Guldana, jednak ostatecznie gol trafia na konto pomocnika Śląska. Dla Filipa jest to więc premierowe trafienie w zielono-biało-czerwonych barwach. Czekamy na kolejne!', 'article2', '2020-04-25 12:23:23', 'Marković, Bramka, Cracovia', '2020-04-28 12:23:23', 1378, 3),
-(13, 'Wrócić na właściwy tor', 'Zaledwie trzy dni po przegranym meczu derbowym, Śląsk Wrocław ma szansę na rehabilitacje. W 25. kolejce PKO Ekstraklasy Trójkolorowi podejmą Koronę Kielce{hl}.\r\nZwycięstwo w derbach mogło dać Śląskowi awans na trzecie miejsce w tabeli PKO Ekstraklasy. Wrocławianie przegrali jednak z Zagłębiem Lubin (1:3) i nie poprawili swojego dorobku punktowego. Porażki Pogoni Szczecin i Cracovii sprawiają jednak, że ponownie pojawia się szansa na poprawę pozycji względem rywali. - Po porażce każdy jest zły, jest wiele emocji. Dziś mieliśmy spotkanie w szatni na Oporowskiej przed treningiem.{st} Postawiliśmy sprawę jasno - nie daliśmy rady, wygrała drużyna lepiej przygotowana i cały nasz zespół oraz sztab ma tego świadomość. Nikt nie chce przegrywać, wiemy jednak, że jest to wpisane w futbol. To nasza piąta porażka w sezonie, nie jest tego wiele, ale każda boli i powoduje złość. Najważniejsza będzie teraz reakcja drużyny. Żeby fizycznie i mentalnie pokazać się w środę z dużo lepszej strony. - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. \r\n\r\nWczorajsza wygrana Lecha Poznań sprawiła, że Śląsk znajduje się obecnie na piątym miejscu w tabeli. Trzy punkty w meczu z Koroną pozwolą wrocławianom awansować na podium. W składzie zielono-biało-czerwonych może dojść do kilku zmian w porównaniu z niedzielnym meczem w Lubinie. Na debiut wciąż czekają zimowe nabytki Śląska - Guillermo Cotugno i Márk Tamás. - Trzeba zobaczyć jak poszczególni gracze wyglądają również w treningach, jak mentalnie. Psychologiczny aspekt jest bardzo ważny po takiej porażce. Zmiany w drużynie muszą być przemyślane i jak najlepsze, by ich efektem była wygrana - mówił trener Lavička na przedmeczowej konferencji prasowej. \r\n \r\nGuillerme Cotugno? On idzie krok po kroku w górę. Pracujemy z nim taktycznie, fizycznie, dużo rozmawiamy. Ma swoją jakość i mądrość, ale w drużynie jest rywalizacja i od niej zależy, kto i kiedy dostanie swoje szanse.\r\n\r\nSytuacja dzisiejszego rywala Śląska jest bardzo trudna. Kielczanie zgromadzili do tej pory 23 punkty i zajmują dopiero 15. miejsce w tabeli. Nie wygrali jeszcze ani jednego spotkania w rundzie wiosennej, zaliczając dwa remisy i dwie porażki. Do bezpiecznego miejsca tracą w tej chwili siedem punktów, więc każde zwycięstwo jest dla nich na wagę złota. \r\n\r\nBilans bezpośrednich meczów Śląska z Koroną pokazuje, że kielczanie nie są wygodnym rywalem dla WKS-u. Trójkolorowi nie wygrali z tym przeciwnikiem od sześcu spotkań. Nieco lepiej wygląda bilans meczów na Stadionie Wrocław, gdzie Śląsk nie przegrał z Koroną od trzech meczów. \r\n\r\nPierwsze spotkanie tych zespołów w obecnym sezonie zakończyło się zwycięstwem Korony 1:0. Bramkę na wagę zwycięstwa zdobył wówczas Milan Radin. Kielczanie byli pierwszym zespołem, który pokonał Śląsk w tym sezonie ligowym. Początek dzisiejszego meczu o godzinie 18:00.', 'article3', '2020-04-27 12:27:04', 'Korona Kielce, Cracovia Kraków, Lavička, Cotugno', '2020-04-28 12:27:04', 340, 3);
+(13, 'Wrócić na właściwy tor', 'Zaledwie trzy dni po przegranym meczu derbowym, Śląsk Wrocław ma szansę na rehabilitacje. W 25. kolejce PKO Ekstraklasy Trójkolorowi podejmą Koronę Kielce{hl}.\r\nZwycięstwo w derbach mogło dać Śląskowi awans na trzecie miejsce w tabeli PKO Ekstraklasy. Wrocławianie przegrali jednak z Zagłębiem Lubin (1:3) i nie poprawili swojego dorobku punktowego. Porażki Pogoni Szczecin i Cracovii sprawiają jednak, że ponownie pojawia się szansa na poprawę pozycji względem rywali. - Po porażce każdy jest zły, jest wiele emocji. Dziś mieliśmy spotkanie w szatni na Oporowskiej przed treningiem.{st} Postawiliśmy sprawę jasno - nie daliśmy rady, wygrała drużyna lepiej przygotowana i cały nasz zespół oraz sztab ma tego świadomość. Nikt nie chce przegrywać, wiemy jednak, że jest to wpisane w futbol. To nasza piąta porażka w sezonie, nie jest tego wiele, ale każda boli i powoduje złość. Najważniejsza będzie teraz reakcja drużyny. Żeby fizycznie i mentalnie pokazać się w środę z dużo lepszej strony. - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. \r\n\r\nWczorajsza wygrana Lecha Poznań sprawiła, że Śląsk znajduje się obecnie na piątym miejscu w tabeli. Trzy punkty w meczu z Koroną pozwolą wrocławianom awansować na podium. W składzie zielono-biało-czerwonych może dojść do kilku zmian w porównaniu z niedzielnym meczem w Lubinie. Na debiut wciąż czekają zimowe nabytki Śląska - Guillermo Cotugno i Márk Tamás. - Trzeba zobaczyć jak poszczególni gracze wyglądają również w treningach, jak mentalnie. Psychologiczny aspekt jest bardzo ważny po takiej porażce. Zmiany w drużynie muszą być przemyślane i jak najlepsze, by ich efektem była wygrana - mówił trener Lavička na przedmeczowej konferencji prasowej. \r\n \r\nGuillerme Cotugno? On idzie krok po kroku w górę. Pracujemy z nim taktycznie, fizycznie, dużo rozmawiamy. Ma swoją jakość i mądrość, ale w drużynie jest rywalizacja i od niej zależy, kto i kiedy dostanie swoje szanse.\r\n\r\nSytuacja dzisiejszego rywala Śląska jest bardzo trudna. Kielczanie zgromadzili do tej pory 23 punkty i zajmują dopiero 15. miejsce w tabeli. Nie wygrali jeszcze ani jednego spotkania w rundzie wiosennej, zaliczając dwa remisy i dwie porażki. Do bezpiecznego miejsca tracą w tej chwili siedem punktów, więc każde zwycięstwo jest dla nich na wagę złota. \r\n\r\nBilans bezpośrednich meczów Śląska z Koroną pokazuje, że kielczanie nie są wygodnym rywalem dla WKS-u. Trójkolorowi nie wygrali z tym przeciwnikiem od sześcu spotkań. Nieco lepiej wygląda bilans meczów na Stadionie Wrocław, gdzie Śląsk nie przegrał z Koroną od trzech meczów. \r\n\r\nPierwsze spotkanie tych zespołów w obecnym sezonie zakończyło się zwycięstwem Korony 1:0. Bramkę na wagę zwycięstwa zdobył wówczas Milan Radin. Kielczanie byli pierwszym zespołem, który pokonał Śląsk w tym sezonie ligowym. Początek dzisiejszego meczu o godzinie 18:00.', 'article3', '2020-04-27 12:27:04', 'Korona Kielce, Cracovia Kraków, Lavička, Cotugno', '2020-04-28 12:27:04', 340, 3),
+(17, '27. kolejka odkodowana w Canal+', 'Nadawca telewizyjny meczów PKO BP Ekstraklasy, Canal+ Sport, zdecydował się odkodować wszystkie mecze 27. kolejki dla abonentów Platformy CANAL+.{hl} Decyzja związana jest z postanowieniem o rozgrywaniu meczów PKO Ekstraklasy bez udziału kibiców ze względu na z ryzyko rozprzestrzeniania się koronawirusa (Covid-19).\nO tym, że mecze Ekstraklasy do odwołania będą odbywać się bez udziału publiczności wiemy od wtorkowego przedpołudnia. TUTAJ informowaliśmy o zwrocie biletów zakupionych na piątkowe spotkanie Śląska Wrocław z Rakowem Częstochowa.{st}\n\nTym razem kibice nie będą mogli wspomóc swoich drużyn z trybun, jednak dzięki decyzji CANAL+, większa ich grupa obejrzy spotkanie swojego klubu w domu. Nadawca telewizyjne zdecydował o odkodowaniu całej 27. kolejki dla wszystkich abonentów Platformy CANAL+.\n\nPoniżej treść całego komunikatu telewizji Canal+ Sport:\n\n&quot;Wszystkie mecze 27. kolejki PKO BP Ekstraklasy odkodowane dla abonentów CANAL+! W hicie tej serii gier Lech Poznań podejmie Legię Warszawa.\n \nAbonenci i Kibice! Sytuacja jest wyjątkowa, wymaga więc od nas wyjątkowych działań. Z duchem sportu i z myślą o Was – kibicach, najbliższą kolejkę PKO BP Ekstraklasy odkodujemy dla wszystkich abonentów Platformy CANAL+. To znaczy, że nawet jeśli nie macie CANAL+ w swojej ofercie, to będziecie mogli przeżywać sportowe emocje razem ze swoimi drużynami - pomimo zamkniętych stadionów. Pracujemy równocześnie dla Was nad specjalnymi ofertami, które pozwolą śledzić rozgrywki PKO BP Ekstraklasy w kolejnych kolejkach. Zachęcamy również innych operatorów którzy mają w ofercie CANAL+ do podobnych działań. Ze sportowymi pozdrowieniami! CANAL+ dla kibiców!&quot;.', 'article8', '2020-05-10 21:52:04', 'Canal+, Mecze, PKO Ekstraklasa', '2020-05-10 21:52:04', 0, 2),
+(18, '27. kolejka odkodowana w Canal+', 'Nadawca telewizyjny meczów PKO BP Ekstraklasy, Canal+ Sport, zdecydował się odkodować wszystkie mecze 27. kolejki dla abonentów Platformy CANAL+.{hl} Decyzja związana jest z postanowieniem o rozgrywaniu meczów PKO Ekstraklasy bez udziału kibiców ze względu na z ryzyko rozprzestrzeniania się koronawirusa (Covid-19).\nO tym, że mecze Ekstraklasy do odwołania będą odbywać się bez udziału publiczności wiemy od wtorkowego przedpołudnia. TUTAJ informowaliśmy o zwrocie biletów zakupionych na piątkowe spotkanie Śląska Wrocław z Rakowem Częstochowa.{st}\n\nTym razem kibice nie będą mogli wspomóc swoich drużyn z trybun, jednak dzięki decyzji CANAL+, większa ich grupa obejrzy spotkanie swojego klubu w domu. Nadawca telewizyjne zdecydował o odkodowaniu całej 27. kolejki dla wszystkich abonentów Platformy CANAL+.\n\nPoniżej treść całego komunikatu telewizji Canal+ Sport:\n\n&quot;Wszystkie mecze 27. kolejki PKO BP Ekstraklasy odkodowane dla abonentów CANAL+! W hicie tej serii gier Lech Poznań podejmie Legię Warszawa.\n \nAbonenci i Kibice! Sytuacja jest wyjątkowa, wymaga więc od nas wyjątkowych działań. Z duchem sportu i z myślą o Was – kibicach, najbliższą kolejkę PKO BP Ekstraklasy odkodujemy dla wszystkich abonentów Platformy CANAL+. To znaczy, że nawet jeśli nie macie CANAL+ w swojej ofercie, to będziecie mogli przeżywać sportowe emocje razem ze swoimi drużynami - pomimo zamkniętych stadionów. Pracujemy równocześnie dla Was nad specjalnymi ofertami, które pozwolą śledzić rozgrywki PKO BP Ekstraklasy w kolejnych kolejkach. Zachęcamy również innych operatorów którzy mają w ofercie CANAL+ do podobnych działań. Ze sportowymi pozdrowieniami! CANAL+ dla kibiców!&quot;.', 'article8', '2020-05-10 21:52:23', 'Canal+, Mecze, PKO Ekstraklasa', '2020-05-10 21:52:23', 0, 2),
+(19, 'Mecz o wysoką stawkę', 'W 24. kolejce PKO Ekstraklasy Śląsk Wrocław uda się do Lubina, gdzie zmierzy się z miejscowym Zagłębiem. Wygrana w derbach może znacznie przybliżyć wrocławian do miejsca w górnej ósemce na koniec rundy zasadniczej.{hl}Początek rundy wiosennej wygląda obiecująco dla Śląska. Pięć punktów w trzech meczach to solidny start, jednak jeśli wrocławianie chcą być pewni miejsca w grupie mistrzowskiej na koniec rundy zasadniczej, to muszą wygrywać. Każde punkty są cenne, ale te zdobyte w derbowej rywalizacji, mają podwójne znaczenie.Zagłębie również bardzo potrzebuje punktów. Lubinianie nie rozpoczęli rundy wiosennej w najlepszym stylu. Dwie porażki i remis sprawiły, że zespół Martina Seveli z dorobkiem 29 punktów znajduje się dopiero na dwunastym miejscu w ligowej tabeli{st} tracąc w tej chwili do ósmej Wisły Płock cztery punkty. Czasu do końca rundy zostało coraz mniej i każde kolejne potknięcie może sprawić, że Zagłębie, zamiast grać z czołowymi zespołami, znajdzie się w dolnej ósemce. Wrocławianie nie wspominają najlepiej ostatnich wizyt na stadionie w Lubinie. Trzy ostatnie mecze zakończyły się porażką WKS-u i Śląsk nie zdobył w nich ani jednej bramki. Dodatkowo, Trójkolorowi nie wygrali w Lubinie od 6 listopada 2011 roku. Wówczas zwyciężyli aż 5:1, jednak od tamtego meczu ich bilans w Lubinie to trzy remisy i cztery porażki. Coraz lepiej wygląda sytuacja kadrowa Śląska. Po trzech meczach zawieszenia do składu wraca Filip Marković. - Filip walczy o miejsce w składzie. Jesienią brakowało mu trochę przygotowania fizycznego, ale przed tą rundą dobrze przepracował okres przygotowawczy. W trzech ostatnich meczach był zawieszony, teraz jest przygotowany i widać na treningach, że jest głodny gry. - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. Ubiegły tydzień w Lubinie stał pod znakiem transferów. Bartosz Slisz odszedł do Legii Warszawa, bijąc tym samym rekord, jeśli chodzi o transakcje wewnątrz ligi (1,5 mln euro). Zagłębie szybko znalazło jednak zastępstwo. - Analizowaliśmy przeciwnika. Slisz odszedł do Legii Warszawa, ale zastąpi go bardzo doświadczony pomocnik z Rosji - Baszkirow. Myślę, że Zagłębie nie będzie zmieniać swojego stylu gry. Mają bardzo niebezpieczne skrzydła, kreatywną dziesiątkę w postaci Filipa Starzyńskiego, więc wiemy, że czeka nas spore wyzwanie - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. Poprzednie spotkanie Śląska z Zagłębiem na długo zapadnie w pamięci kibiców. Po szalonym meczu padł remis 4:4. Bramkę na wagę punktu w doliczonym czasie gry zdobył wówczas Erik Exposito, który skompletował wtedy hat-tricka. Początek meczu Zagłębie - Śląsk o godzinie 17:30. Na naszej stronie internetowej przeprowadzimy relację live. ', 'article4', '2020-05-10 21:55:15', 'Zagłębie, Exposito, Lavička, Marković', '2020-05-10 21:55:15', 0, 3),
+(20, 'Czy to działa?', 'adasdasda', 'dsadasd', '2020-05-10 21:55:52', 'asdasd', '2020-05-10 21:55:52', 0, 3),
+(23, 'Trenerzy Śląska Wrocław na stażu w Slavii Praga', 'Krystian Rubajczyk, Dawid Gomola, Paweł Mucha i Józef Klepak w dniach 25-28 lutego przebywali na stażu szkoleniowym w akademii Slavii Praga, obserwując pracę jednego z najlepszych czeskich klubów.{hl}\nSlavia Praga to pięciokrotny mistrz Czech, a także obecny lider Fortuna Ligi.  W klubie występowali między innymi Jii Pavlenka (obecnie Werder Brema), Tomas Soucek (West Ham United), a we wcześniejszych latach choćby Karel Poborsky i Vladimir Smicer.{st}\n\nZgodnie z długofalową strategią rozwoju działalności klubu przyjętą przez Śląsk Wrocław, kolejna grupa trenerów odbyła staż trenerski. - Jednym z najważniejszych elementów rozwoju klubu jest dalsze kształcenie i rozwój trenerów Akademii. Podjęliśmy szerokie działania w zakresie nawiązania współpracy i wyjazdów na staże zagraniczne z klubami, które specjalizują się w przygotowaniu młodzieży do grania na najwyższym poziomie. Staże takie odbyły się już w Benfice Lizbona, Dinamo Zagrzeb, MSK Żylina, a kolejnymi klubami są: Slavia Praga, FC Liverpool, RB Lipsk i Red Bull Salzburg. Jesteśmy na etapie unowocześniania naszego systemu szkolenia w Akademii i dostosowywania do najbardziej nowoczesnych tendencji europejskich i z tego powodu takie wyjazdy dają nam wiele ciekawych spostrzeżeń - mówi Krzysztof Paluszek, dyrektor do spraw rozwoju sportowego Śląska Wrocław.\n\nZaplecze Akademii Slavii, choć wizualnie skromne, to robi ogromne wrażenie i posiada wszystko, czego młodzi piłkarze potrzebują do odpowiedniego rozwoju. Każdy zespół należący do Akademii posiada swoją własną szatnię, a trenerzy mają przydzielone swoje pokoje. - Jest tam wszystko, co potrzebne do profesjonalnego treningu. Jest odpowiednia liczba boisk, każda drużyna ma swoją szatnie i wszystko jest zorganizowane w jednym miejscu - mówi Krystian Rubajczyk. ', 'article1', '2020-05-10 22:00:30', 'Slavia Praga, Rubajczyk, Gomola, Mucha, Klepak', '2020-05-10 22:00:30', 0, 2),
+(26, 'Trenerzy Śląska Wrocław na stażu w Slavii Praga', 'Krystian Rubajczyk, Dawid Gomola, Paweł Mucha i Józef Klepak w dniach 25-28 lutego przebywali na stażu szkoleniowym w akademii Slavii Praga, obserwując pracę jednego z najlepszych czeskich klubów.{hl}\nSlavia Praga to pięciokrotny mistrz Czech, a także obecny lider Fortuna Ligi.  W klubie występowali między innymi Jii Pavlenka (obecnie Werder Brema), Tomas Soucek (West Ham United), a we wcześniejszych latach choćby Karel Poborsky i Vladimir Smicer.{st}\n\nZgodnie z długofalową strategią rozwoju działalności klubu przyjętą przez Śląsk Wrocław, kolejna grupa trenerów odbyła staż trenerski. - Jednym z najważniejszych elementów rozwoju klubu jest dalsze kształcenie i rozwój trenerów Akademii. Podjęliśmy szerokie działania w zakresie nawiązania współpracy i wyjazdów na staże zagraniczne z klubami, które specjalizują się w przygotowaniu młodzieży do grania na najwyższym poziomie. Staże takie odbyły się już w Benfice Lizbona, Dinamo Zagrzeb, MSK Żylina, a kolejnymi klubami są: Slavia Praga, FC Liverpool, RB Lipsk i Red Bull Salzburg. Jesteśmy na etapie unowocześniania naszego systemu szkolenia w Akademii i dostosowywania do najbardziej nowoczesnych tendencji europejskich i z tego powodu takie wyjazdy dają nam wiele ciekawych spostrzeżeń - mówi Krzysztof Paluszek, dyrektor do spraw rozwoju sportowego Śląska Wrocław.\n\nZaplecze Akademii Slavii, choć wizualnie skromne, to robi ogromne wrażenie i posiada wszystko, czego młodzi piłkarze potrzebują do odpowiedniego rozwoju. Każdy zespół należący do Akademii posiada swoją własną szatnię, a trenerzy mają przydzielone swoje pokoje. - Jest tam wszystko, co potrzebne do profesjonalnego treningu. Jest odpowiednia liczba boisk, każda drużyna ma swoją szatnie i wszystko jest zorganizowane w jednym miejscu - mówi Krystian Rubajczyk. ', 'article1', '2020-05-11 18:42:35', 'Slavia Praga, Rubajczyk, Gomola, Mucha, Klepak', '2020-05-11 18:42:35', 0, 2),
+(27, 'vvvvvv ka odkodowana w Canal+', 'Nadawca telewizyjny meczów PKO BP Ekstraklasy, Canal+ Sport, zdecydował się odkodować wszystkie mecze 27. kolejki dla abonentów Platformy CANAL+.{hl} Decyzja związana jest z postanowieniem o rozgrywaniu meczów PKO Ekstraklasy bez udziału kibiców ze względu na z ryzyko rozprzestrzeniania się koronawirusa (Covid-19).\nO tym, że mecze Ekstraklasy do odwołania będą odbywać się bez udziału publiczności wiemy od wtorkowego przedpołudnia. TUTAJ informowaliśmy o zwrocie biletów zakupionych na piątkowe spotkanie Śląska Wrocław z Rakowem Częstochowa.{st}\n\nTym razem kibice nie będą mogli wspomóc swoich drużyn z trybun, jednak dzięki decyzji CANAL+, większa ich grupa obejrzy spotkanie swojego klubu w domu. Nadawca telewizyjne zdecydował o odkodowaniu całej 27. kolejki dla wszystkich abonentów Platformy CANAL+.\n\nPoniżej treść całego komunikatu telewizji Canal+ Sport:\n\n&quot;Wszystkie mecze 27. kolejki PKO BP Ekstraklasy odkodowane dla abonentów CANAL+! W hicie tej serii gier Lech Poznań podejmie Legię Warszawa.\n \nAbonenci i Kibice! Sytuacja jest wyjątkowa, wymaga więc od nas wyjątkowych działań. Z duchem sportu i z myślą o Was – kibicach, najbliższą kolejkę PKO BP Ekstraklasy odkodujemy dla wszystkich abonentów Platformy CANAL+. To znaczy, że nawet jeśli nie macie CANAL+ w swojej ofercie, to będziecie mogli przeżywać sportowe emocje razem ze swoimi drużynami - pomimo zamkniętych stadionów. Pracujemy równocześnie dla Was nad specjalnymi ofertami, które pozwolą śledzić rozgrywki PKO BP Ekstraklasy w kolejnych kolejkach. Zachęcamy również innych operatorów którzy mają w ofercie CANAL+ do podobnych działań. Ze sportowymi pozdrowieniami! CANAL+ dla kibiców!&quot;.', 'article8', '2020-05-11 18:42:49', 'Canal+, Mecze, PKO Ekstraklasa', '2020-05-11 18:42:49', 0, 2),
+(28, 'bbbb ka Wrocław na stażu w Slavii Praga', 'Krystian Rubajczyk, Dawid Gomola, Paweł Mucha i Józef Klepak w dniach 25-28 lutego przebywali na stażu szkoleniowym w akademii Slavii Praga, obserwując pracę jednego z najlepszych czeskich klubów.{hl}\nSlavia Praga to pięciokrotny mistrz Czech, a także obecny lider Fortuna Ligi.  W klubie występowali między innymi Jii Pavlenka (obecnie Werder Brema), Tomas Soucek (West Ham United), a we wcześniejszych latach choćby Karel Poborsky i Vladimir Smicer.{st}\n\nZgodnie z długofalową strategią rozwoju działalności klubu przyjętą przez Śląsk Wrocław, kolejna grupa trenerów odbyła staż trenerski. - Jednym z najważniejszych elementów rozwoju klubu jest dalsze kształcenie i rozwój trenerów Akademii. Podjęliśmy szerokie działania w zakresie nawiązania współpracy i wyjazdów na staże zagraniczne z klubami, które specjalizują się w przygotowaniu młodzieży do grania na najwyższym poziomie. Staże takie odbyły się już w Benfice Lizbona, Dinamo Zagrzeb, MSK Żylina, a kolejnymi klubami są: Slavia Praga, FC Liverpool, RB Lipsk i Red Bull Salzburg. Jesteśmy na etapie unowocześniania naszego systemu szkolenia w Akademii i dostosowywania do najbardziej nowoczesnych tendencji europejskich i z tego powodu takie wyjazdy dają nam wiele ciekawych spostrzeżeń - mówi Krzysztof Paluszek, dyrektor do spraw rozwoju sportowego Śląska Wrocław.\n\nZaplecze Akademii Slavii, choć wizualnie skromne, to robi ogromne wrażenie i posiada wszystko, czego młodzi piłkarze potrzebują do odpowiedniego rozwoju. Każdy zespół należący do Akademii posiada swoją własną szatnię, a trenerzy mają przydzielone swoje pokoje. - Jest tam wszystko, co potrzebne do profesjonalnego treningu. Jest odpowiednia liczba boisk, każda drużyna ma swoją szatnie i wszystko jest zorganizowane w jednym miejscu - mówi Krystian Rubajczyk. ', 'article1', '2020-05-11 18:43:04', 'Slavia Praga, Rubajczyk, Gomola, Mucha, Klepak', '2020-05-11 18:43:04', 0, 2),
+(29, 'NOWY', 'Zaledwie trzy dni po przegranym meczu derbowym, Śląsk Wrocław ma szansę na rehabilitacje. W 25. kolejce PKO Ekstraklasy Trójkolorowi podejmą Koronę Kielce{hl}.\nZwycięstwo w derbach mogło dać Śląskowi awans na trzecie miejsce w tabeli PKO Ekstraklasy. Wrocławianie przegrali jednak z Zagłębiem Lubin (1:3) i nie poprawili swojego dorobku punktowego. Porażki Pogoni Szczecin i Cracovii sprawiają jednak, że ponownie pojawia się szansa na poprawę pozycji względem rywali. - Po porażce każdy jest zły, jest wiele emocji. Dziś mieliśmy spotkanie w szatni na Oporowskiej przed treningiem.{st} Postawiliśmy sprawę jasno - nie daliśmy rady, wygrała drużyna lepiej przygotowana i cały nasz zespół oraz sztab ma tego świadomość. Nikt nie chce przegrywać, wiemy jednak, że jest to wpisane w futbol. To nasza piąta porażka w sezonie, nie jest tego wiele, ale każda boli i powoduje złość. Najważniejsza będzie teraz reakcja drużyny. Żeby fizycznie i mentalnie pokazać się w środę z dużo lepszej strony. - mówił Vitezslav Lavička na przedmeczowej konferencji prasowej. \n\nWczorajsza wygrana Lecha Poznań sprawiła, że Śląsk znajduje się obecnie na piątym miejscu w tabeli. Trzy punkty w meczu z Koroną pozwolą wrocławianom awansować na podium. W składzie zielono-biało-czerwonych może dojść do kilku zmian w porównaniu z niedzielnym meczem w Lubinie. Na debiut wciąż czekają zimowe nabytki Śląska - Guillermo Cotugno i Márk Tamás. - Trzeba zobaczyć jak poszczególni gracze wyglądają również w treningach, jak mentalnie. Psychologiczny aspekt jest bardzo ważny po takiej porażce. Zmiany w drużynie muszą być przemyślane i jak najlepsze, by ich efektem była wygrana - mówił trener Lavička na przedmeczowej konferencji prasowej. \n \nGuillerme Cotugno? On idzie krok po kroku w górę. Pracujemy z nim taktycznie, fizycznie, dużo rozmawiamy. Ma swoją jakość i mądrość, ale w drużynie jest rywalizacja i od niej zależy, kto i kiedy dostanie swoje szanse.\n\nSytuacja dzisiejszego rywala Śląska jest bardzo trudna. Kielczanie zgromadzili do tej pory 23 punkty i zajmują dopiero 15. miejsce w tabeli. Nie wygrali jeszcze ani jednego spotkania w rundzie wiosennej, zaliczając dwa remisy i dwie porażki. Do bezpiecznego miejsca tracą w tej chwili siedem punktów, więc każde zwycięstwo jest dla nich na wagę złota. \n\nBilans bezpośrednich meczów Śląska z Koroną pokazuje, że kielczanie nie są wygodnym rywalem dla WKS-u. Trójkolorowi nie wygrali z tym przeciwnikiem od sześcu spotkań. Nieco lepiej wygląda bilans meczów na Stadionie Wrocław, gdzie Śląsk nie przegrał z Koroną od trzech meczów. \n\nPierwsze spotkanie tych zespołów w obecnym sezonie zakończyło się zwycięstwem Korony 1:0. Bramkę na wagę zwycięstwa zdobył wówczas Milan Radin. Kielczanie byli pierwszym zespołem, który pokonał Śląsk w tym sezonie ligowym. Początek dzisiejszego meczu o godzinie 18:00.', 'article3', '2020-05-11 18:45:04', 'Korona Kielce, Cracovia Kraków, Lavička, Cotugno', '2020-05-11 18:45:04', 0, 3),
+(30, 'NOWY2', 'Nadawca telewizyjny meczów PKO BP Ekstraklasy, Canal+ Sport, zdecydował się odkodować wszystkie mecze 27. kolejki dla abonentów Platformy CANAL+.{hl} Decyzja związana jest z postanowieniem o rozgrywaniu meczów PKO Ekstraklasy bez udziału kibiców ze względu na z ryzyko rozprzestrzeniania się koronawirusa (Covid-19).\nO tym, że mecze Ekstraklasy do odwołania będą odbywać się bez udziału publiczności wiemy od wtorkowego przedpołudnia. TUTAJ informowaliśmy o zwrocie biletów zakupionych na piątkowe spotkanie Śląska Wrocław z Rakowem Częstochowa.{st}\n\nTym razem kibice nie będą mogli wspomóc swoich drużyn z trybun, jednak dzięki decyzji CANAL+, większa ich grupa obejrzy spotkanie swojego klubu w domu. Nadawca telewizyjne zdecydował o odkodowaniu całej 27. kolejki dla wszystkich abonentów Platformy CANAL+.\n\nPoniżej treść całego komunikatu telewizji Canal+ Sport:\n\n&amp;quot;Wszystkie mecze 27. kolejki PKO BP Ekstraklasy odkodowane dla abonentów CANAL+! W hicie tej serii gier Lech Poznań podejmie Legię Warszawa.\n \nAbonenci i Kibice! Sytuacja jest wyjątkowa, wymaga więc od nas wyjątkowych działań. Z duchem sportu i z myślą o Was – kibicach, najbliższą kolejkę PKO BP Ekstraklasy odkodujemy dla wszystkich abonentów Platformy CANAL+. To znaczy, że nawet jeśli nie macie CANAL+ w swojej ofercie, to będziecie mogli przeżywać sportowe emocje razem ze swoimi drużynami - pomimo zamkniętych stadionów. Pracujemy równocześnie dla Was nad specjalnymi ofertami, które pozwolą śledzić rozgrywki PKO BP Ekstraklasy w kolejnych kolejkach. Zachęcamy również innych operatorów którzy mają w ofercie CANAL+ do podobnych działań. Ze sportowymi pozdrowieniami! CANAL+ dla kibiców!&amp;quot;.', 'article8', '2020-05-11 18:46:04', 'Canal+, Mecze, PKO Ekstraklasa', '2020-05-11 18:46:04', 0, 2);
 
 -- --------------------------------------------------------
 
@@ -140,7 +248,7 @@ CREATE TABLE `players` (
   `age` int(11) NOT NULL,
   `height` int(11) NOT NULL,
   `nationality` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `date_of_birth` date NOT NULL,
+  `date_of_birth` datetime NOT NULL,
   `place_of_birth` varchar(150) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `position` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `player_value` int(11) NOT NULL,
@@ -152,9 +260,9 @@ CREATE TABLE `players` (
 --
 
 INSERT INTO `players` (`player_ID`, `first_name`, `last_name`, `age`, `height`, `nationality`, `date_of_birth`, `place_of_birth`, `position`, `player_value`, `player_img_path`) VALUES
-(1, 'Marco', 'Paixao', 35, 185, 'Portugalia', '1984-10-19', 'Sesimbra', 'Napastnik', 1000000, 'sadsd'),
-(2, 'Dino', 'JAJAJ', 28, 193, 'Polska', '1987-05-23', 'Krakow', 'Pomocnik', 600000, 'svsdv'),
-(4, 'Dino', 'Stiglec', 28, 193, 'Polska', '1987-05-23', 'Krakow', 'Pomocnik', 600000, 'svsdv');
+(1, 'Marco', 'Paixao', 35, 185, 'Portugalia', '1984-10-19 00:00:00', 'Sesimbra', 'Napastnik', 1000000, 'sadsd'),
+(8, 'Adam', 'Malysz', 12, 123, 'nationalityDt', '1988-11-11 00:00:00', 'birthdayPlaceDt', 'Bramkarz', 12313, 'playerImgPathDt'),
+(10, 'Marco', 'Paixao', 35, 185, 'Portugalia', '1984-10-19 00:00:00', 'Sesimbra', 'Napastnik', 1000000, 'img/MarcoPaixao.png');
 
 -- --------------------------------------------------------
 
@@ -212,14 +320,14 @@ CREATE TABLE `workers` (
   `age` int(11) NOT NULL,
   `nationality` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `mail` varchar(500) DEFAULT NULL,
-  `is_journalist` tinyint(1) NOT NULL DEFAULT '0',
-  `is_executive` tinyint(1) NOT NULL DEFAULT '0',
-  `is_staff` tinyint(1) NOT NULL DEFAULT '0',
+  `is_journalist` tinyint(1) NOT NULL DEFAULT 0,
+  `is_executive` tinyint(1) NOT NULL DEFAULT 0,
+  `is_staff` tinyint(1) NOT NULL DEFAULT 0,
   `worker_login` varchar(100) NOT NULL,
   `worker_password` varchar(500) NOT NULL,
   `worker_img_path` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL,
   `worker_date_of_birth` date DEFAULT NULL,
-  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `create_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -236,6 +344,12 @@ INSERT INTO `workers` (`worker_ID`, `first_name`, `last_name`, `age`, `nationali
 --
 
 --
+-- Indeksy dla tabeli `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievement_ID`);
+
+--
 -- Indeksy dla tabeli `clients`
 --
 ALTER TABLE `clients`
@@ -245,7 +359,8 @@ ALTER TABLE `clients`
 -- Indeksy dla tabeli `clubs`
 --
 ALTER TABLE `clubs`
-  ADD PRIMARY KEY (`club_ID`);
+  ADD PRIMARY KEY (`club_ID`),
+  ADD UNIQUE KEY `league_position` (`league_position`);
 
 --
 -- Indeksy dla tabeli `matches`
@@ -254,6 +369,21 @@ ALTER TABLE `matches`
   ADD PRIMARY KEY (`match_ID`),
   ADD KEY `club_home_ID` (`club_home_ID`),
   ADD KEY `club_away_ID` (`club_away_ID`);
+
+--
+-- Indeksy dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  ADD PRIMARY KEY (`narrative_ID`),
+  ADD KEY `match_id` (`match_ID`);
+
+--
+-- Indeksy dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `narrative_id` (`narrative_id`),
+  ADD KEY `author_id` (`author_id`);
 
 --
 -- Indeksy dla tabeli `news`
@@ -300,6 +430,12 @@ ALTER TABLE `workers`
 --
 
 --
+-- AUTO_INCREMENT dla tabeli `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievement_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT dla tabeli `clients`
 --
 ALTER TABLE `clients`
@@ -309,19 +445,37 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT dla tabeli `clubs`
 --
 ALTER TABLE `clubs`
-  MODIFY `club_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `club_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT dla tabeli `matches`
+--
+ALTER TABLE `matches`
+  MODIFY `match_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  MODIFY `narrative_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `news_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT dla tabeli `players`
 --
 ALTER TABLE `players`
-  MODIFY `player_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `player_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT dla tabeli `seats`
@@ -353,6 +507,19 @@ ALTER TABLE `matches`
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`club_away_ID`) REFERENCES `clubs` (`club_ID`);
 
 --
+-- Ograniczenia dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  ADD CONSTRAINT `narratives_ibfk_1` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
+
+--
+-- Ograniczenia dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  ADD CONSTRAINT `narrative_items_ibfk_1` FOREIGN KEY (`narrative_id`) REFERENCES `narratives` (`narrative_ID`),
+  ADD CONSTRAINT `narrative_items_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `workers` (`worker_ID`);
+
+--
 -- Ograniczenia dla tabeli `news`
 --
 ALTER TABLE `news`
@@ -369,8 +536,8 @@ ALTER TABLE `stadium`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `clients` (`client_id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`),
-  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`);
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`),
+  ADD CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

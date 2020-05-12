@@ -1,0 +1,38 @@
+form {
+	float: none;
+	padding: none;
+}
+
+
+
+.articlesTable {
+	margin-right: 40px;
+}
+
+label {
+	margin-top: 5px;
+}
+
+input {
+	margin-bottom: 7px;
+}
+
+#newsTitle {
+	font-weight: bold;
+}
+
+button {
+	margin: 5px;
+}
+
+table {
+	margin: 40px;
+	
+}
+
+td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -14,7 +14,7 @@
     $club = new Club($db);
 
     // Get ID
-    $club->club_ID = isset($_GET['club_ID']) ? $_GET['club_ID'] : die();
+    $club->clubname = isset($_GET['clubname']) ? $_GET['clubname'] : die();
 
     // Get club
     $club->read_single();
@@ -26,7 +26,7 @@
         'city' => $club->city,
         'stadium' => $club->stadium,
         'club_address' => $club->club_address,
-        'path_img_path' => $club->path_img_path
+        'path_img_logo' => $club->path_img_logo
     );
 
     // Make JSON

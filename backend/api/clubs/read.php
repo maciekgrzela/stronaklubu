@@ -33,7 +33,7 @@
                 'city' => $city,
                 'stadium' => $stadium,
                 'club_address' => $club_address,
-                'path_img_path' => $path_img_path
+                'path_img_logo' => $path_img_logo
             );
 
 

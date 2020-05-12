@@ -26,8 +26,6 @@
     $club->club_address = $data->club_address;
     $club->path_img_logo = $data->path_img_logo;
     
-   
-
     // Create club
     if($club->create()) {
         echo json_encode(

@@ -29,16 +29,14 @@
 
             $match_item = array(
                 'match_ID' => $match_ID,
-                'club_home_ID' => $club_home_ID,
-                'club_away_ID' => $club_away_ID,
+                'clubHomeName' => $clubHomeName,
+                'clubAwayName' => $clubAwayName,
                 'stadium' => $stadium,
                 'match_address' => $match_address,
                 'amount_of_spectators' => $amount_of_spectators,
                 'earnings' => $earnings,
                 'date_of_match' => $date_of_match
-
             );
-
 
             // Push to "data"
             array_push($matchs_arr, $match_item);

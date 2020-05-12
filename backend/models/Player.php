@@ -91,7 +91,6 @@
             
         }
 
-
         // Create Player
         public function create() {
             // Create query
@@ -123,16 +122,15 @@
             $this->player_img_path = htmlspecialchars(strip_tags($this->player_img_path));
 
             // Bind data
-
             $stmt->bindParam(':first_name', $this->first_name);
             $stmt->bindParam(':last_name', $this->last_name);
-            $stmt->bindParam(':age', $this->age);
-            $stmt->bindParam(':height', $this->height);
+            $stmt->bindValue(':age', $this->age);
+            $stmt->bindValue(':height', $this->height);
             $stmt->bindParam(':nationality', $this->nationality);
             $stmt->bindParam(':date_of_birth', $this->date_of_birth);
             $stmt->bindParam(':place_of_birth', $this->place_of_birth);
             $stmt->bindParam(':position', $this->position);
-            $stmt->bindParam(':player_value', $this->player_value);
+            $stmt->bindValue(':player_value', $this->player_value);
             $stmt->bindParam(':player_img_path', $this->player_img_path);
 
             if($stmt->execute()) {
@@ -140,9 +138,7 @@
             }
 
             printf("Error: %s.\n, $stmt->error");
-
             return false;
-
         }
 
         // Update Player
@@ -177,7 +173,6 @@
             $this->player_ID = htmlspecialchars(strip_tags($this->player_ID));
 
             // Bind data
-
             $stmt->bindParam(':first_name', $this->first_name);
             $stmt->bindParam(':last_name', $this->last_name);
             $stmt->bindParam(':age', $this->age);
@@ -199,7 +194,6 @@
             return false;
         }
 
-
         // Delete Player
         public function delete() {
             // Create query
@@ -211,20 +205,16 @@
             // Clean data
             $this->player_ID = htmlspecialchars(strip_tags($this->player_ID));
 
-
             // Bind player_ID
-            $stmt->bindParam('player_ID', $this->player_ID);
+            $stmt->bindParam(':player_ID', $this->player_ID);
 
-            
             // Execute query
             if($stmt->execute()) {
                 return true;
             }
 
             printf("Error: %s.\n, $stmt->error");
-
             return false;
-
         }
 
     }

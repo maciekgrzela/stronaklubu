@@ -15,6 +15,8 @@
         public $amount_of_spectators;
         public $earnings;
         public $date_of_match;
+        public $clubHomeName;
+        public $clubAwayName;
 
         // Constructor with DB
         public function __construct($db) {
@@ -23,17 +25,21 @@
 
         // Get matchs
         public function read() {
-            $query = 'SELECT
-                match_ID,
-                club_home_ID,
-                club_away_ID,
-                stadium,
-                match_address,
-                amount_of_spectators,
-                earnings,
-                date_of_match
-                FROM
-                ' . $this->table;
+            $query = 'SELECT 
+            matches.match_ID, 
+            c.clubname as clubHomeName, 
+            z.clubname as clubAwayName, 
+            matches.stadium, 
+            matches.match_address, 
+            matches.amount_of_spectators, 
+            matches.earnings, 
+            matches.date_of_match 
+            FROM matches 
+            INNER JOIN clubs c 
+            ON matches.club_home_ID = c.club_ID 
+            INNER JOIN clubs z 
+            ON matches.club_away_ID = z.club_ID
+            ';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -135,7 +141,7 @@
             match_address = :match_address,
             amount_of_spectators = :amount_of_spectators,
             earnings = :earnings,
-            date_of_match = :date_of_match';
+            date_of_match = :date_of_match WHERE match_ID = :match_ID';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);

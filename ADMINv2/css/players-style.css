@@ -1,0 +1,15 @@
+#playerImgPreview {
+	border: 2px solid black;
+	padding-top: 20px;
+
+	width: auto;
+	height: auto;
+}
+
+.choosePlayer {
+	padding: 40px;
+}
+
+.playerImgPreview {
+	padding: 40px;
+}

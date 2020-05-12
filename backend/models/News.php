@@ -7,7 +7,6 @@
         public $table = 'News';
 
         // News Properties
-
         public $news_ID;
         public $title;
         public $content_path;
@@ -144,16 +143,14 @@
             $stmt->bindParam(':content_path', $this->content_path);
             $stmt->bindParam(':news_img_path', $this->news_img_path);
             $stmt->bindParam(':tags', $this->tags);
-            $stmt->bindParam(':worker_ID', $this->worker_ID);
+            $stmt->bindValue(':worker_ID', $this->worker_ID);
 
             if($stmt->execute()) {
                 return true;
             }
 
             printf("Error: %s.\n, $stmt->error");
-
             return false;
-            
         }
 
         // Update News
@@ -207,7 +204,7 @@
 
 
             // Bind news_ID
-            $stmt->bindParam('news_ID', $this->news_ID);
+            $stmt->bindParam(':news_ID', $this->news_ID);
 
             
             // Execute query

@@ -35,9 +35,7 @@
 
             // Execute query
             $stmt->execute();
-
             return $stmt;
-
         }
 
         // Get single Club
@@ -48,13 +46,13 @@
                 city,
                 stadium,
                 club_address,
-                path_img_logo  FROM ' . $this->table . ' WHERE club_ID = ?';
+                path_img_logo  FROM ' . $this->table . ' WHERE clubname = ?';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
             // Bind ID
-            $stmt->bindParam(1, $this->club_ID);
+            $stmt->bindParam(1, $this->clubname);
 
             // Execute query
             $stmt->execute();
@@ -63,7 +61,7 @@
 
             // Set properties
 
-            $this->clubname = $row['clubname'];
+            $this->club_ID = $row['club_ID'];
             $this->city = $row['city'];
             $this->stadium = $row['stadium'];
             $this->club_address = $row['club_address'];
