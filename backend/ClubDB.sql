@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 09 Maj 2020, 22:05
+-- Czas generowania: 13 Maj 2020, 19:11
 -- Wersja serwera: 10.1.38-MariaDB
 -- Wersja PHP: 5.6.40
 
@@ -44,7 +44,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `user_login`, `user_password`, `create_date`) VALUES
-(1, 'Grzegorz', 'Krawczyk', 'gkrawczyk@stronaklubu.pl', '1987-07-19', 'gkrawczyk', '0ecdd847e27f7b9fd5942b983c3afa42', '2020-04-06 00:00:00'),
+(1, 'Grzegorz', 'Krawczyk', 'gkrawczyk@op.pl', '1987-07-19', 'gkrawczyk', '0ecdd847e27f7b9fd5942b983c3afa42', '2020-04-06 00:00:00'),
 (2, 'Dawid', 'Marczak', 'to', '2020-04-07', 'menda', 'pazdzioch', '2020-04-06 00:00:00'),
 (3, 'Dawid', 'Marczak', 'to', '2020-04-07', 'menda', 'pazdzioch', '2020-04-06 00:00:00');
 
@@ -235,26 +235,6 @@ INSERT INTO `players` (`player_ID`, `first_name`, `last_name`, `age`, `height`, 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `seats`
---
-
-CREATE TABLE `seats` (
-  `seat_ID` int(11) NOT NULL,
-  `sector` varchar(5) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `seat_value` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `seats`
---
-
-INSERT INTO `seats` (`seat_ID`, `sector`, `seat_value`) VALUES
-(1, 'C', 25),
-(2, 'B', 15);
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `stadium`
 --
 
@@ -271,9 +251,34 @@ CREATE TABLE `stadium` (
 CREATE TABLE `tickets` (
   `ticket_ID` int(11) NOT NULL,
   `client_ID` int(11) NOT NULL,
-  `seat_ID` int(11) NOT NULL,
+  `seat` varchar(10) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `match_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `tickets`
+--
+
+INSERT INTO `tickets` (`ticket_ID`, `client_ID`, `seat`, `match_ID`) VALUES
+(5, 1, 'B5.1 E11', 3),
+(6, 1, 'B5.1 B7', 3),
+(7, 1, 'B5.1 D9', 3),
+(8, 1, 'B5.1 F11', 3),
+(9, 1, 'B5.1 F12', 3),
+(10, 1, 'B5.1 F6', 3),
+(11, 1, 'B5.1 E12', 3),
+(12, 1, 'B5.1 E6', 3),
+(13, 1, 'B5.1 E5', 3),
+(14, 1, 'B6.1 E12', 1),
+(15, 1, 'B6.1 E10', 1),
+(16, 1, 'B6.1 F9', 1),
+(17, 1, 'B6.1 F10', 1),
+(18, 1, 'B6.1 E11', 1),
+(19, 1, 'A8.1 E10', 1),
+(20, 1, 'A8.1 E11', 1),
+(21, 1, 'A8.1 F10', 1),
+(22, 1, 'A8.1 E12', 1),
+(23, 1, 'A8.1 F11', 1);
 
 -- --------------------------------------------------------
 
@@ -361,12 +366,6 @@ ALTER TABLE `players`
   ADD PRIMARY KEY (`player_ID`);
 
 --
--- Indeksy dla tabeli `seats`
---
-ALTER TABLE `seats`
-  ADD PRIMARY KEY (`seat_ID`);
-
---
 -- Indeksy dla tabeli `stadium`
 --
 ALTER TABLE `stadium`
@@ -379,7 +378,7 @@ ALTER TABLE `tickets`
   ADD PRIMARY KEY (`ticket_ID`),
   ADD KEY `client_ID` (`client_ID`),
   ADD KEY `match_ID` (`match_ID`),
-  ADD KEY `seat_ID` (`seat_ID`);
+  ADD KEY `seat_ID` (`seat`);
 
 --
 -- Indeksy dla tabeli `workers`
@@ -434,16 +433,10 @@ ALTER TABLE `players`
   MODIFY `player_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `seats`
---
-ALTER TABLE `seats`
-  MODIFY `seat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT dla tabeli `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `ticket_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT dla tabeli `workers`
@@ -492,7 +485,6 @@ ALTER TABLE `stadium`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `clients` (`client_id`),
-  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`),
   ADD CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
 COMMIT;
 
