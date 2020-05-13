@@ -29,10 +29,7 @@
         'created_at' => $news->created_at,
         'last_commented' => $news->last_commented,
         'viewers' => $news->viewers,
-        'worker_first_name' => $news->worker_first_name,
-        'worker_last_name' => $news->worker_last_name,
-        'worker_age' => $news->worker_age,
-        'worker_nationality' => $news->worker_nationality
+        'worker_ID' => $news->worker_ID
     );
 
     // Make JSON

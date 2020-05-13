@@ -3,6 +3,16 @@ form {
 	padding: none;
 }
 
+
+
+.articlesTable {
+	margin-right: 40px;
+}
+
+label {
+	margin-top: 5px;
+}
+
 input {
 	margin-bottom: 7px;
 }
@@ -18,4 +28,11 @@ button {
 table {
 	margin: 40px;
 	
+}
+
+td {
+  max-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

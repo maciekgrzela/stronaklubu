@@ -1,0 +1,14 @@
+td {
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .narrativeItemsTable h3 {
+      margin-top: 20px;
+  }
+
+.narrativeItemsTable {
+    margin-right: 40px;
+}

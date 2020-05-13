@@ -16,15 +16,17 @@ $db = $database->connect();
 $narrative = new Narrative($db);
 
 // Get raw posted data
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
+
+$data = $_POST;
 
 // Set club_ID to delete
-$narrative->narrative_ID = $data->narrative_ID;
+$narrative->narrative_ID = $data["narrative_ID"];
 
 // Delete club
 if($narrative->delete()) {
     echo json_encode(
-        array('message' => 'narrative ' . $data->narrative_ID . ' Deleted')
+        array('message' => 'narrative  Deleted')
     );
 } else {
     echo json_encode(
