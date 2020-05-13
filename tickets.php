@@ -1,4 +1,9 @@
 <?php
+session_start();
+
+    if(!isset($_SESSION['user'])){
+        header("Location: index.php");
+    }
 ?>
 <!doctype html>
 <html class="no-js" lang="pl">
@@ -22,6 +27,7 @@
 </head>
 
 <body>
+<span class="d-none clientid"><?php echo $_SESSION['client']['id'] ?></span>
 <!--[if IE]>
 <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
 <![endif]-->
@@ -45,7 +51,7 @@
                 <a class="text-muted" href="#" aria-label="Search">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="mx-3" role="img" viewBox="0 0 24 24" focusable="false"><title>Search</title><circle cx="10.5" cy="10.5" r="7.5"/><path d="M21 21l-5.2-5.2"/></svg>
                 </a>
-                <a class="btn btn-sm btn-outline-primary" href="./admin/login.html">Moje konto</a>
+                <a class="btn btn-sm btn-outline-primary" href="admin/login.php">Moje konto</a>
             </div>
         </div>
     </header>
@@ -131,7 +137,24 @@
     </div>
 </footer>
 
-
+<div class="modal fade" id="ticketSuccessModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Bilety</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                Zakup biletów przebiegł prawidłowo
+            </div>
+            <div class="modal-footer">
+                <a type="button" href="index.php" class="btn btn-primary">Przejdź do strony głównej</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 
 <script src="js/vendor/modernizr-3.8.0.min.js"></script>

@@ -291,7 +291,7 @@ $(document).on('click', '#stadium g', function(e){
                    }).done((response) => {});
                }
 
-               console.log("Dodano poprawnie bilety");
+               $('#ticketSuccessModal').modal('show');
            }else {
                alert("Nie wybrano biletów. Proszę zaznaczyć miejsca siedzące a następnie nacisnąć przycisk ZAKUP BILETY");
            }

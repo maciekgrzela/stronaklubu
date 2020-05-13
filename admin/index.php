@@ -1,3 +1,14 @@
+<?php
+session_start();
+
+if(isset($_POST['user'])){
+    $_SESSION['user'] = $_POST['user'];
+}
+if(!isset($_SESSION['user'])){
+    header("Location: ../index.php");
+}
+
+?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -88,7 +99,7 @@
 
       <ul class="navbar-nav px-2">
       <li class="nav-item text-nowrap" id="logout">
-        <a class="nav-link" href="#">Wyloguj</a>
+        <a class="nav-link" href="./logout/logout.php">Wyloguj</a>
       </li>
     </ul>
     </nav>

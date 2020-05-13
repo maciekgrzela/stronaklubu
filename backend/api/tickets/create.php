@@ -16,11 +16,11 @@ $db = $database->connect();
 $ticket = new Ticket($db);
 
 // Get raw posted data
-$data = json_decode(file_get_contents("php://input"));
+$data = $_POST;
 
-$ticket->client_ID = $data->client_ID;
-$ticket->seat = $data->seat;
-$ticket->match_ID = $data->match_ID;
+$ticket->client_ID = $data["client_ID"];
+$ticket->seat = $data["seat"];
+$ticket->match_ID = $data["match_ID"];
 
 // Create ticket
 if($ticket->create()) {
