@@ -17,6 +17,10 @@
         public $worker_ID;
         public $last_commented;
         public $viewers;
+        public $worker_first_name;
+        public $worker_last_name;
+        public $worker_age;
+        public $worker_nationality;
 
         // Constructor with DB
         public function __construct($db) {
@@ -26,15 +30,22 @@
         // Get News
         public function read() {
             $query = 'SELECT
-                news_ID,
-                title,
-                content_path,
-                news_img_path,
-                tags,
-                created_at,
-                last_commented,
-                viewers,
-                worker_ID FROM ' . $this->table . ' ORDER BY created_at';
+                n.news_ID,
+                n.title,
+                n.content_path,
+                n.news_img_path,
+                n.tags,
+                n.created_at,
+                n.last_commented,
+                n.viewers,
+                w.first_name as worker_first_name,
+                w.last_name as worker_last_name,
+                w.age as worker_age,
+                w.nationality as worker_nationality 
+                FROM ' . $this->table . ' n
+                LEFT JOIN
+                    workers w ON n.worker_ID = w.worker_ID
+                ORDER BY created_at';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -48,15 +59,22 @@
         // Get single News
         public function read_single() {
             $query = 'SELECT
-                news_ID,
-                title,
-                content_path,
-                news_img_path,
-                tags,
-                created_at,
-                last_commented,
-                viewers,
-                worker_ID  FROM ' . $this->table . ' WHERE news_ID = ?';
+                n.news_ID,
+                n.title,
+                n.content_path,
+                n.news_img_path,
+                n.tags,
+                n.created_at,
+                n.last_commented,
+                n.viewers,
+                w.first_name as worker_first_name,
+                w.last_name as worker_last_name,
+                w.age as worker_age,
+                w.nationality as worker_nationality 
+                FROM ' . $this->table . ' n
+                LEFT JOIN
+                    workers w ON n.worker_ID = w.worker_ID
+                WHERE n.news_ID = ?';
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -76,7 +94,10 @@
             $this->news_img_path = $row['news_img_path'];
             $this->tags = $row['tags'];
             $this->created_at = $row['created_at'];
-            $this->worker_ID = $row['worker_ID'];
+            $this->worker_first_name = $row['worker_first_name'];
+            $this->worker_last_name = $row['worker_last_name'];
+            $this->worker_age = $row['worker_age'];
+            $this->worker_nationality = $row['worker_nationality'];
         }
 
         public function read_last_commented() {

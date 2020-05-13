@@ -1,0 +1,47 @@
+div.intro p {
+
+   margin-top: 20px;
+   text-align: center;
+   font-size: 25px;
+}
+
+.green {
+
+ color:#398756
+}
+
+section.history {
+
+    margin-top: 30px;
+    text-align: center;
+    font-weight: 200;
+}
+
+.archivalPhotos {
+
+    margin-bottom: 30px;
+}
+
+.headerHistory {
+
+    color:#A10500
+}
+
+.successTable {
+
+    margin-top: 30px;
+    text-align: left;
+}
+
+.columns {
+
+    color:#A10500 !important;
+    text-transform: uppercase;
+   
+}
+
+.tableHeader {
+
+    color:#398756;
+    text-transform: uppercase;
+}

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 28 Kwi 2020, 14:39
+-- Czas generowania: 09 Maj 2020, 22:05
 -- Wersja serwera: 10.1.38-MariaDB
 -- Wersja PHP: 5.6.40
 
@@ -60,16 +60,33 @@ CREATE TABLE `clubs` (
   `city` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `stadium` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `club_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `path_img_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL
+  `path_img_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
+  `league_position` int(11) DEFAULT NULL,
+  `league_points` int(11) NOT NULL DEFAULT '0',
+  `league_matches` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Zrzut danych tabeli `clubs`
 --
 
-INSERT INTO `clubs` (`club_ID`, `clubname`, `city`, `stadium`, `club_address`, `path_img_logo`) VALUES
-(1, 'Slask Wroclaw', 'Wroclaw', 'Stadion Wroclaw', 'aleja slaska', 'asdasdasd'),
-(2, 'Lechia', 'Gdansk', 'PGE Arena', 'adasd', 'adasd');
+INSERT INTO `clubs` (`club_ID`, `clubname`, `city`, `stadium`, `club_address`, `path_img_logo`, `league_position`, `league_points`, `league_matches`) VALUES
+(1, 'Klub FC', 'Wroclaw', 'Stadion Wroclaw', 'aleja Śląska 1, 54-118 Wrocław', 'klubfc', 4, 42, 26),
+(2, 'Zespół Gdańsk', 'Gdansk', 'PGE Arena', 'adasd', 'lechiaGdansk', 7, 38, 26),
+(3, 'Zespół Warszawa', 'Warszawa', '', '', 'legiaWarszawa', 1, 51, 26),
+(4, 'Zespół Gliwice', 'Gliwice', '', '', 'piastGliwice', 2, 43, 26),
+(5, 'Zespół Kraków I', 'Kraków', '', '', 'cracoviaKrakow', 3, 42, 26),
+(6, 'Zespół Poznań', 'Poznań', '', '', 'lechPoznan', 5, 42, 26),
+(7, 'Zespół Szczecin', 'Szczecin', '', '', 'pogonSzczecin', 6, 41, 26),
+(8, 'Zespół Białystok', 'Białystok', '', '', 'jagielloniaBialystok', 8, 37, 26),
+(9, 'Zespół Częstochowa', 'Częstochowa', '', '', 'rakowCzestochowa', 9, 36, 26),
+(10, 'Zespół Płock', 'Płock', '', '', 'wislaPlock', 10, 36, 26),
+(11, 'Zespół Lubin', 'Lubin', '', '', 'zaglebieLubin', 11, 33, 26),
+(12, 'Zespół Zabrze', 'Zabrze', '', '', 'gornikZabrze', 12, 33, 26),
+(13, 'Zespół Kraków II', 'Kraków', '', '', 'wislaKrakow', 13, 31, 26),
+(14, 'Zespół Kielce', 'Kielce', '', '', 'koronaKielce', 14, 26, 26),
+(15, 'Zespół Gdynia', 'Gdynia', '', '', 'arkaGdynia', 15, 25, 26),
+(16, 'Zespół Łódź', 'Łódź', '', '', 'lksLodz', 16, 20, 26);
 
 -- --------------------------------------------------------
 
@@ -85,7 +102,7 @@ CREATE TABLE `matches` (
   `match_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `amount_of_spectators` int(11) DEFAULT NULL,
   `earnings` double DEFAULT NULL,
-  `date_of_match` date NOT NULL
+  `date_of_match` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -93,7 +110,66 @@ CREATE TABLE `matches` (
 --
 
 INSERT INTO `matches` (`match_ID`, `club_home_ID`, `club_away_ID`, `stadium`, `match_address`, `amount_of_spectators`, `earnings`, `date_of_match`) VALUES
-(1, 1, 2, 'adasd', 'asdasd', NULL, NULL, '2020-04-13');
+(1, 1, 2, 'Stadion Wrocław', 'aleja Śląska 1, 54-118 Wrocław', 10000, NULL, '2020-05-08 00:00:00'),
+(2, 1, 4, 'Stadion Poznań', 'Bułgarska 5/7, Poznań 60-320', 12000, NULL, '2020-05-12 16:16:38'),
+(3, 14, 1, 'Stadion Kielce', 'Księdza Piotra Ściegiennego 8, 25-033 Kielce', 7000, NULL, '2020-05-04 16:16:38');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `narratives`
+--
+
+CREATE TABLE `narratives` (
+  `narrative_ID` int(11) NOT NULL,
+  `match_ID` int(11) NOT NULL,
+  `title` varchar(300) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `narratives`
+--
+
+INSERT INTO `narratives` (`narrative_ID`, `match_ID`, `title`, `date`) VALUES
+(1, 1, 'Relacja z meczu 26 kolejki PKO Ekstraklasy', '2020-05-08 19:22:22'),
+(2, 2, 'Relacja z meczu 27 kolejki PKO Ekstraklasy', '2020-05-08 19:23:24'),
+(3, 3, 'Relacja z meczu 28 kolejki PKO Ekstraklasy', '2020-05-09 20:12:24');
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `narrative_items`
+--
+
+CREATE TABLE `narrative_items` (
+  `item_id` int(11) NOT NULL,
+  `narrative_id` int(11) NOT NULL,
+  `author_id` int(11) NOT NULL,
+  `img_path` varchar(100) COLLATE utf8_polish_ci NOT NULL DEFAULT 'thumbnail',
+  `text` varchar(500) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
+  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `narrative_items`
+--
+
+INSERT INTO `narrative_items` (`item_id`, `narrative_id`, `author_id`, `img_path`, `text`, `date`) VALUES
+(2, 1, 2, 'whistle', 'Witamy Państwa bardzo serdecznie na relacji z 26. kolejki meczu PKO Ekstraklasy. Jest 19:46. Zawodnicy już na płycie boiska. Właśnie sędzia dzisiejszego meczu rozpoczyna spotkanie.', '2020-05-08 19:47:36'),
+(3, 1, 2, 'free-kick', 'Pierwsza groźna akcja pod bramką gospodarzy. Na szczęście obrońca ratuje sytuację.', '2020-05-09 21:15:12'),
+(5, 1, 2, 'corner', 'Rzut rożny dla drużyny gospodarzy. Zawodnik drużyny gości w ostatnim momencie wybił piłkę na aut bramkowy', '2020-05-09 21:35:07'),
+(6, 1, 2, 'free-kick', 'Drużyna gości ratuje się z opresji. Piłka szybko wyprowadzona przez bramkarza. Zawodnicy gości zbliżają się pod pole karne gospodarzy', '2020-05-09 21:37:39'),
+(7, 1, 2, 'penalty', 'aaaaaaa', '2020-05-09 21:38:18'),
+(8, 1, 2, 'corner', 'bbbbb', '2020-05-09 21:39:34'),
+(9, 1, 3, 'penalty', 'ccccc', '2020-05-09 21:40:30'),
+(10, 1, 2, 'corner', 'eeeee', '2020-05-09 21:41:48'),
+(11, 1, 2, 'corner', 'hhhhhhhh', '2020-05-09 21:51:20'),
+(12, 1, 2, 'corner', 'uuuuuuu', '2020-05-09 21:53:58'),
+(13, 1, 2, 'corner', 'gggggg', '2020-05-09 21:55:19'),
+(14, 1, 2, 'corner', 'uiyhkjhda', '2020-05-09 21:57:12'),
+(15, 1, 2, 'penalty', 'Proszę Państwa. Karny dla gospodarzy!', '2020-05-09 21:59:41'),
+(16, 1, 2, 'red-card', 'Bramkarz gości dostaje czerwoną kartkę', '2020-05-09 22:02:20');
 
 -- --------------------------------------------------------
 
@@ -245,7 +321,8 @@ ALTER TABLE `clients`
 -- Indeksy dla tabeli `clubs`
 --
 ALTER TABLE `clubs`
-  ADD PRIMARY KEY (`club_ID`);
+  ADD PRIMARY KEY (`club_ID`),
+  ADD UNIQUE KEY `league_position` (`league_position`);
 
 --
 -- Indeksy dla tabeli `matches`
@@ -254,6 +331,21 @@ ALTER TABLE `matches`
   ADD PRIMARY KEY (`match_ID`),
   ADD KEY `club_home_ID` (`club_home_ID`),
   ADD KEY `club_away_ID` (`club_away_ID`);
+
+--
+-- Indeksy dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  ADD PRIMARY KEY (`narrative_ID`),
+  ADD KEY `match_id` (`match_ID`);
+
+--
+-- Indeksy dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  ADD PRIMARY KEY (`item_id`),
+  ADD KEY `narrative_id` (`narrative_id`),
+  ADD KEY `author_id` (`author_id`);
 
 --
 -- Indeksy dla tabeli `news`
@@ -309,7 +401,25 @@ ALTER TABLE `clients`
 -- AUTO_INCREMENT dla tabeli `clubs`
 --
 ALTER TABLE `clubs`
-  MODIFY `club_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `club_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT dla tabeli `matches`
+--
+ALTER TABLE `matches`
+  MODIFY `match_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  MODIFY `narrative_ID` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT dla tabeli `news`
@@ -353,6 +463,19 @@ ALTER TABLE `matches`
   ADD CONSTRAINT `matches_ibfk_2` FOREIGN KEY (`club_away_ID`) REFERENCES `clubs` (`club_ID`);
 
 --
+-- Ograniczenia dla tabeli `narratives`
+--
+ALTER TABLE `narratives`
+  ADD CONSTRAINT `narratives_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_ID`);
+
+--
+-- Ograniczenia dla tabeli `narrative_items`
+--
+ALTER TABLE `narrative_items`
+  ADD CONSTRAINT `narrative_items_ibfk_1` FOREIGN KEY (`narrative_id`) REFERENCES `narratives` (`narrative_id`),
+  ADD CONSTRAINT `narrative_items_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `workers` (`worker_ID`);
+
+--
 -- Ograniczenia dla tabeli `news`
 --
 ALTER TABLE `news`
@@ -369,8 +492,8 @@ ALTER TABLE `stadium`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `clients` (`client_id`),
-  ADD CONSTRAINT `tickets_ibfk_2` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`),
-  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`);
+  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`),
+  ADD CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

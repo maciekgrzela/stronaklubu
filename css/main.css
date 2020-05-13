@@ -169,3 +169,7 @@ textarea {
     page-break-after: avoid;
   }
 }
+
+.menu-link:hover {
+  color: #006643 !important;
+}

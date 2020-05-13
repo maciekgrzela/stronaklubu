@@ -1,0 +1,12 @@
+.absolute-center {
+    position: absolute;
+    top: 0;
+}
+
+.other-article {
+    filter: grayscale(1);
+}
+
+.activeTitle {
+    filter: grayscale(0);
+}

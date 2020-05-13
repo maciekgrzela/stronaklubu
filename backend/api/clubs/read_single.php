@@ -26,7 +26,10 @@
         'city' => $club->city,
         'stadium' => $club->stadium,
         'club_address' => $club->club_address,
-        'path_img_path' => $club->path_img_path
+        'path_img_logo' => $club->path_img_logo,
+        'league_position' => $club->league_position,
+        'league_points' => $club->league_points,
+        'league_matches' => $club->league_matches
     );
 
     // Make JSON

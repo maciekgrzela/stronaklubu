@@ -1,0 +1,12 @@
+.calendar-item {
+    font-size: large !important;
+    background-color: transparent !important;
+}
+
+.calendar-item > .title {
+    overflow-y: hidden;
+}
+
+.calendar-item > span > div > img {
+    width: 30%;
+}

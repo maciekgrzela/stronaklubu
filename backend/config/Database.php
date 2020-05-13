@@ -6,7 +6,7 @@
         
         private $host = 'localhost';
         private $db_name = 'ClubDB';
-        private $username = 'root';
+        private $username = 'club';
         private $password = '';
         private $conn;
 

@@ -1,0 +1,8 @@
+.live-placeholder {
+    background-image: url("../img/live-placeholder.jpg");
+    background-size: cover;
+}
+
+.live-placeholder h1 {
+    text-shadow: 0px 0px 11px rgba(0, 0, 0, 1);
+}

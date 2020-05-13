@@ -36,7 +36,10 @@
                 'created_at' => $created_at,
                 'last_commented' => $last_commented,
                 'viewers' => $viewers,
-                'worker_ID' => $worker_ID
+                'worker_first_name' => $worker_first_name,
+                'worker_last_name' => $worker_last_name,
+                'worker_age' => $worker_age,
+                'worker_nationality' => $worker_nationality
             );
 
 

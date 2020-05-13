@@ -1,0 +1,11 @@
+#stadium {
+    width: 70%;
+    height: 70%;
+}
+.stadium-map-img {
+    max-width: 50%;
+}
+
+.single-event-card:hover {
+    background-color: rgba(0,0,0,0.05);
+}
