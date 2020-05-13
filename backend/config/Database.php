@@ -4,9 +4,9 @@
 
         // DB Params
         
-        private $host = 'localhost';
+        private $host = '192.168.1.14';
         private $db_name = 'ClubDB';
-        private $username = 'root';
+        private $username = 'club';
         private $password = '';
         private $conn;
 
