@@ -2,34 +2,35 @@
     // Headers
     header('Access-Control-Allow-Origin: *');
     header('Content-Type: application/json');
-    header('Access-Control-Allow-Methods: DELETE');
+    header('Access-Control-Allow-Methods: POST');
     header('Access-Control-Allow-Headers: Access-Control-Allow-Headers-Type, Access-Control-Allow-Methods, Authorization, X-Requested-With');
 
     include_once '../../config/Database.php';
-    include_once '../../models/News.php';
+    include_once '../../models/Achievement.php';
 
     // Instantiate DB & connect
     $database = new Database();
     $db = $database->connect();
 
     // Instantiate news object
-    $news = new News($db);
+    $achievement = new Achievement($db);
 
     // Get raw posted data
-    //$data = json_decode(file_get_contents("php://input"));
-
+    // $data = json_decode(file_get_contents("php://input"));
+    
     $data = $_POST;
-
-    // Set news_ID to update
-    $news->news_ID = $data["news_ID"];
    
-    // Delete news
-    if($news->delete()) {
+    // $achievement->achievement_ID = $data["achievement_ID"];
+    $achievement->achievement_year = $data["achievement_year"];
+    $achievement->achievement_name = $data["achievement_name"];
+
+    // Create achievement
+    if($achievement->create()) {
         echo json_encode(
-            array('message' => 'News  Deleted')
+            array('message' => 'Achievement Created')
         );
     } else {
         echo json_encode(
-            array('message' => 'News Not Deleted')
+            array('message' => 'Achievement NOT Created')
         );
     }

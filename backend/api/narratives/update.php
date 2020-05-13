@@ -16,19 +16,21 @@ $db = $database->connect();
 $narrative = new Narrative($db);
 
 // Get raw posted data
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
+
+$data = $_POST;
 
 // Set club_ID to update
-$narrative->narrative_ID = $data->narrative_ID;
+$narrative->narrative_ID = $data["narrative_ID"];
 
-$narrative->match_ID = $data->match_ID;
-$narrative->title = $data->title;
-$narrative->date = $data->date;
+$narrative->match_ID = $data["match_ID"];
+$narrative->title = $data["title"];
+$narrative->date = $data["date"];
 
 // Create club
-if($club->update()) {
+if($narrative->update()) {
     echo json_encode(
-        array('message' => 'narrative ' . $data->narrative_ID . ' Updated')
+        array('message' => 'narrative ' . $data["narrative_ID"] . ' Updated')
     );
 } else {
     echo json_encode(

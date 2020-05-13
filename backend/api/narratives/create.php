@@ -16,12 +16,13 @@ $db = $database->connect();
 $narrative = new Narrative($db);
 
 // Get raw posted data
-$data = json_decode(file_get_contents("php://input"));
+// $data = json_decode(file_get_contents("php://input"));
 
+$data = $_POST;
 
-$narrative->match_ID = $data->match_ID;
-$narrative->title = $data->title;
-$narrative->date = $data->date;
+$narrative->match_ID = $data["match_ID"];
+$narrative->title = $data["title"];
+$narrative->date = $data["date"];
 
 // Create narrative
 if($narrative->create()) {

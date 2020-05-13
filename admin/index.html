@@ -14,20 +14,15 @@
     <!-- Bootstrap core CSS -->
     <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
-    <!--Datatable-->
-    <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
-
     <script src="js/bootstrap.bundle.js"></script>
 
     <!-- Custom styles for this template -->
     <link href="css/dashboard.css" rel="stylesheet">
-    <link href="css/articles-style.css" rel="stylesheet">
-
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
   </head>
 
   <body>
-        <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
       <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.html"><img src="img/slask_herb.png" width="30" height="30" class="d-inline-block align-center" alt=""> Admin panel
       </a>
 
@@ -60,7 +55,7 @@
         RELACJE LIVE
       </a>
       <div class="dropdown-menu">
-        <a class="dropdown-item" href="createNarrative.html">Przeprowadź relację</a>
+        <a class="dropdown-item" href="createNarrative">Stwórz relację</a>
       </div>
       </li>
       </ul>
@@ -100,7 +95,7 @@
 
     <div class="container-fluid">
       <div class="row">
-<nav class="col-md-2 d-none d-md-block bg-light sidebar">
+        <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
             <ul class="nav flex-column">
               <li class="nav-item">
@@ -154,7 +149,7 @@
 
 
               <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="createNarrative.html">
                   <span data-feather="bar-chart-2"></span>
                   Przeprowadź relację
                 </a>
@@ -229,103 +224,94 @@
         </nav>
 
 
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+            <h1 class="h2">Witaj, Jan Kowalski!</h1>
+
+          </div>
 
 
 
+    <div class="row">
+    <div class="col-sm">
+      <form class="myAccount">
+            <h3>Moje konto</h3>
+
+            <div class="form-group">
+            <label for="firstname">Imię</label>
+            <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Imie">
+            </div>
+
+            <div class="form-group">
+            <label for="exampleInputEmail1">Nazwisko</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nazwisko">
+            </div>
+
+            <div class="form-group">
+            <label for="exampleInputEmail1">Login</label>
+            <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Login">
+            </div>
+
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Adres email</label>
+            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+            
+          </div>
+
+          <label for="basic-url">Data urodzenia</label>
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="basic-addon3">YYYY-MM-DD</span>
+            </div>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3">
+          </div>
 
 
 
-
-
-
-<!-- ---------------------------------------------------------------------- -->
-
-
-<main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-  
-  <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-    <h1 class="h2">Zarządzanie artykułami</h1>
+          <button type="submit" class="btn btn-success">Zmień dane</button>
+        </form>
+    </div>
+    <div class="col-sm">
+      <form class="editPassword">
+          <h3>Zmiana hasła</h3>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Stare hasło</label>
+            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Stare hasło">
+            
+          </div>
+          <div class="form-group">
+            <label for="exampleInputPassword1">Nowe hasło</label>
+            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nowe hasło">
+          </div>
+          <button type="submit" class="btn btn-success">Zmień hasło</button>
+        </form>
+    </div>
   </div>
 
 
-<div id="content">
-  <div class="row">
-    <div class="col-sm">
-      <h3>Dodaj artykuł</h3>
-      <form class="addArticle">
 
-        <div class="form-group">
-
-          <label for="newsID">Identyfikator artykułu</label>
-          <input type="text" class="form-control" id="newsID" placeholder="ID" disabled>
-
-          <label for="authorID">Identyfikator autora</label>
-          <input type="text" class="form-control" id="authorID" placeholder="ID autora" value="3" required disabled>
-
-
-          <label for="newsTitle">Tytuł</label>
-          <input type="text" class="form-control" id="newsTitle" placeholder="Tytuł artykułu" required="">
-
-          <label for="newsContent">Treść</label>
-          <textarea id="newsContent" class="form-control" rows="12" placeholder="Tutaj umieść treść wpisu" required></textarea> 
-
-          <label for="newsImgPath">Zdjęcie</label>
-          <input type="text" class="form-control" id="newsImgPath" placeholder="Tytuł artykułu" required="">
-
-          <label for="newsTags">Tagi</label>
-          <input type="text" class="form-control" id="newsTags" placeholder="Gornik Zabrze, jedenastka-kolejki..." required="">
-        </div>
-
-        <button id="btnAddArticle" type="submit" class="btn btn-success">Dodaj artykuł</button>
-        <button id="btnEditArticle" type="submit" class="btn btn-warning">Edytuj artykuł</button>
-        <button id="btnDeleteArticle" type="submit" class="btn btn-danger">Usuń artykuł</button>
-        
-      </form>
-
-
-
-    </div>
-
-      
-    <div class="col-sm">  
-
-      <div class="articlesTable">
-          <h3>Artykuły dodane</h3>
-          <table id="articlesTable" class="display" >
-                
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">Autor</th>
-                <th scope="col">Tytuł</th>
-                <th scope="col">Treść</th>
-                <th scope="col">Zdjęcie</th>
-                <th scope="col">Tagi</th>
-              </tr>
-            </thead>
-            <tbody>
-
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-
-    <div class="row">
-
-      <div class="col-sm">
-
-
-
-        
-      </div>
 
           
-    </div> 
+         
         
 
 
-</main>
+        </main>
+      </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -343,13 +329,7 @@
     <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
     <script src="../../assets/js/vendor/popper.min.js"></script>
     <script src="../../dist/js/bootstrap.min.js"></script>
-    <script src="js/bootstrap.bundle.js"></script>
-
-
-    <!--Datatable-->
-    <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
-    <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-    <script src="js/articles.js"></script>
+    <script src="css/bootstrap.bundle.js"></script>
 
     <!-- Icons -->
     <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>

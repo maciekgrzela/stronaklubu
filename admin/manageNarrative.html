@@ -11,14 +11,14 @@
 
   <!-- Bootstrap core CSS -->
   <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="stylesheet" type="text/css" href="css/manageNarrative.css">
 
   <!--Datatable-->
   <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
   <link href="css/dashboard.css" rel="stylesheet">
-  <link href="css/players-style.css" rel="stylesheet">
-  <link href="css/style.css" rel="stylesheet">
+  <link href="css/createNarrative.css" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
 </head>
 
@@ -150,7 +150,7 @@
           <ul class="nav flex-column mb-2">
 
             <li class="nav-item">
-              <a class="nav-link" href="createNarrative.html">
+              <a class="nav-link" href="#">
                 <span data-feather="bar-chart-2"></span>
                 Przeprowadź relację
               </a>
@@ -220,95 +220,61 @@
 
       <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
         <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-          <h1 class="h2">Zarządzanie piłkarzami</h1>
+          <h1 class="h2">Zarządzanie relacjami LIVE</h1>
 
         </div>
+
 
         <div id="content">
 
           <div class="row">
             <div class="col-sm">
-              <form class="playerAddForm">
-                <h3>Dane piłkarza</h3>
+              <form class="narrativeAddForm">
+                <h3>Dodaj wpis relacji</h3>
 
                 <div class="form-group">
-                  <label for="playerID">Identyfikator</label>
-                  <input type="text" class="form-control" id="playerID" aria-describedby="emailHelp" placeholder="ID">
+                  <label for="narrativeItemID">Identyfikator wpisu relacji</label>
+                  <input type="text" class="form-control" id="narrativeItemID" aria-describedby="emailHelp" placeholder="ID wpisu relacji" disabled>
                 </div>
 
                 <div class="form-group">
-                  <label for="playerFirstName">Imię</label>
-                  <input type="text" class="form-control" id="playerFirstName" aria-describedby="emailHelp"
-                    placeholder="Imie" required>
+                  <label for="narrativeID">Identyfikator relacji</label>
+                  <input type="text" class="form-control" id="narrativeID" aria-describedby="emailHelp"
+                    placeholder="ID relacji" required disabled>
                 </div>
 
                 <div class="form-group">
-                  <label for="playerLastName">Nazwisko</label>
-                  <input type="text" class="form-control" id="playerLastName" aria-describedby="emailHelp"
-                    placeholder="Nazwisko" required>
+                  <label for="narrativeItemAuthor">Identyfikator autora</label>
+                  <input type="text" class="form-control" id="narrativeItemAuthor" aria-describedby="emailHelp"
+                    placeholder="Autor" required disabled>
                 </div>
 
-                <div class="form-group">
-                  <label for="playerAge">Wiek</label>
-                  <input type="text" class="form-control" id="playerAge" aria-describedby="emailHelp" placeholder="Wiek"
-                    required>
-                </div>
+                <label for="chooseType">Wybierz zdarzenie</label>
+                  <select class="form-control" id="chooseType">
+                    <option>whistle</option>
+                    <option>red-card</option>
+                    <option>yellow-card</option>
+                    <option>corner</option>
+                    <option>free-kick</option>
+                    <option>penalty</option>
+                  </select>
 
-                <div class="form-group">
-                  <label for="playerHeight">Wzrost</label>
-                  <input type="text" class="form-control" id="playerHeight" aria-describedby="emailHelp"
-                    placeholder="Wzrost" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="playerNationality">Narodowość</label>
-                  <input type="text" class="form-control" id="playerNationality" aria-describedby="emailHelp"
-                    placeholder="Narodowość" required>
-                </div>
-
-                <label for="playerBirthday">Data urodzenia</label>
+                <label for="narrativeItemContent">Treść wpisu relacji</label>
+                <textarea id="narrativeItemContent" class="form-control" rows="12" placeholder="Tutaj umieść treść wpisu realcji"></textarea> 
+                
+                <label for="narrativeItemDate">Data meczu</label>
                 <div class="input-group mb-3">
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon3">YYYY-MM-DD</span>
                   </div>
-                  <input type="text" class="form-control" id="playerBirthday" aria-describedby="basic-addon3" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="playerBirthPlace">Miasto urodzenia</label>
-                  <input type="text" class="form-control" id="playerBirthPlace" aria-describedby="emailHelp"
-                    placeholder="Miasto urodzenia" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="playerPosition">Wybierz pozycję</label>
-                  <select class="form-control" id="playerPosition">
-                    <option></option>
-                    <option>Bramkarz</option>
-                    <option>Obrońca</option>
-                    <option>Pomocnik</option>
-                    <option>Napastnik</option>
-                  </select>
-                </div>
-
-                <div class="form-group">
-                  <label for="playerValue">Wartość zawodnika</label>
-                  <input type="text" class="form-control" id="playerValue" aria-describedby="emailHelp"
-                    placeholder="Wartość zawodnika" required>
-                </div>
-
-                <div class="form-group">
-                  <label for="playerImgPath">Zdjęcie zawodnika</label>
-                  <input type="text" class="form-control" id="playerImgPath" aria-describedby="emailHelp"
-                    placeholder="Zdjęcie zawodnika" required>
+                  <input type="text" class="form-control" id="narrativeItemDate" aria-describedby="basic-addon3" required>
                 </div>
 
                 <!-- <button id="btnAddPlayer" type="buttonAddPlayer" class="btn btn-success">Dodaj piłkarza</button> -->
-                <button id="btnAddPlayer" type="submit" class="btn btn-success">Dodaj piłkarza</button>
-                <button id="btnEditPlayer" type="submit" class="btn btn-warning">Edytuj piłkarza</button>
-                <button id="btnDeletePlayer" type="submit" class="btn btn-danger">Usuń piłkarza</button>
+                <button id="btnAddNarrativeItem" class="btn btn-success">Dodaj relację</button>
+                <button id="btnEditNarrativeItem" class="btn btn-warning">Edytuj relację</button>
+                <button id="btnDeleteNarrativeItem" class="btn btn-danger">Usuń relację</button>
               </form>
-
 
               <!-- <button id="btnAddPlayer" type="buttonAddPlayer" class="btn btn-success">Dodaj piłkarza</button> -->
 
@@ -316,46 +282,52 @@
             </div>
 
 
-            <div class="col-sm">
+            <div class="right col-sm">
+                <div class="narrativesTable">
+                    <h3>Realcje LIVE w bazie</h3>
+    
+                    <table id="narrativesTable" class="display" style="width: 100%;">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Id meczu</th>
+                          <th scope="col">Tytuł</th>
+                          <th scope="col">Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+    
+                      </tbody>
+                    </table>
+                  </div>
 
-              <div class="divWithDataTable">
-                <h3>Piłkarze w bazie</h3>
-
-                <table id="playersTable" class="display table-responsive">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Imię</th>
-                      <th scope="col">Nazwisko</th>
-                      <th scope="col">Wiek</th>
-                      <th scope="col">Wzrost</th>
-                      <th scope="col">Narodowość</th>
-                      <th scope="col">Data urodzenia</th>
-                      <th scope="col">Miasto</th>
-                      <th scope="col">Pozycja</th>
-                      <th scope="col">Wartość</th>
-                      <th scope="col">Zdjęcie</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-
-                  </tbody>
+                <div class="narrativeItemsTable">
+                    <h3>Zdarzenia do relacji LIVE</h3>
+    
+                    <table id="narrativeItemsTable" class="display">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Relacja</th>
+                          <th scope="col">Autor</th>
+                          <th scope="col">Zdarzenie</th>
+                          <th scope="col">Treść wpisu</th>
+                          <th scope="col">Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+    
+                    </tbody>
                 </table>
               </div>
-
-              <div class="playerImgPreview">
-                <h3>Zdjęcie</h3>
-                <img src="img/Musonda.png" id="playerImgPreview" class="rounded img-fluid" alt="Cinque Terre">
-              </div>
             </div>
+            
+          </div>
+            
           </div>
 
-          <div class="row">
-            <div class="col-sm">
-              <div class="playersTable">
-              </div>
-            </div>
-          </div>
+
+
         </div>
       </main>
     </div>
@@ -388,7 +360,7 @@
   <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
   <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
   
-  <script src="js/players.js"></script>
+  <script src="js/manageNarrative.js"></script>
  
 </body>
 
