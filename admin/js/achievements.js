@@ -33,7 +33,7 @@ $(document).ready(function () {
 	});
 
     $.ajax({
-        url: "http://localhost/PSIMv2/backend/api/achievements/read.php",
+        url: "http://localhost/stronaklubu/backend/api/achievements/read.php",
         method: "GET",
         dataType: "json"
 
@@ -57,7 +57,7 @@ $(document).ready(function () {
 		var _achievement_name = $("#achievement_name").val();
 
 		$.ajax({
-			url: 'http://localhost/PSIMv2/backend/api/achievements/create.php/',
+			url: 'http://localhost/stronaklubu/backend/api/achievements/create.php/',
 			method: "post",
 			dataType: "json",
 			data: {
@@ -79,7 +79,7 @@ $(document).ready(function () {
 		var _achievement_ID = $("#achievement_ID").val();
 
 		$.ajax({
-			url: "http://localhost/PSIMv2/backend/api/achievements/delete.php/",
+			url: "http://localhost/stronaklubu/backend/api/achievements/delete.php/",
 			method: "post",
 			dataType: "json",
 			data: {
@@ -101,7 +101,7 @@ $(document).ready(function () {
         var _achievement_name = $("#achievement_name").val();
 
 		$.ajax({
-			url: "http://localhost/PSIMv2/backend/api/achievements/update.php/",
+			url: "http://localhost/stronaklubu/backend/api/achievements/update.php/",
 			method: "post",
 			dataType: "json",
 			data: {

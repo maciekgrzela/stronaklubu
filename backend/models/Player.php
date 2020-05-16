@@ -4,7 +4,7 @@
 
         // DB stuff
         public $conn;
-        public $table = 'Players';
+        public $table = 'players';
 
         // Player Properties
         public $player_ID;

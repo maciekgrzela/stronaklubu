@@ -1,3 +1,4 @@
+
 <?php
 session_start();
 
@@ -9,31 +10,35 @@ if(!isset($_SESSION['user'])) {
 }
 
 ?>
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Slask Wroclaw - Admin</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+  <title>Slask Wroclaw - Admin</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-  </head>
+  <!--Datatable-->
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="img/slask_herb.png" width="30" height="30" class="d-inline-block align-center" alt=""> Admin panel
-      </a>
+  <!-- Custom styles for this template -->
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link href="css/createNarrative.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.html"><img src="img/slask_herb.png" width="30"
+        height="30" class="d-inline-block align-center" alt=""> Admin panel
+    </a>
 
             <?php
 
@@ -420,112 +425,146 @@ if(!isset($_SESSION['user'])) {
             }
         }
           ?>
-          </div>
-        </nav>
+        </div>
+      </nav>
 
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2"><?php if(isset($_SESSION['user'])) {
-                echo "Witaj ".$_SESSION['user']['first_name']. " " . $_SESSION['user']['last_name']. "!";
-            } else if (isset($_SESSION['worker'])) {
-              echo "Witaj ".$_SESSION['worker']['first_name']. " " .$_SESSION['worker']['last_name']." !";
-          }
-            ?></h1>
-          </div>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h2">Zarządzanie relacjami LIVE</h1>
 
-    <div class="row">
-    <div class="col-sm">
-      <form class="myAccount">
-            <h3>Moje konto</h3>
+        </div>
 
-            <div class="form-group">
-            <label for="firstname">Imię</label>
-            <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Imie" value="<?php if(isset($_SESSION['user'])){
-                echo $_SESSION['user']['first_name'];
-            } 
-            ?>">
+
+        <div id="content">
+
+          <div class="row">
+            <div class="col-sm">
+              <form class="narrativeAddForm">
+                <h3>Dane relacji</h3>
+
+                <div class="form-group">
+                  <label for="narrativeID">Identyfikator realcji</label>
+                  <input type="text" class="form-control" id="narrativeID" aria-describedby="emailHelp" placeholder="ID relacji" disabled>
+                </div>
+
+                <div class="form-group">
+                  <label for="matchID">Identyfikator meczu</label>
+                  <input type="text" class="form-control" id="matchID" aria-describedby="emailHelp"
+                    placeholder="ID meczu" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="narrativeTitle">Tytuł</label>
+                  <input type="text" class="form-control" id="narrativeTitle" aria-describedby="emailHelp"
+                    placeholder="Tytuł relacji" required>
+                </div>
+
+                <label for="narrativeDate">Data</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">YYYY-MM-DD</span>
+                  </div>
+                  <input type="text" class="form-control" id="narrativeDate" aria-describedby="basic-addon3" required>
+                </div>
+
+
+
+                <!-- <button id="btnAddPlayer" type="buttonAddPlayer" class="btn btn-success">Dodaj piłkarza</button> -->
+                <button id="btnAddNarrative" class="btn btn-success">Dodaj relację</button>
+                <button id="btnEditNarrative" class="btn btn-warning">Edytuj relację</button>
+                <button id="btnDeleteNarrative" class="btn btn-danger">Usuń relację</button>
+              </form>
+
+              
+
+
+              <!-- <button id="btnAddPlayer" type="buttonAddPlayer" class="btn btn-success">Dodaj piłkarza</button> -->
+
+              <!-- <button id="wypelnij" class="btn btn-danger">Wypelnij</button> -->
             </div>
 
-            <div class="form-group">
-            <label for="lastName">Nazwisko</label>
-            <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Nazwisko" value="<?php if(isset($_SESSION['user'])){
-                echo $_SESSION['user']['last_name'];
-            } 
-          ?>">
+
+            <div class="col-sm">
+                <div class="matchesTable">
+                    <h3>Mecze w bazie</h3>
+    
+                    <table id="matchesTable" class="display">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Gospodarze</th>
+                          <th scope="col">Goście</th>
+                          <th scope="col">Stadion</th>
+                          <th scope="col">Adres</th>
+                          <th scope="col">Liczba widzów</th>
+                          <th scope="col">Zarobki</th>
+                          <th scope="col">Data</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+    
+                      </tbody>
+                    </table>
+                  </div>
             </div>
+          </div>
 
-            <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Login" value="<?php 
-            if(isset($_SESSION['user']['worker_login'])){
-                echo $_SESSION['user']['worker_login'];
-            } else if (isset($_SESSION['user']['user_login'])) {
-              echo $_SESSION['user']['user_login'];
-            }
-            ?>">
+          <div class="row">
+            <div class="col-sm">
+              <div class="narrativesTable">
+                <h3>Realcje LIVE w bazie</h3>
+
+                <table id="narrativesTable" class="display">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Tytuł</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Id meczu</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+
+                  </tbody>
+                </table>
+              </div>
             </div>
-
-
-          <div class="form-group">
-            <label for="exampleInputEmail1">Adres email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="<?php if (isset($_SESSION['user']['mail'])) {
-                echo $_SESSION['user']['mail'];
-            } else if (isset($_SESSION['user']['email'])) {
-              echo $_SESSION['user']['email'];
-            } 
-            ?>">
-            
           </div>
-
-          <label for="basic-url">Data urodzenia</label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon3">YYYY-MM-DD</span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="<?php if(isset($_SESSION['user']['date_of_birth'])){
-                echo $_SESSION['user']['date_of_birth'];
-            } else if (isset($_SESSION['user']['worker_date_of_birth'])) {
-              echo $_SESSION['user']['worker_date_of_birth'];
-          }
-            ?>">
-          </div>
-          <button type="submit" class="btn btn-success">Zmień dane</button>
-        </form>
-    </div>
-    <div class="col-sm">
-      <form class="editPassword">
-          <h3>Zmiana hasła</h3>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Stare hasło</label>
-            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Stare hasło">
-            
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Nowe hasło</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nowe hasło">
-          </div>
-          <button type="submit" class="btn btn-success">Zmień hasło</button>
-        </form>
+        </div>
+      </main>
     </div>
   </div>
-        </main>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  <!--     <script src="../../assets/js/vendor/popper.min.js"></script>
+ -->
 
+  <!--     <script src="../../dist/js/bootstrap.min.js"></script>
+    <script src="js/bootstrap.bundle.js"></script> -->
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-  </body>
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
+
+  <!-- Graphs -->
+  <script src="https://code.jquery.com/jquery-3.5.0.min.js"></script>
+  <!-- <script src="//cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script> -->
+
+  <!--Datatable-->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  
+  <script src="js/createNarrative.js"></script>
+ 
+</body>
+
 </html>
-

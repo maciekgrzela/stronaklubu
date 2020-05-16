@@ -1,6 +1,9 @@
 $(document).ready(function() {
 
     let table = $('#articlesTable').DataTable();
+    let worker = $('#worker').val();
+
+    console.log(worker);
  
     $('#articlesTable tbody').on( 'click', 'tr', function () {
         if ( $(this).hasClass('selected') ) {
@@ -20,12 +23,11 @@ $(document).ready(function() {
 	table.draw();
 
 	$.ajax({
-		url : "http://localhost/PSIMv2/backend/api/news/read.php",
+		url : "http://localhost/stronaklubu/backend/api/news/read_specific.php?worker_ID="+worker,
 		method : "GET",
 		dataType : "json"
 		
 	}).done((response) => {
-
 
 			for (var i = 0; i < response.length; i++) {
 				table.row.add(
@@ -34,7 +36,9 @@ $(document).ready(function() {
 					response[i].title, 
 					response[i].content_path, 
                     response[i].news_img_path,
-                    response[i].tags]
+                    response[i].tags,
+                    response[i].viewers,
+                    response[i].created_at]
 					);
 			}
 
@@ -49,6 +53,7 @@ $(document).ready(function() {
         var content = table.row( this ).data()[3];
         var imgPath = table.row( this ).data()[4];
         var tags = table.row( this ).data()[5];
+
         
         $("#newsID").val(newsID);
         $("#authorID").val(newsAuthor);
@@ -70,7 +75,7 @@ $(document).ready(function() {
         var tags = $("#newsTags").val();
 
         $.ajax({
-            url : "http://localhost/PSIMv2/backend/api/news/create.php",
+            url : "http://localhost/stronaklubu/backend/api/news/create.php",
             method : "post",
             dataType : "json",
             data : {
@@ -95,7 +100,7 @@ $(document).ready(function() {
     var _newsID = $("#newsID").val();
 
     request = $.ajax({
-        url : "http://localhost/PSIMv2/backend/api/news/delete.php",
+        url : "http://localhost/stronaklubu/backend/api/news/delete.php",
         method : "post",
         dataType : "json",
         data : {
@@ -126,7 +131,7 @@ $(document).ready(function() {
     var _worker_ID = $("#authorID").val();
 
     request = $.ajax({
-        url : "http://localhost/PSIMv2/backend/api/news/update.php",
+        url : "http://localhost/stronaklubu/backend/api/news/update.php",
         method : "post",
         dataType : "json",
         data : {

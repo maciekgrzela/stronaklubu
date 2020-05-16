@@ -29,8 +29,8 @@
 
             $match_item = array(
                 'match_ID' => $match_ID,
-                'clubHomeName' => $clubHomeName,
-                'clubAwayName' => $clubAwayName,
+                'club1_clubname' => $club_home_clubname,
+                'club2_clubname' => $club_away_clubname,
                 'stadium' => $stadium,
                 'match_address' => $match_address,
                 'amount_of_spectators' => $amount_of_spectators,

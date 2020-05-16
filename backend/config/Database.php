@@ -5,8 +5,8 @@
         // DB Params
         
         private $host = 'localhost';
-        private $db_name = 'ClubDB';
-        private $username = 'club';
+        private $db_name = 'clubcb';
+        private $username = 'root';
         private $password = '';
         private $conn;
 

@@ -2,6 +2,9 @@ $(document).ready(function () {
     
 	let table = $('#matchesTable').DataTable();
 
+	let worker = $('#worker').val();
+
+
 	$('#matchesTable tbody').on('click', 'tr', function () {
 		if ($(this).hasClass('selected')) {
 			$(this).removeClass('selected');
@@ -20,7 +23,7 @@ $(document).ready(function () {
 	table.draw();
 
 	$.ajax({
-		url: "http://localhost/PSIMv2/backend/api/matches/read.php",
+		url: "http://localhost/stronaklubu/backend/api/matches/read.php",
 		method: "GET",
 		dataType: "json"
 
@@ -43,7 +46,7 @@ $(document).ready(function () {
     });
 
     $.ajax({
-		url: "http://localhost/PSIMv2/backend/api/clubs/read.php",
+		url: "http://localhost/stronaklubu/backend/api/clubs/read.php",
 		method: "GET",
 		dataType: "json"
 
@@ -79,7 +82,7 @@ $(document).ready(function () {
 		var club_home_name = $("#chooseClubHome").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/clubs/read_single.php?clubname=" + club_home_name,
+			url : "http://localhost/stronaklubu/backend/api/clubs/read_single.php?clubname=" + club_home_name,
 			method : "get",
 			dataType : "json"
 	
@@ -95,7 +98,7 @@ $(document).ready(function () {
 		var club_away_name = $("#chooseClubAway").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/clubs/read_single.php?clubname=" + club_away_name,
+			url : "http://localhost/stronaklubu/backend/api/clubs/read_single.php?clubname=" + club_away_name,
 			method : "get",
 			dataType : "json"
 	
@@ -125,7 +128,7 @@ $(document).ready(function () {
 		var club_home_name = $("#chooseClubHome").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/clubs/read_single.php?clubname=" + club_home_name,
+			url : "http://localhost/stronaklubu/backend/api/clubs/read_single.php?clubname=" + club_home_name,
 			method : "get",
 			dataType : "json"
 	
@@ -138,7 +141,7 @@ $(document).ready(function () {
 		var club_away_name = $("#chooseClubAway").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/clubs/read_single.php?clubname=" + club_away_name,
+			url : "http://localhost/stronaklubu/backend/api/clubs/read_single.php?clubname=" + club_away_name,
 			method : "get",
 			dataType : "json"
 	
@@ -157,7 +160,7 @@ $(document).ready(function () {
 		var matchDate = $("#matchDate").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/matches/create.php",
+			url : "http://localhost/stronaklubu/backend/api/matches/create.php",
 			method : "post",
 			dataType : "json",
 			data : {
@@ -189,7 +192,7 @@ $(document).ready(function () {
 		console.log(club_away_ID);
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/matches/update.php",
+			url : "http://localhost/stronaklubu/backend/api/matches/update.php",
 			method : "post",
 			dataType : "json",
 			data : {
@@ -216,7 +219,7 @@ $(document).ready(function () {
 		var matchID = $("#matchID").val();
 
 		$.ajax({
-			url : "http://localhost/PSIMv2/backend/api/matches/delete.php",
+			url : "http://localhost/stronaklubu/backend/api/matches/delete.php",
 			method : "post",
 			dataType : "json",
 			data : {

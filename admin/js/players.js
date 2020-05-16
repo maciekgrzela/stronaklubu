@@ -20,7 +20,7 @@ $(document).ready(function () {
 	table.draw();
 
 	$.ajax({
-		url: "http://localhost/PSIMv2/backend/api/player/read.php",
+		url: "http://localhost/stronaklubu/backend/api/player/read.php",
 		method: "GET",
 		dataType: "json"
 
@@ -117,7 +117,7 @@ $(document).ready(function () {
 		var _player_img_path = $("#playerImgPath").val();
 
 		$.ajax({
-			url: "http://localhost/PSIMv2/backend/api/player/create.php",
+			url: "http://localhost/stronaklubu/backend/api/player/create.php",
 			method: "post",
 			dataType: "json",
 			data: {
@@ -156,7 +156,7 @@ $(document).ready(function () {
 		var _player_img_path = $("#playerImgPath").val();
 
 		$.ajax({
-			url: "http://localhost/PSIMv2/backend/api/player/update.php",
+			url: "http://localhost/stronaklubu/backend/api/player/update.php",
 			method: "post",
 			dataType: "json",
 			data: {
@@ -186,7 +186,7 @@ $(document).ready(function () {
 		console.log(_player_ID);
 
 		$.ajax({
-			url: "http://localhost/PSIMv2/backend/api/player/delete.php",
+			url: "http://localhost/stronaklubu/backend/api/player/delete.php",
 			method: "post",
 			dataType: "json",
 			data: {

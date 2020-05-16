@@ -9,33 +9,42 @@ if(!isset($_SESSION['user'])) {
 }
 
 ?>
+
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <title>Slask Wroclaw - Admin</title>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <link rel="icon" href="/docs/4.0/assets/img/favicons/favicon.ico">
 
-    <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
+  <title>Slask Wroclaw - Admin</title>
 
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.0/examples/dashboard/">
 
-    <!-- Custom styles for this template -->
-    <link href="css/dashboard.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
-  </head>
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
 
-  <body>
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
-      <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="img/slask_herb.png" width="30" height="30" class="d-inline-block align-center" alt=""> Admin panel
-      </a>
+  <!--Datatable-->
+  <link href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css" rel="stylesheet">
 
-            <?php
+  <script src="js/bootstrap.bundle.js"></script>
+
+  <!-- Custom styles for this template -->
+  <link href="css/dashboard.css" rel="stylesheet">
+  <link href="css/achievements-style.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+    <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="index.php"><img src="img/slask_herb.png" width="30"
+        height="30" class="d-inline-block align-center" alt=""> Admin panel
+    </a>
+
+             <?php
 
             if(isset($_SESSION['user'])) {
               echo '
@@ -420,112 +429,132 @@ if(!isset($_SESSION['user'])) {
             }
         }
           ?>
-          </div>
-        </nav>
+        </div>
+      </nav>
+
+      <!-- ---------------------------------------------------------------------- -->
 
 
-        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
-          <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
-            <h1 class="h2"><?php if(isset($_SESSION['user'])) {
-                echo "Witaj ".$_SESSION['user']['first_name']. " " . $_SESSION['user']['last_name']. "!";
-            } else if (isset($_SESSION['worker'])) {
-              echo "Witaj ".$_SESSION['worker']['first_name']. " " .$_SESSION['worker']['last_name']." !";
-          }
-            ?></h1>
-          </div>
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
+        <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
+          <h1 class="h2">Zarządzanie osiągnięciami</h1>
+        </div>
 
-    <div class="row">
-    <div class="col-sm">
-      <form class="myAccount">
-            <h3>Moje konto</h3>
+        <div id="content">
+          <div class="row">
+            <div class="col-sm">
+              <form class="addAchevementForm">
+                <h3>Dodaj osiągnięcie</h3>
 
-            <div class="form-group">
-            <label for="firstname">Imię</label>
-            <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Imie" value="<?php if(isset($_SESSION['user'])){
-                echo $_SESSION['user']['first_name'];
-            } 
-            ?>">
+                <div class="form-group">
+                  <label for="achievement_ID">Identyfikator</label>
+                  <input type="text" class="form-control" id="achievement_ID" aria-describedby="emailHelp"
+                    placeholder="ID" required disabled>
+                </div>
+
+                <label for="achievement_year">Data osiągnięcia</label>
+                <div class="input-group mb-3">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3">YYYY</span>
+                  </div>
+                  <input type="text" class="form-control" id="achievement_year" aria-describedby="basic-addon3"
+                    placeholder="Rok" required>
+                </div>
+
+                <div class="form-group">
+                  <label for="achievement_name">Osiągnięcie</label>
+                  <input type="text" class="form-control" id="achievement_name" aria-describedby="emailHelp"
+                    placeholder="Osiągnięcie" required>
+                </div>
+
+                <button id="btnAddAchievement" class="btn btn-success">Dodaj osiągnięcie</button>
+                <button id="btnEditAchievement" class="btn btn-warning">Edytuj osiągnięcie</button>
+                <button id="btnDeleteAchievement" class="btn btn-danger">Usuń osiągnięcie</button>
+
+              </form>
             </div>
 
-            <div class="form-group">
-            <label for="lastName">Nazwisko</label>
-            <input type="text" class="form-control" id="lastName" aria-describedby="emailHelp" placeholder="Nazwisko" value="<?php if(isset($_SESSION['user'])){
-                echo $_SESSION['user']['last_name'];
-            } 
-          ?>">
+            <div class="col-sm">
+              <div class="achievementsTable">
+                <h3>Osiągnięcia</h3>
+
+                <table id="achievementsTable" class="display">
+                  <thead>
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Data</th>
+                      <th scope="col">Osiągnięcia</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>1976</td>
+                      <td>Puchar Polski</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>1977</td>
+                      <td>Mistrz Polski</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>1987</td>
+                      <td>Puchar Polski</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">4</th>
+                      <td>2009</td>
+                      <td>Puchar Ekstraklasy</td>
+                    </tr>
+
+                    <tr>
+                      <th scope="row">5</th>
+                      <td>2012</td>
+                      <td>Mistrz Polski</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
+          </div>
 
-            <div class="form-group">
-            <label for="login">Login</label>
-            <input type="text" class="form-control" id="login" aria-describedby="emailHelp" placeholder="Login" value="<?php 
-            if(isset($_SESSION['user']['worker_login'])){
-                echo $_SESSION['user']['worker_login'];
-            } else if (isset($_SESSION['user']['user_login'])) {
-              echo $_SESSION['user']['user_login'];
-            }
-            ?>">
+          <div class="row">
+            <div class="col-sm">
+
             </div>
-
-
-          <div class="form-group">
-            <label for="exampleInputEmail1">Adres email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" value="<?php if (isset($_SESSION['user']['mail'])) {
-                echo $_SESSION['user']['mail'];
-            } else if (isset($_SESSION['user']['email'])) {
-              echo $_SESSION['user']['email'];
-            } 
-            ?>">
-            
           </div>
-
-          <label for="basic-url">Data urodzenia</label>
-          <div class="input-group mb-3">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="basic-addon3">YYYY-MM-DD</span>
-            </div>
-            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="<?php if(isset($_SESSION['user']['date_of_birth'])){
-                echo $_SESSION['user']['date_of_birth'];
-            } else if (isset($_SESSION['user']['worker_date_of_birth'])) {
-              echo $_SESSION['user']['worker_date_of_birth'];
-          }
-            ?>">
-          </div>
-          <button type="submit" class="btn btn-success">Zmień dane</button>
-        </form>
-    </div>
-    <div class="col-sm">
-      <form class="editPassword">
-          <h3>Zmiana hasła</h3>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Stare hasło</label>
-            <input type="password" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Stare hasło">
-            
-          </div>
-          <div class="form-group">
-            <label for="exampleInputPassword1">Nowe hasło</label>
-            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nowe hasło">
-          </div>
-          <button type="submit" class="btn btn-success">Zmień hasło</button>
-        </form>
+        </div>
+      </main>
     </div>
   </div>
-        </main>
-      </div>
-    </div>
 
-    <!-- Bootstrap core JavaScript
+  <!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
-    <script src="js/bootstrap.bundle.min.js"></script>
+  <!-- Placed at the end of the document so the pages load faster -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-slim.min.js"><\/script>')</script>
+  <script src="../../assets/js/vendor/popper.min.js"></script>
+  <script src="../../dist/js/bootstrap.min.js"></script>
+  <script src="js/bootstrap.bundle.js"></script>
 
+  <!-- Icons -->
+  <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+  <script>
+    feather.replace()
+  </script>
 
-    <!-- Icons -->
-    <script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
-    <script>
-      feather.replace()
-    </script>
-  </body>
+    <!--Datatable-->
+  <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.1/Chart.min.js"></script>
+
+  <script src="js/achievements.js"></script>
+</body>
+
 </html>
-

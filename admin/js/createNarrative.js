@@ -20,7 +20,7 @@ $(document).ready(function () {
 	table.draw();
 
 	$.ajax({
-		url: "http://localhost/PSIMv2/backend/api/matches/read.php",
+		url: "http://localhost/stronaklubu/backend/api/matches/read.php",
 		method: "GET",
 		dataType: "json"
 
@@ -29,8 +29,8 @@ $(document).ready(function () {
 		for (var i = 0; i < response.length; i++) {
 			table.row.add(
 				[response[i].match_ID,
-				response[i].clubHomeName,
-				response[i].clubAwayName,
+				response[i].club_home_clubname,
+				response[i].club_home_clubname,
 				response[i].stadium,
 				response[i].match_address,
 				response[i].amount_of_spectators,
@@ -74,7 +74,7 @@ $(document).ready(function () {
 	table2.draw();
 
 	$.ajax({
-		url: "http://localhost/PSIMv2/backend/api/narratives/read.php",
+		url: "http://localhost/stronaklubu/backend/api/narratives/read.php",
 		method: "GET",
 		dataType: "json"
 
@@ -116,7 +116,7 @@ $(document).ready(function () {
             var date = $("#narrativeDate").val();
 
             $.ajax({
-                url : "http://localhost/PSIMv2/backend/api/narratives/create.php",
+                url : "http://localhost/stronaklubu/backend/api/narratives/create.php",
                 method : "post",
                 dataType : "json",
                 data : {
@@ -139,7 +139,7 @@ $(document).ready(function () {
         var narrartiveID = $("#narrativeID").val();
 
         $.ajax({
-            url : "http://localhost/PSIMv2/backend/api/narratives/delete.php",
+            url : "http://localhost/stronaklubu/backend/api/narratives/delete.php",
             method : "post",
             dataType : "json",
             data : {
@@ -163,7 +163,7 @@ $(document).ready(function () {
         var date = $("#narrativeDate").val();
 
         $.ajax({
-            url : "http://localhost/PSIMv2/backend/api/narratives/update.php",
+            url : "http://localhost/stronaklubu/backend/api/narratives/update.php",
             method : "post",
             dataType : "json",
             data : {

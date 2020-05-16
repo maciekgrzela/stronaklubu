@@ -56,6 +56,34 @@
             return $stmt;
         }
 
+        // Get Ticket by author
+        public function read_specific($worker_ID) {
+
+
+            $query = 'SELECT 
+            news_ID, 
+            title, 
+            content_path, 
+            news_img_path, 
+            created_at,
+            tags,
+            viewers,
+            worker_ID
+            FROM ' . $this->table . ' 
+            WHERE worker_ID = ?';
+
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+
+            // Bind ID
+            $stmt->bindParam(1, $worker_ID);
+
+            // Execute query
+            $stmt->execute();
+
+            return $stmt;
+        }   
+
         // Get single News
         public function read_single() {
             $query = 'SELECT

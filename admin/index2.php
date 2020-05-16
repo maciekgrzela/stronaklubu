@@ -97,30 +97,112 @@
       <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
           <div class="sidebar-sticky">
-            <ul class="nav flex-column">
+
+
+          <?php
+
+          $zmienna = "WORKER";
+
+            if($zmienna == "USER") {
+              echo '<ul class="nav flex-column">
               <li class="nav-item">
                 <a class="nav-link active" href="index.html">
                   <span data-feather="home"></span>
                   Strona główna <span class="sr-only">(current)</span>
                 </a>
               </li>
-            </ul>
-              <!-- NAGŁÓWEK SIDEBARU -->
-              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Piłkarze</span>
+            </ul>';
+
+            echo '<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Bilety</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+            </a>
+          </h6>
+          
+          <ul class="nav flex-column">
+          <li class="nav-item">
+          <a class="nav-link" href="players.html">
+            <span data-feather="users"></span>
+            Moje bilety
+          </a>
+        </li>
+            </ul>';
+
+
+
+
+          } else if ($zmienna == "WORKER") {
+            echo '<ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link active" href="index.html">
+                <span data-feather="home"></span>
+                Strona główna <span class="sr-only">(current)</span>
+              </a>
+            </li>
+          </ul>';
+
+            $zmienna2 = "JOURNALIST1";
+
+            if ($zmienna2 == "JOURNALIST") {
+              echo '<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Relacje LIVE</span>
               <a class="d-flex align-items-center text-muted" href="#">
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
+
+
               <li class="nav-item">
-                <a class="nav-link" href="players.html">
-                  <span data-feather="users"></span>
-                  Zarządzanie piłkarzami
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Przeprowadź relację
                 </a>
               </li>
-              </ul>
-              <!-- NAGŁÓWEK SIDEBARU -->
+            </ul>';
+
+              echo '<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Artykuły</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+              </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="articles.html">
+                  <span data-feather="file-text"></span>
+                  Zarządzanie artykułami
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="articlesStats.html">
+                  <span data-feather="edit"></span>
+                  Statystyki
+                </a>
+              </li>
+              </ul>';
+
+            }
+
+            $zmienna3 = "STUFF1";
+
+            if ($zmienna3 == "STUFF") {
+              echo '
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Relacje LIVE</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+
+
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Przeprowadź relację
+                </a>
+              </li>
+            </ul>';
+
+              echo '<h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Artykuły</span>
               <a class="d-flex align-items-center text-muted" href="#">
               </a>
@@ -139,29 +221,25 @@
                 </a>
               </li>
               </ul>
-              <!-- NAGŁÓWEK SIDEBARU -->
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Relacje LIVE</span>
+              <span>Piłkarze</span>
               <a class="d-flex align-items-center text-muted" href="#">
               </a>
             </h6>
             <ul class="nav flex-column mb-2">
-
-
               <li class="nav-item">
-                <a class="nav-link" href="createNarrative.html">
-                  <span data-feather="bar-chart-2"></span>
-                  Przeprowadź relację
+                <a class="nav-link" href="players.html">
+                  <span data-feather="users"></span>
+                  Zarządzanie piłkarzami
                 </a>
               </li>
-            </ul>
-            <!-- NAGŁÓWEK SIDEBARU -->
+              </ul>
               <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
               <span>Bilety</span>
               <a class="d-flex align-items-center text-muted" href="#">
               </a>
             </h6>
-<ul class="nav flex-column mb-2">
+            <ul class="nav flex-column mb-2">
 
               <li class="nav-item">
                 <a class="nav-link" href="#">
@@ -184,24 +262,74 @@
                   Statystyki
                 </a>
               </li>
-              
+            </ul>';
+            }
 
+            $zmienna4 = "EXECUTIVE";
 
-            </ul>
+            if ($zmienna4 == "EXECUTIVE") {
+              echo '
 
-            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-              <span>Klub</span>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Relacje LIVE</span>
               <a class="d-flex align-items-center text-muted" href="#">
               </a>
             </h6>
+            <ul class="nav flex-column mb-2">
 
 
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="bar-chart-2"></span>
+                  Przeprowadź relację
+                </a>
+              </li>
+            </ul>
+
+
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Artykuły</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+              </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="articles.html">
+                  <span data-feather="file-text"></span>
+                  Zarządzanie artykułami
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="articlesStats.html">
+                  <span data-feather="edit"></span>
+                  Statystyki
+                </a>
+              </li>
+              </ul>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Piłkarze</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+            </h6>
+            <ul class="nav flex-column mb-2">
+              <li class="nav-item">
+                <a class="nav-link" href="players.html">
+                  <span data-feather="users"></span>
+                  Zarządzanie piłkarzami
+                </a>
+              </li>
+              </ul>
+              <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+              <span>Bilety</span>
+              <a class="d-flex align-items-center text-muted" href="#">
+              </a>
+            </h6>
             <ul class="nav flex-column mb-2">
 
               <li class="nav-item">
-                <a class="nav-link" href="achievements.html">
+                <a class="nav-link" href="#">
                   <span data-feather="layers"></span>
-                  Osiągnięcia
+                  Stadion
                 </a>
               </li>
             
@@ -209,21 +337,58 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">
                   <span data-feather="file-text"></span>
-                  Historia klubu
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="file-text"></span>
-                  Sponsorzy
+                  Zarządzanie wydarzeniami
                 </a>
               </li>
 
+              <li class="nav-item">
+                <a class="nav-link" href="#">
+                  <span data-feather="file-text"></span>
+                  Statystyki
+                </a>
+              </li>
             </ul>
+              
+              
+            <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+            <span>Klub</span>
+            <a class="d-flex align-items-center text-muted" href="#">
+            </a>
+          </h6>
+
+
+          <ul class="nav flex-column mb-2">
+
+            <li class="nav-item">
+              <a class="nav-link" href="achievements.html">
+                <span data-feather="layers"></span>
+                Osiągnięcia
+              </a>
+            </li>
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Historia klubu
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">
+                <span data-feather="file-text"></span>
+                Sponsorzy
+              </a>
+            </li>
+          </ul>';
+            }
+
+        }
+          ?>
+                    
+
           </div>
         </nav>
-
-
+      
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4">
           <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pb-2 mb-3 border-bottom">
             <h1 class="h2">Witaj, Jan Kowalski!</h1>
@@ -239,7 +404,7 @@
 
             <div class="form-group">
             <label for="firstname">Imię</label>
-            <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Imie">
+            <input type="text" class="form-control" id="firstname" aria-describedby="emailHelp" placeholder="Imie" value="">
             </div>
 
             <div class="form-group">
@@ -288,14 +453,6 @@
         </form>
     </div>
   </div>
-
-
-
-
-          
-         
-        
-
 
         </main>
       </div>
