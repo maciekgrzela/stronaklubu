@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.5
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Czas generowania: 09 Maj 2020, 22:05
--- Wersja serwera: 10.1.38-MariaDB
--- Wersja PHP: 5.6.40
+-- Host: localhost
+-- Czas generowania: 16 Maj 2020, 17:49
+-- Wersja serwera: 10.4.6-MariaDB
+-- Wersja PHP: 7.1.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET AUTOCOMMIT = 0;
@@ -19,8 +19,27 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Baza danych: `clubdb`
+-- Baza danych: `clubcb`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktura tabeli dla tabeli `achievements`
+--
+
+CREATE TABLE `achievements` (
+  `achievement_ID` int(11) NOT NULL,
+  `achievement_year` year(4) NOT NULL,
+  `achievement_name` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `achievements`
+--
+
+INSERT INTO `achievements` (`achievement_ID`, `achievement_year`, `achievement_name`) VALUES
+(1, 2012, 'qeqwe');
 
 -- --------------------------------------------------------
 
@@ -36,7 +55,7 @@ CREATE TABLE `clients` (
   `date_of_birth` date NOT NULL,
   `user_login` varchar(150) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `user_password` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `create_date` datetime DEFAULT CURRENT_TIMESTAMP
+  `create_date` datetime DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -44,7 +63,7 @@ CREATE TABLE `clients` (
 --
 
 INSERT INTO `clients` (`client_id`, `first_name`, `last_name`, `email`, `date_of_birth`, `user_login`, `user_password`, `create_date`) VALUES
-(1, 'Grzegorz', 'Krawczyk', 'gkrawczyk@stronaklubu.pl', '1987-07-19', 'gkrawczyk', '0ecdd847e27f7b9fd5942b983c3afa42', '2020-04-06 00:00:00'),
+(1, 'Grzegorz', 'Krawczyk', 'gkrawczyk@op.pl', '1987-07-19', 'gkrawczyk', '0ecdd847e27f7b9fd5942b983c3afa42', '2020-04-06 00:00:00'),
 (2, 'Dawid', 'Marczak', 'to', '2020-04-07', 'menda', 'pazdzioch', '2020-04-06 00:00:00'),
 (3, 'Dawid', 'Marczak', 'to', '2020-04-07', 'menda', 'pazdzioch', '2020-04-06 00:00:00');
 
@@ -62,8 +81,8 @@ CREATE TABLE `clubs` (
   `club_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `path_img_logo` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `league_position` int(11) DEFAULT NULL,
-  `league_points` int(11) NOT NULL DEFAULT '0',
-  `league_matches` int(11) NOT NULL DEFAULT '0'
+  `league_points` int(11) NOT NULL DEFAULT 0,
+  `league_matches` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -102,7 +121,7 @@ CREATE TABLE `matches` (
   `match_address` varchar(500) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `amount_of_spectators` int(11) DEFAULT NULL,
   `earnings` double DEFAULT NULL,
-  `date_of_match` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date_of_match` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -124,7 +143,7 @@ CREATE TABLE `narratives` (
   `narrative_ID` int(11) NOT NULL,
   `match_ID` int(11) NOT NULL,
   `title` varchar(300) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
@@ -148,7 +167,7 @@ CREATE TABLE `narrative_items` (
   `author_id` int(11) NOT NULL,
   `img_path` varchar(100) COLLATE utf8_polish_ci NOT NULL DEFAULT 'thumbnail',
   `text` varchar(500) COLLATE utf8_polish_ci NOT NULL DEFAULT '',
-  `date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
@@ -169,7 +188,8 @@ INSERT INTO `narrative_items` (`item_id`, `narrative_id`, `author_id`, `img_path
 (13, 1, 2, 'corner', 'gggggg', '2020-05-09 21:55:19'),
 (14, 1, 2, 'corner', 'uiyhkjhda', '2020-05-09 21:57:12'),
 (15, 1, 2, 'penalty', 'Proszę Państwa. Karny dla gospodarzy!', '2020-05-09 21:59:41'),
-(16, 1, 2, 'red-card', 'Bramkarz gości dostaje czerwoną kartkę', '2020-05-09 22:02:20');
+(16, 1, 2, 'red-card', 'Bramkarz gości dostaje czerwoną kartkę', '2020-05-09 22:02:20'),
+(17, 1, 2, 'corner', 'Rzut rożny dla drużyny gospodarzy. Zawodnik drużyny gości w ostatnim momencie wybił piłkę na aut bramkowy', '2020-05-09 21:35:07');
 
 -- --------------------------------------------------------
 
@@ -182,10 +202,10 @@ CREATE TABLE `news` (
   `title` varchar(200) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `content_path` longtext CHARACTER SET utf8 NOT NULL,
   `news_img_path` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `created_at` datetime NOT NULL DEFAULT current_timestamp(),
   `tags` varchar(500) CHARACTER SET utf8 DEFAULT NULL,
-  `last_commented` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `viewers` int(11) NOT NULL DEFAULT '0',
+  `last_commented` datetime NOT NULL DEFAULT current_timestamp(),
+  `viewers` int(11) NOT NULL DEFAULT 0,
   `worker_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -235,26 +255,6 @@ INSERT INTO `players` (`player_ID`, `first_name`, `last_name`, `age`, `height`, 
 -- --------------------------------------------------------
 
 --
--- Struktura tabeli dla tabeli `seats`
---
-
-CREATE TABLE `seats` (
-  `seat_ID` int(11) NOT NULL,
-  `sector` varchar(5) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
-  `seat_value` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Zrzut danych tabeli `seats`
---
-
-INSERT INTO `seats` (`seat_ID`, `sector`, `seat_value`) VALUES
-(1, 'C', 25),
-(2, 'B', 15);
-
--- --------------------------------------------------------
-
---
 -- Struktura tabeli dla tabeli `stadium`
 --
 
@@ -271,9 +271,34 @@ CREATE TABLE `stadium` (
 CREATE TABLE `tickets` (
   `ticket_ID` int(11) NOT NULL,
   `client_ID` int(11) NOT NULL,
-  `seat_ID` int(11) NOT NULL,
+  `seat` varchar(10) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `match_ID` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Zrzut danych tabeli `tickets`
+--
+
+INSERT INTO `tickets` (`ticket_ID`, `client_ID`, `seat`, `match_ID`) VALUES
+(5, 1, 'B5.1 E11', 3),
+(6, 1, 'B5.1 B7', 3),
+(7, 1, 'B5.1 D9', 3),
+(8, 1, 'B5.1 F11', 3),
+(9, 1, 'B5.1 F12', 3),
+(10, 1, 'B5.1 F6', 3),
+(11, 1, 'B5.1 E12', 3),
+(12, 1, 'B5.1 E6', 3),
+(13, 1, 'B5.1 E5', 3),
+(14, 1, 'B6.1 E12', 1),
+(15, 1, 'B6.1 E10', 1),
+(16, 1, 'B6.1 F9', 1),
+(17, 1, 'B6.1 F10', 1),
+(18, 1, 'B6.1 E11', 1),
+(19, 1, 'A8.1 E10', 1),
+(20, 1, 'A8.1 E11', 1),
+(21, 1, 'A8.1 F10', 1),
+(22, 1, 'A8.1 E12', 1),
+(23, 1, 'A8.1 F11', 1);
 
 -- --------------------------------------------------------
 
@@ -288,14 +313,14 @@ CREATE TABLE `workers` (
   `age` int(11) NOT NULL,
   `nationality` varchar(50) CHARACTER SET utf8 COLLATE utf8_polish_ci NOT NULL,
   `mail` varchar(500) DEFAULT NULL,
-  `is_journalist` tinyint(1) NOT NULL DEFAULT '0',
-  `is_executive` tinyint(1) NOT NULL DEFAULT '0',
-  `is_staff` tinyint(1) NOT NULL DEFAULT '0',
+  `is_journalist` tinyint(1) NOT NULL DEFAULT 0,
+  `is_executive` tinyint(1) NOT NULL DEFAULT 0,
+  `is_staff` tinyint(1) NOT NULL DEFAULT 0,
   `worker_login` varchar(100) NOT NULL,
   `worker_password` varchar(500) NOT NULL,
   `worker_img_path` varchar(100) CHARACTER SET utf8 COLLATE utf8_polish_ci DEFAULT NULL,
   `worker_date_of_birth` date DEFAULT NULL,
-  `create_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `create_date` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -305,11 +330,17 @@ CREATE TABLE `workers` (
 INSERT INTO `workers` (`worker_ID`, `first_name`, `last_name`, `age`, `nationality`, `mail`, `is_journalist`, `is_executive`, `is_staff`, `worker_login`, `worker_password`, `worker_img_path`, `worker_date_of_birth`, `create_date`) VALUES
 (1, 'Viteslav', 'Lavicka', 67, 'Czechy', 'vlavicka@stronaklubu.pl', 0, 0, 1, 'vlavicka', 'dfb5cee111b9b65f0be13dd2aa713a9c', NULL, '1963-04-30', '2020-04-28 13:39:31'),
 (2, 'Jan', 'Kowalski', 34, 'Polska', 'jkowalski@stronaklubu.pl', 1, 0, 0, 'jkowalski', 'e8edfe7797be6a4290f7f4f2c7d44fbb', NULL, '1986-04-13', '2020-04-28 13:44:03'),
-(3, 'Mateusz', 'Nowak', 26, 'Polska', 'mnowak@stronaklubu.pl', 1, 0, 0, 'mnowak', '7dd4371a995ef5cb43ec30782625de2f', NULL, '1996-04-07', '2020-04-28 13:48:42');
+(3, 'Mateusz', 'Nowak', 26, 'Polska', 'mnowak@stronaklubu.pl', 0, 1, 0, 'mnowak', '7dd4371a995ef5cb43ec30782625de2f', NULL, '1996-04-07', '2020-04-28 13:48:42');
 
 --
 -- Indeksy dla zrzutów tabel
 --
+
+--
+-- Indeksy dla tabeli `achievements`
+--
+ALTER TABLE `achievements`
+  ADD PRIMARY KEY (`achievement_ID`);
 
 --
 -- Indeksy dla tabeli `clients`
@@ -361,12 +392,6 @@ ALTER TABLE `players`
   ADD PRIMARY KEY (`player_ID`);
 
 --
--- Indeksy dla tabeli `seats`
---
-ALTER TABLE `seats`
-  ADD PRIMARY KEY (`seat_ID`);
-
---
 -- Indeksy dla tabeli `stadium`
 --
 ALTER TABLE `stadium`
@@ -379,7 +404,7 @@ ALTER TABLE `tickets`
   ADD PRIMARY KEY (`ticket_ID`),
   ADD KEY `client_ID` (`client_ID`),
   ADD KEY `match_ID` (`match_ID`),
-  ADD KEY `seat_ID` (`seat_ID`);
+  ADD KEY `seat_ID` (`seat`);
 
 --
 -- Indeksy dla tabeli `workers`
@@ -390,6 +415,12 @@ ALTER TABLE `workers`
 --
 -- AUTO_INCREMENT for dumped tables
 --
+
+--
+-- AUTO_INCREMENT dla tabeli `achievements`
+--
+ALTER TABLE `achievements`
+  MODIFY `achievement_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT dla tabeli `clients`
@@ -413,19 +444,19 @@ ALTER TABLE `matches`
 -- AUTO_INCREMENT dla tabeli `narratives`
 --
 ALTER TABLE `narratives`
-  MODIFY `narrative_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `narrative_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `narrative_items`
 --
 ALTER TABLE `narrative_items`
-  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT dla tabeli `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `news_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `players`
@@ -434,16 +465,10 @@ ALTER TABLE `players`
   MODIFY `player_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT dla tabeli `seats`
---
-ALTER TABLE `seats`
-  MODIFY `seat_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
---
 -- AUTO_INCREMENT dla tabeli `tickets`
 --
 ALTER TABLE `tickets`
-  MODIFY `ticket_ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ticket_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT dla tabeli `workers`
@@ -466,13 +491,13 @@ ALTER TABLE `matches`
 -- Ograniczenia dla tabeli `narratives`
 --
 ALTER TABLE `narratives`
-  ADD CONSTRAINT `narratives_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matches` (`match_ID`);
+  ADD CONSTRAINT `narratives_ibfk_1` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
 
 --
 -- Ograniczenia dla tabeli `narrative_items`
 --
 ALTER TABLE `narrative_items`
-  ADD CONSTRAINT `narrative_items_ibfk_1` FOREIGN KEY (`narrative_id`) REFERENCES `narratives` (`narrative_id`),
+  ADD CONSTRAINT `narrative_items_ibfk_1` FOREIGN KEY (`narrative_id`) REFERENCES `narratives` (`narrative_ID`),
   ADD CONSTRAINT `narrative_items_ibfk_2` FOREIGN KEY (`author_id`) REFERENCES `workers` (`worker_ID`);
 
 --
@@ -492,7 +517,6 @@ ALTER TABLE `stadium`
 --
 ALTER TABLE `tickets`
   ADD CONSTRAINT `tickets_ibfk_1` FOREIGN KEY (`client_ID`) REFERENCES `clients` (`client_id`),
-  ADD CONSTRAINT `tickets_ibfk_3` FOREIGN KEY (`seat_ID`) REFERENCES `seats` (`seat_ID`),
   ADD CONSTRAINT `tickets_ibfk_4` FOREIGN KEY (`match_ID`) REFERENCES `matches` (`match_ID`);
 COMMIT;
 
